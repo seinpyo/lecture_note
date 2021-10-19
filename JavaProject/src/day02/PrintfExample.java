@@ -29,6 +29,7 @@ public class PrintfExample {
 				System.out.printf("%d %% %d = %d\n\n", 19, 5, 19%5);
 				
 				// %와 d,f,s 사이에 숫자 옵션을 넣어서 표시할 자릿수를 조절한다
+				
 				// 정수의 자릿수 조절
 				// %와 d 사이에 숫자를 쓰지 않은 경우 : 표시될 데이터의 자리수만큼 확보한 후 출력
 				System.out.printf("정수%d정수\n", 123);
