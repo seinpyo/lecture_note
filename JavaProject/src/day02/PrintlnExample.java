@@ -2,12 +2,12 @@ package day02;
 
 public class PrintlnExample {
 	public static void main(String[] args) {
-		//println()은 printf("\n")와 같은 동작함.
-				//println은 \n이 없어도 모든 출력 후 줄바꿈을 한 번 실행.
+		//printl.n()은 print/f("\n")와 같은 동작함.
+				//printl.n은 \n이 없어도 모든 출력 후 줄바꿈을 한 번 실행.
 				//System.out.println("\n"); -> 두번 줄바꿈.
 				
-				//printf와 같이 format 양식 글자(%d, %f 등)을 사용하지 못한다.
-				//printf보다 출력이 간편한 장점
+				//print.f와 같이 format 양식 글자(%d, %f 등)을 사용하지 못한다.
+				//print.f보다 출력이 간편한 장점
 				System.out.println(10);
 				System.out.println(12.123);
 				System.out.println("Java Programming"); 
