@@ -2,12 +2,12 @@ package day02;
 
 public class PrintlnExample {
 	public static void main(String[] args) {
-		//printl.n()은 print/f("\n")와 같은 동작함.
-				//printl.n은 \n이 없어도 모든 출력 후 줄바꿈을 한 번 실행.
+		//println()은 printf("\n")와 같은 동작함.
+				//println은 \n이 없어도 모든 출력 후 줄바꿈을 한 번 실행.
 				//System.out.println("\n"); -> 두번 줄바꿈.
 				
-				//print.f와 같이 format 양식 글자(%d, %f 등)을 사용하지 못한다.
-				//print.f보다 출력이 간편한 장점
+				//printf와 같이 format 양식 글자(%d, %f 등)을 사용하지 못한다.
+				//printf보다 출력이 간편한 장점
 				System.out.println(10);
 				System.out.println(12.123);
 				System.out.println("Java Programming"); 
@@ -25,7 +25,7 @@ public class PrintlnExample {
 				//		- 첫글짜가 같은 경우 두번째 글자를 비교
 				//		- 두번째 글자도 같다면 세번째 비교 ...
 				//		- 사전에서 찾았을 때 먼저 나오는 글자를 작다, 뒤에 나오는 글자를 크다고 평가
-				//		- (a:작다~z:크다, ㄱ:작다~ㅎ:크다) air > apple
+				//		- air > apple (a:작다~z:크다, ㄱ:작다~ㅎ:크다) 
 				
 				System.out.println("10" + "5");
 				System.out.println("10" + 5);

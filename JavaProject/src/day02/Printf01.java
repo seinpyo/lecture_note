@@ -26,5 +26,7 @@ public class Printf01 {
 		
 		// 사칙 연산의 결과 출력 : %연산 - 나눗셈의 나머지 계산 연산자
 		System.out.printf("%d %% %d = %d\n", 19, 5, 19%5);
+		
+	
 	}
 }
