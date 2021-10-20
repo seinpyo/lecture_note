@@ -32,6 +32,8 @@ public class Main_Boj3003 {
 				break;
 			}
 		}
+		
 		sc.close();
+		
 	}
 }
