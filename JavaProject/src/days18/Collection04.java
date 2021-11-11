@@ -31,8 +31,30 @@ public class Collection04 {
 		List<Integer>list = new LinkedList<Integer>(lotto);
 		Collections.sort(list);
 		for(Integer i : list) {
-			System.out.print(i + "번 ");
+			System.out.print(i + " ");
 		}
+			
+		Iterator<Integer> iter = lotto.iterator();
+		Iterator<Integer> iter2 = list.iterator();
+		
+		System.out.println("\niter1");
+		while(iter.hasNext()) {
+			System.out.printf("%d ", iter.next());
+		}
+		
+		System.out.println();
+		
+		System.out.println("iter2");
+		while(iter2.hasNext()) {
+			System.out.printf("%d ", iter2.next());
+		}
+		
+		
+//		for(Integer k : lotto) System.out.printf("d% ", k);
+		System.out.println("\nlist for문 출력");
+		for(Integer j : list) System.out.printf("%d ", j);
+		
+		
 		
 	}
 }
