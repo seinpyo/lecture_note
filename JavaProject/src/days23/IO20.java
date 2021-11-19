@@ -6,9 +6,9 @@ import java.util.ArrayList;
 public class IO20 {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
-		File dir = new File("C:\\Users\\JAVA01\\git\\repository\\JavaProject\\temp");
+		File dir = new File("C:\\StudybyMyself\\JavaProject\\temp");
 		if(!dir.exists()) dir.mkdirs();
-		File file = new File(dir, "2021_11_18_14_10.dat");
+		File file = new File(dir, "2021_11_18_09_39.dat");
 		
 		ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)));
 		

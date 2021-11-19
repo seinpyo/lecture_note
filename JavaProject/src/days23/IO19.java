@@ -78,7 +78,7 @@ public class IO19 {
 			if(isExit == 'y' || isExit == 'Y') break;
 			}
 			
-			File dir = new File("C:\\Users\\JAVA01\\git\\repository\\JavaProject\\temp");
+			File dir = new File("C:\\StudybyMyself\\JavaProject\\temp");
 			if(!dir.exists()) dir.mkdirs();
 			
 			//현재 날짜,시간으로 파일 제목만들기

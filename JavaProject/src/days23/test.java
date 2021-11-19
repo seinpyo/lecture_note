@@ -74,6 +74,5 @@ public class test{
 		s1.repair(t);
 		System.out.println(m);
 		
-		
 	}
 }
