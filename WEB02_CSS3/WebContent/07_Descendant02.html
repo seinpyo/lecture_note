@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>08_Descendant02</title>
+<style type="text/css">
+	#header>h1{background:blue; color:white;} 
+	/*#id>태그 -> id안의 태그만 적용*/
+	#header>h2 {background:orange; color:white;}
+	#header>#nav>h1 {background:red; color:white;}
+	/*#header 안의 #nav 안의 h1태그에 적용*/
+	#nav>h2 {background:green; color:white;}
+</style>
+</head>
+<body>
+	<div id="header">
+		<h1 class="title">회사이름/로고</h1>
+		<h2>회사이름/로고</h2>
+		<div id="nav">
+			<h1> #header>#nav>h1</h1>
+			<h2>header2</h2>
+			<h3>CSS3</h3>
+		</div>
+		<h1>#header>h1</h1>
+		<h2>#header>h2</h2>
+	</div>
+	<div id="section">
+		<h1 class="title">Aside</h1>
+		<p> 감사원은 원장을 포함한 5인 이상 11인 이하의 감사위원으로 구성한다. 
+		모든 국민의 재산권은 보장된다. 그 내용과 한계는 법률로 정한다. 헌법개정안이 제2항의 찬성을 얻은 때에는 
+		헌법개정은 확정되며, 대통령은 즉시 이를 공포하여야 한다. 
+		누구든지 병역의무의 이행으로 인하여 불이익한 처우를 받지 아니한다. </p>
+	</div>
+</body>
+</html>
