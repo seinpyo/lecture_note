@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>08_Transform_ex02.html</title>
+<style type="text/css">
+    #base{width:250px; height:1000px; background:#595959;}
+    #top{width:100%; height:150px; border:1px solid white;}
+    .menuall{width:100%; height:40px; border:1px solid yellow; 
+    background:#232323; color:white; line-height:0px; text-align:center;}
+    .submenuall{width:100%; height:1px;
+    background:#989898;}
+
+    .menuall:hover{color:orange}
+    #menu1:hover~#submenu1{display:block; transform-origin: top;  transform: scaleY(100);}
+    #menu1:hover~#menu2{transform: translateY(100px);}
+    #menu1:hover~#menu3{transform: translateY(100px);}
+    #menu1:hover~#menu4{transform: translateY(100px);}
+    #menu1:hover~#menu5{transform: translateY(100px);}
+    #menu1:hover~#submenu2{transform: translateY(100px);}
+    #menu1:hover~#submenu3{transform: translateY(100px);}
+    #menu1:hover~#submenu4{transform: translateY(100px);}
+    #menu1:hover~#submenu5{transform: translateY(100px);}
+
+    #menu2:hover~#submenu2{display:block; transform-origin: top;  transform: scaleY(100);}
+    #menu2:hover~#menu3{transform: translateY(100px);}
+    #menu2:hover~#menu4{transform: translateY(100px);}
+    #menu2:hover~#menu5{transform: translateY(100px);}
+    #menu2:hover~#submenu3{transform: translateY(100px);}
+    #menu2:hover~#submenu4{transform: translateY(100px);}
+    #menu2:hover~#submenu5{transform: translateY(100px);}
+
+    #menu3:hover~#submenu3{display:block; transform-origin: top;  transform: scaleY(100);}
+    #menu3:hover~#menu4{transform: translateY(100px);}
+    #menu3:hover~#menu5{transform: translateY(100px);}
+    #menu3:hover~#submenu4{transform: translateY(100px);}
+    #menu3:hover~#submenu5{transform: translateY(100px);}
+
+    #menu4:hover~#submenu4{display:block; transform-origin: top;  transform: scaleY(100);}
+    #menu4:hover~#menu5{transform: translateY(100px);}
+    #menu4:hover~#submenu5{transform: translateY(100px);}
+
+    #menu5:hover~#submenu5{display:block; transform-origin: top;  transform: scaleY(100);}
+</style>
+</head>
+<body>
+<div id="base">
+    <div id="top"></div>
+    <div id="menu1" class="menuall"><h2>NEWS</h2></div>
+    <div id="submenu1" class="submenuall"></div>
+    <div id="menu2" class="menuall"><h2>PORTPOLIO</h2></div>
+    <div id="submenu2" class="submenuall"></div>
+    <div id="menu3" class="menuall"><h2>BOARD</h2></div>
+    <div id="submenu3" class="submenuall"></div>
+    <div id="menu4" class="menuall"><h2>ALBUM</h2></div>
+    <div id="submenu4" class="submenuall"></div>
+    <div id="menu5" class="menuall"><h2>CONTACT</h2></div>
+    <div id="submenu5" class="submenuall"></div>
+</div>
+</body>
+</html>

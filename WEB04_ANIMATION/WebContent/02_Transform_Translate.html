@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>02_Transform_Translate</title>
+<style type="text/css">
+.origin{width: 200px; height:134px; border: 1px solid black; float: left; margin: 40px;}
+
+.movex, .movey, .movexy {transition: 1s;}
+/* transition-duration에서 duration은 생략 가능 */
+
+.movex:hover {
+    transform:translateX(50px);
+    -webkit-transform: translateX(50px);
+    -ms-transform: translateX(50px);
+    -moz-transform: translateX(50px);
+    -o-transform: translateX(50px);
+}
+.movey:hover {transform:translateY(50px);}
+.movexy:hover {transform:translate(30px, 30px);}
+/*left값이나 top값의 변형을 적용하여도 똑같지만 이들은 절대좌표에 의해 움직이며
+translate로 인한 변형은 상대좌표에 의해 적용된다.*/
+
+
+</style>
+</head>
+<body>
+    <div class="origin">
+        <div class="movex"><img src="images/bus.jpg"></div>
+    </div>
+    <div class="origin">
+        <div class="movey"><img src="images/bus.jpg"></div>
+    </div>
+    <div class="origin">
+        <div class="movexy"><img src="images/bus.jpg"></div>
+    </div>
+</body>
+</html>
