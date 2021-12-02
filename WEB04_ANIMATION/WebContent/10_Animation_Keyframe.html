@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>10_Animation_Keyframe</title>
+<style type="text/css">
+    #a {width: 200px; height: 200px; background: blue; margin: 20px; animation-name: change_bg;
+    animation-duration: 2s;}
+    #b {width: 200px; height: 200px; background: green; margin: 20px; animation-name: change_bg;
+    animation-duration: 2s;}
+
+    /*애니메이션 키프레임의 정의*/
+    @keyframes change_bg{
+        from{border:1px solid black} 
+        to{background: #a5d6ff; border: 1px solid red; border-radius: 50%;}  
+    } /*from 에서 부터 to까지 움직임 또는 변화를 정의*/
+</style>
+</head>
+<body>
+    <div id="a"></div>
+    <div id="b"></div>
+</body>
+</html>

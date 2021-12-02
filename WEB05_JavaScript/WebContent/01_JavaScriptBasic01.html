@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01_JavaScriptBasic01</title>
+<style type="text/css"></style>
+<script type="text/JavaScript">
+//alert("Hello World #1")
+document.write("<h1>Hellow World #1</h1>")
+</script>
+</head>
+<body>
+    <h1>Hellow World#3</h1>
+    <script type="text/JavaScript">
+        // alert("Hello World #2")
+        document.write("<h1>Hellow World #2</h1>")
+        
+        // 문자자료형
+
+        // alert('Hello, JavaScript ...\n 작은 따옴표');
+        // alert("Hello, JavaScript ...\n 큰 따옴표");
+        // alert("Hello, 'JavaScript' ...\n 인용 표현");
+        // alert('Hello, "JavaScript" ...\n 인용 표현');
+        // alert("Hello, \"JavaScript\" ...\n 이스케이프 문자");
+        
+        document.write('<h1>\'Hello, JavaScript ...\'<br /> 작은 따옴표</h1>');
+        document.write("<h1>\"Hello, JavaScript ...\" <br />큰 따옴표</h1>");
+        document.write("<h1>'Hello, JavaScript ...'  <br /> 인용 표현</h1>");
+        document.write('<h1>"Hello, JavaScript ..." <br /> 인용 표현</h1>');
+
+        // 숫자 자료형
+        // alert(273);
+        // alert(3.14);
+        document.write("<h1>" + 273 + "</h1>");
+        document.write("<h1>273</h1>");
+        document.write("<br />");
+        document.write(3.14);
+
+        //산술 연산
+
+        // alert('27+35=' + (27+35));
+        document.write("<h1> 74 + 24 = " + (74+24) + "</h1>");
+        document.write("<h1> 74 - 24 = " + (74-24) + "</h1>");
+        document.write("<h1> 74 * 24 = " + (74*24) + "</h1>");
+        document.write("<h1> 74 / 24 = " + (74/24) + "</h1>");
+        document.write("<h1> 74 & 24 = " + (74%24) + "</h1>");
+
+        //비교, 논리연산
+
+       // alert('52 > 135 && 45 < 78 : ' + (52>135 && 45<78))
+        document.write("<h1> 52 > 135 || 45 < 78 : " + (52>135 || 45<78) + "</h1>");
+        document.write("<h1> !(52>135) : " + (!(52>135)) + "</h1");
+
+        //변수 
+
+        var a =10; 
+        a= 123.123;  
+        var radius = 10;
+        var pi = 3.14;
+        // alert(pi);  //3.14
+        // alert(2 * pi * radius); //62.800000000000004 
+        var varChar = "Hello World"; 
+        var booleanType = true;
+        pi = varChar;
+        // alert(pi);  //Hello World
+        // alert(2 * pi * radius); //NaN (Not a Number)
+
+        //변수에 함수 저장하기
+
+        // var functionVar = function() {
+        //     alert("함수를 변수에 저장하여 호출합니다.");
+        // }; 
+
+        // functionVar();
+
+        //복합 대입 연산자 
+
+        var value = 10;
+        value += 10; 
+       // alert(value); //20
+        value -= "world";
+        //alert(value); //NaN
+
+        //증감 연산자
+
+        var number = 10;
+        console.log(++number + 5);
+        console.log(--number + 5);
+        console.log(number++ + 5);
+        console.log(number-- + 5);
+
+        // 변수의 특징과 변수들 간의 연산
+
+        var cup = 'Coffee';
+        cup = 'Green Tea';
+        cup = 'Water';
+        var number = 10; 
+        console.log('Drink ' + number + ' cups of ' + cup + '!!');
+        
+        //자료형 검사
+
+        console.log('typeof(\'홍길동\') : ' + typeof('홍길동')); 
+        console.log('typeof(150) : ' + typeof(150)); 
+        console.log('typeof(3.14) : ' + typeof(3.14)); 
+        console.log('typeof(\'ture\') : ' + typeof('ture')); 
+        console.log('typeof(\'function(){}\') : ' + typeof('function(){}'));
+        var objectVar = {a:10, b:20}
+        console.log('typeof(\'objectVar\') : ' + typeof(objectVar)); 
+        console.log('typeof(\'number2\') : ' + typeof(number2)); 
+        number2 = '123'; //JS는 변수 선언 없이 변수 사용 O 
+        console.log('typeof(\'number2\') : ' + typeof(number2)); 
+
+        //입력
+
+        var input = prompt('이름을 입력하세요.','두 글자 이상 입력');
+        alert(input + '님 반갑습니다.');
+
+        var bool = confirm('1293번 방에서 초대메시지가 도착했습니다.');
+        if(bool) {
+            alert('1293번 방으로 이동합니다.');
+        } else {
+            alert('초대를 거절했습니다.');
+        }
+
+
+    </script>
+</body>
+</html>
