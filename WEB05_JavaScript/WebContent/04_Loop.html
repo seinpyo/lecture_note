@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<script type="text/javaScript">
+    var value = 1;
+    var s = "";
+    while (value < 5) {
+        console.log(value + '번째 반복');
+        s = s + value + "번째 반복\n";
+        value++;
+    }
+    console.log("s = \n" + s);
+
+
+//     var value =0; 
+//     var startTime = new Date().getTime();
+//     //오늘 날짜 현재 시간을 밀리초로 환산
+//     endTime = startTime + 1000;
+
+//     while (new Date().getTime() < endTime){
+//         value++;
+//     } 
+//     console.log("시작시간 : " + startTime);
+//     console.log("종료시간 : " + endTime);
+//     console.log("반복횟수 : " + value);
+
+    //do~while
+
+    var value=10;
+    do { 
+        console.log(value + "번째 반복")
+        value++;
+        } while(value<=5);
+
+
+    //for
+
+    var array =['포도','사과','바나나','망고'];
+    for(var i=0; i<array.length; i++){
+        console.log(array[i]);
+    }
+
+    //↓ 향상된 for문의 JS버전
+    for(const a in array) { 
+        console.log(array[a]); 
+    }
+
+</script>
+</head>
+<body>
+    
+</body>
+</html>

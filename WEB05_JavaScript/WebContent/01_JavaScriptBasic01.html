@@ -112,16 +112,30 @@ document.write("<h1>Hellow World #1</h1>")
 
         //입력
 
-        var input = prompt('이름을 입력하세요.','두 글자 이상 입력');
-        alert(input + '님 반갑습니다.');
+        // var input = prompt('이름을 입력하세요.','두 글자 이상 입력');
+        // var num = Nubmer(input)
+        // alert(input + '님 반갑습니다.');
 
-        var bool = confirm('1293번 방에서 초대메시지가 도착했습니다.');
-        if(bool) {
-            alert('1293번 방으로 이동합니다.');
-        } else {
-            alert('초대를 거절했습니다.');
-        }
+        // var bool = confirm('1293번 방에서 초대메시지가 도착했습니다.');
+        // if(bool) {
+        //     alert('1293번 방으로 이동합니다.');
+        // } else {
+        //     alert('초대를 거절했습니다.');
+        // }
 
+        var input1 = prompt('국어 점수를 입력하세요.','0~100');
+        var kor = Number(input1);
+        var input2 = prompt('영어 점수를 입력하세요.','0~100');
+        var eng = Number(input2);
+        var input3 = prompt('수학 점수를 입력하세요.','0~100');
+        var mat = Number(input3);
+        var tot = kor + eng + mat;
+        var ave = tot/3;
+        console.log("입력한 점수 : 국어 " +kor+"점, 영어 "+eng+"점, 수학"+mat+"점\n"
+        +"총점 : " +tot+ "\n평균 : " + ave);
+
+
+        
 
     </script>
 </body>

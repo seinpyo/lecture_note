@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>08_BOM01</title>
+<script type="text/javaScript">
+    var child = window.open('', 
+    'child1', 'width=600, height=480, left=200, top=100;');
+    
+    // window.setInterval(function(){
+    //     child.moveBy(50, 50);
+    // }, 1000);
+    //     //child 변수가 담긴 창을 가로50, 세로50 이동 1000밀리초마다 이동
+
+    // function abc() { child.moveBy(50, 50); }
+    // window.setInterval('abc()', 1000);
+
+    var output = '';
+    for(var key in window) {
+        output += '※' + key + ' : ' +  window[key] + '\n';
+    }
+    console.log( output ); 
+
+</script>
+</head>
+<body>
+    
+</body>
+</html>

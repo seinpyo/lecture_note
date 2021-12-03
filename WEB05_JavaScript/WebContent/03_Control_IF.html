@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>03_Control_IF</title>
+<style type="text/css"></style>
+<script type="text/javaScript">
+
+    var date = new Date();
+    // 자바 스크립트의  내장 라이브러리 중 날짜 객체를 생성하는 명령.
+
+    var hour = date.getHours();
+    if(hour < 11) {
+        console.log(hour + '시 : 아침 먹을 시간 입니다.')
+    } else if (hour < 15) {
+        console.log(hour + '시 : 점심 먹을 시간 입니다.')
+    } else {
+        console.log(hour + '시 : 저녁 먹을 시간 입니다.')
+    }
+
+    console.log(hour + '시');
+    var min = date.getMinutes();
+    console.log(min + '분');
+    var sec = date.getSeconds();
+    console.log(sec + '초');
+
+    var year = date.getFullYear();
+    console.log(year + '년');
+    var month = date.getMonth();
+    console.log(month + '월');
+    var date1 = date.getDate();
+    console.log(date1 + '일');
+    var week = date.getDay();
+    if (week==1)  console.log('월요일');
+    else if(week==2)  console.log('화요일');
+    else if(week==3)  console.log('수요일');
+    else if(week==4)  console.log('목요일');
+    else if(week==5)  console.log('금요일');
+    else if(week==6)  console.log('토요일');
+    else  console.log('일요일');
+
+
+
+
+
+
+
+
+</script>
+</head>
+<body>
+</body>
+</html>

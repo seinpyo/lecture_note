@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>07_Function03</title>
+<script type="text/javaScript">
+
+//익명함수의 재정의
+var func = function () { console.log('익명 함수1'); }
+func();
+func = function () { console.log('익명 함수2'); }
+func();
+
+//선언적 함수 재정의
+function move() { console.log('move() 함수 1');}
+move();
+function move() { console.log('move() 함수 2');}
+move();
+function move() { console.log('move() 함수 3');}
+move();
+
+
+</script>
+</head>
+<body>
+    
+</body>
+</html>

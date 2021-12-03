@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>06_Function02</title>
+<script type="text/javaScript">
+
+function add(a,b) {
+    c=a+b;
+    console.log(a+" + " + b + " = " + c );
+    return c;
+}
+
+var result = add(10,20);
+console.log(result);
+
+function f(x) {
+    console.log(x + "*" + x + " = " + (x*x));
+    return x*x;
+}
+
+result = f(5,3);   
+console.log(result);
+
+//함수 오버로딩
+
+var array1 = Array(); //빈배열
+var array2 = Array(10) //매개변수만큼의 크기를 가지는 배열을 만듦
+var array3 = Array(23,35,45,55) //매개변수를 배열로 만듦
+
+console.log("array1 : " + array1);
+console.log("array2 : " + array2);
+console.log("array3 : " + array3);
+
+//arguments
+
+function sumAll() {
+    console.log(typeof(arguments) + " : " + arguments.length );
+    var s = ""
+    var sum = 0;
+    for (var i in arguments){
+        s= s + arguments[i] + " ";
+        sum = sum + arguments[i];
+    }
+
+    console.log("s = " + s);
+    console.log("sum : " + sum );
+}
+
+sumAll(1,2,3,4,5);
+sumAll(1,2,3,4,5,6,7,8,9,10);
+
+
+//리턴값이 익명함수 
+
+function returnFunc() {
+    return function () { console.log("리턴될 함수 출력"); };
+}
+
+returnFunc()();
+var value = returnFunc(); 
+value();
+
+
+function varFunction(varFunc) {
+    for(var i=0; i<5; i++) varFunc();
+}
+
+var func = function(){console.log("Hello JavaScript")}
+varFunction(func);
+
+
+//지역변수 
+function test(name) {
+    var output = "Hello " + name ;
+    return output;
+}
+
+//console.log(output); //err
+
+var s = test('홍길동');
+console.log(s);
+
+//클로저
+
+function test2(name) {
+    var output = "Hello " + name;
+    return function(){ return output; } //지역변수를 담은 익명함수가 리턴
+}
+
+var func1 = test2('이순신');
+var s = func1();
+console.log(s);
+console.log(func1());
+console.log(test2('이순신')());
+
+
+
+
+
+</script>
+</head>
+<body>
+    
+</body>
+</html>
