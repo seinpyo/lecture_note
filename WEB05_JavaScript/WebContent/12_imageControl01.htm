@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>12_imageControl01</title>
+<script type="text/JavaScript">
+function changeImg1() {
+    document.getElementById("img1").src = "images/3.jpg"
+}
+
+function changeImg2() {
+    document.getElementById("img2").src = "images/4.jpg"
+}
+
+function changeImg3() {
+    document.getElementById("img1").src = "images/5.jpg"
+}
+
+function changeImg4() {
+    document.getElementById("img2").src = "images/6.jpg"
+}
+
+function recoverImg1() {
+    document.getElementById("img1").src = "images/1.jpg"
+}
+
+function recoverImg2() {
+    document.getElementById("img2").src = "images/2.jpg"
+}
+
+</script>
+</head>
+<body>
+    <img src="images/1.jpg" id="img1" 
+    onclick="changeImg1();" onmouseover="changeImg3()" onmouseout="recoverImg1()">
+    <img src="images/2.jpg" id="img2" 
+    onclick="changeImg2();" onmouseover="changeImg4()" onmouseout="recoverImg2()">
+</body>
+</html>
