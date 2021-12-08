@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>22_imageControl12</title>
+<title>24_imageControl14</title>
 <style type = "text/css">
-    #view {
+#view {
         position: relative;
         width: 600px;
         height: 400px;
@@ -31,32 +31,47 @@
         position: relative;
         width: 200px;
         height: 50px;
-        margin: 0 auto;
-        text-align: center;
-        top: 350px;
         border: 1px solid white;
+        margin: 0 auto;
+        top: 350px; 
+        text-align: center
     }
-    #remote ul{
-        list-style: none; margin: 0; padding: 0; display: inline-block;
-    }
-    #remote ul li {
-        float:left;
-        width: 14px; 
-        height: 14px;
+    #remote div{
+        position: relative;
+        width: 25px;
+        height: 25px;
         background: white;
         border-radius: 50%;
-        margin: 18px 4px;
+        line-height: 25px;
+        text-align: center;
+        cursor: pointer;
+        margin: 13px auto;
     }
 </style>
 <script type="text/JavaScript">
-    var target;
-    function move(number) {
-        target = 600*number*-1;
-        document.getElementById("imgs").style.webkitTransform='translateX('+target+'px)';
+    var playing = false;
+    var timer;
+    var cnt=0; //현재 몇 번째 그림인지 알려주는 변수
+    function play_stop() {
+        if (playing==true) {
+            playing = false;
+            document.getElementById("btn").innerHTML= '▶';
+            window.clearInterval(timer);
+        } else {
+            playing = true;
+            document.getElementById("btn").innerHTML= '■';
+            timer = window.setInterval(function() {  
+                var dist = -600*cnt
+                document.getElementById("imgs").style.left = dist+"px";
+                cnt++;
+                if(cnt == 8) cnt = 0;
+            }, 1000);
+        }
     }
+    
 </script>
 </head>
-<body>
+<body onload="play_stop()">
     <div id="view">
         <div id="imgs">
             <img src="images/Jellyfish.jpg"><img src="images/Tulips.jpg"><img 
@@ -64,18 +79,12 @@
             src="images/Hydrangeas.jpg"><img src="images/Desert.jpg"><img src="images/Koala.jpg"><img 
             src="images/Chrysanthemum.jpg">
         </div>
-        <div id="remote">
-            <ul>
-                <li onclick="move(0)"></li>
-                <li onclick="move(1)"></li>
-                <li onclick="move(2)"></li>
-                <li onclick="move(3)"></li>
-                <li onclick="move(4)"></li>
-                <li onclick="move(5)"></li>
-                <li onclick="move(6)"></li>
-                <li onclick="move(7)"></li>
-            </ul>
+        <div id=remote>
+            <div id="btn" onclick="play_stop()">
+                ■
+            </div>
         </div>
     </div>
+
 </body>
 </html>

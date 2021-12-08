@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>22_imageControl12</title>
+<title>23_imageControl13</title>
 <style type = "text/css">
     #view {
         position: relative;
@@ -27,32 +27,49 @@
         width: 600px;
         height: 400px;
         }
-    #remote {
-        position: relative;
-        width: 200px;
+    .button {
+        position: absolute;
+        width: 50px;
         height: 50px;
-        margin: 0 auto;
-        text-align: center;
-        top: 350px;
-        border: 1px solid white;
-    }
-    #remote ul{
-        list-style: none; margin: 0; padding: 0; display: inline-block;
-    }
-    #remote ul li {
-        float:left;
-        width: 14px; 
-        height: 14px;
-        background: white;
+        bottom: 0;
         border-radius: 50%;
-        margin: 18px 4px;
+        overflow: hidden;
+        background-image: url(images/ico_movie_171115.png);
+    }
+    #lbutton {
+        left: 0;
+        background-position: -60px -460px;
+    }
+    #rbutton {
+        right:0;
+        background-position: 0px -460px;
     }
 </style>
 <script type="text/JavaScript">
-    var target;
-    function move(number) {
-        target = 600*number*-1;
-        document.getElementById("imgs").style.webkitTransform='translateX('+target+'px)';
+    var num=0;
+    function moveleft() {
+        if(num==0) return;
+        num--;
+        var dist = -600*num;
+        document.getElementById("imgs").style.left = dist+"px";
+    }
+    function moveright() {
+        if(num==7) return;
+        num++;
+        var dist = -600*num;
+        document.getElementById("imgs").style.left = dist+"px";
+    }
+
+    function move(x) {
+        if (x==1){
+            if(num==0) return;
+            num--;
+        } else {
+            if(num==7) return;
+            num++;
+        }
+        var dist = -600*num;
+        document.getElementById("imgs").style.left = dist+"px";
     }
 </script>
 </head>
@@ -64,18 +81,8 @@
             src="images/Hydrangeas.jpg"><img src="images/Desert.jpg"><img src="images/Koala.jpg"><img 
             src="images/Chrysanthemum.jpg">
         </div>
-        <div id="remote">
-            <ul>
-                <li onclick="move(0)"></li>
-                <li onclick="move(1)"></li>
-                <li onclick="move(2)"></li>
-                <li onclick="move(3)"></li>
-                <li onclick="move(4)"></li>
-                <li onclick="move(5)"></li>
-                <li onclick="move(6)"></li>
-                <li onclick="move(7)"></li>
-            </ul>
-        </div>
+        <div id="lbutton" class="button" onclick="move(1)"></div>
+        <div id="rbutton" class="button" onclick="move(-1)"></div>
     </div>
 </body>
 </html>
