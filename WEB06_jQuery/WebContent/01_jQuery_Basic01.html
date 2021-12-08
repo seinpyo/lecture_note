@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>01_jQuery_Basic01</title>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+    $(  function(){
+        $("body").css("background", "#00FFFF")
+    })
+
+    $(  function() {
+        $("#tit").css("color", "red");
+    });
+
+    $(function() {
+        $("*").css("border","1px solid blue");
+        //전체 선택자
+    })
+
+    $(function() {
+        $("h3").css("background", "#f0f").css("border", "2px dashed #ff0");
+        //태그 선택자
+        //.css()를 이어 붙여 여러가지 태그 적용 가능
+    })
+
+    $(function() {
+        $("h1, h2").css("background", "#DDDDDD").css("border", "2px dashed #00f");
+        //두개 이상의 태그 선택
+    })
+
+    $(function() {
+        $("#tit").css("background", "#ff0").css("border", "2px solid #f00")
+        .css("font-size", "250%");
+        //아이디 선택자
+    })
+
+    $(function() {
+        $(".tit2").css("background", "#ff0").css("border","2px dashed #f00")
+        .css("font-size","250%");
+        //클래스 선택자 
+    })
+
+    $(function() {
+        $("h1#tit").css("color", "red");
+        //종속 선택자 : id가 tit인 h1에만 css적용
+    })
+</script>
+</head>
+<body>
+    <h1 id="tit">제목</h1>
+    <h1>제이쿼리</h1>
+    <h2>선택자</h2>
+    <h3>직접 선택자</h3>
+    <h1 class="tit2">제목</h1>
+</body>
+</html>
