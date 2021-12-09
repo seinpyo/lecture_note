@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>05_DOM_Operation-2.html</title>
+<style type="text/css">
+    .item_1 {background: red; color: white;}
+    .item_2 {background: pink; color: white;}
+    .item_3 {background: orange; color: white;}
+
+</style>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+    $(function(){
+        let src = $('img').attr('src'); //img태그에서 src속성을 추출, 변수에 저장
+        let header1 = document.createElement('h1');
+        let textNode = document.createTextNode(src);
+        header1.appendChild( textNode );
+        document.body.appendChild(header1);
+
+        let w = $('img').attr('width');
+        header1 = document.createElement('h1');
+        textNode = document.createTextNode(w);
+        header1.appendChild( textNode );
+        document.body.appendChild(header1);
+    })
+    //each를 사용하지 않았으므로 index0에만 적용, 한 번만 출력
+
+</script>
+</head>
+<body>
+
+    <!-- 문서 객체의 속성 검사 -->
+    <h1 class='item_1'> Tulips </h1>
+    <img src="images/Tulips.jpg" width="150"/>
+    <h1 class='item_2'> Penguins </h1>
+    <img src="images/Penguins.jpg" width="150"/>
+    <h1 class='item_3'> Jellyfish </h1>
+    <img src="images/Jellyfish.jpg" width="150"/>
+</body>
+</html>

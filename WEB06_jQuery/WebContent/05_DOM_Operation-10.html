@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>05_DOM_Operation-10.html</title>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+    // $(function() {
+    //     $('<h1></h1>').html('Hello JQuery#1').appendTo('body');
+    // })
+
+    // $(function() {
+    //     $('<h1>Hello JQuery#2</h1>').appendTo('body').css('color','red');
+    // })
+
+    // $(function() {
+    //     $('<img/>').attr({src:'images/Tulips.jpg', width:'200'}).appendTo('body')
+    // })
+
+    // $(function() {
+    //     $('<img/>').attr('src','images/Penguins.jpg').css('width', '200').appendTo('body');
+    // })
+
+    $(function(){
+        $('<img/>').attr({src:'images/Tulips.jpg', width:'200'}).appendTo('body')
+        let h1  = '<h1>Header ~ 1</h1>';
+        let h2  = '<h2>Header ~ 2</h2>';
+        $('body').append(h1,h2,h1,h2);
+    }) 
+
+    $(function(){
+        let content = ['홍길동', '김길동', '박길동'];
+        $.each(content, function(index, item){
+            $('#name_region').append($('<li>'+item+'</li>'))
+        })
+    }) //목적지 : #name_region 전달내용 : <li> item </li>
+
+    $(function(){
+        $('<div>이길동</div>').insertAfter($('header'));
+    })
+</script>
+</head>
+<body>
+    <div>
+        <b>데이터</b>
+        <ul id="name_region"></ul>
+    </div>
+</body>
+</html>

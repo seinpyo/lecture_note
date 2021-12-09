@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>06_Event.html</title>
+<style type="text/css">
+    .reverse {
+        background: black;
+        color: white;
+    }
+    .outer {
+        width: 200px;
+        height: 100px;
+        background: orange;
+        padding: 50px;
+        margin: 10px;
+    }
+    .inner {
+        width: 200px;
+        height: 100%;
+        background: pink;
+    }
+</style>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $('h1').on('click', function(event){
+            let k = $(this).index(); //클릭된 h1태그의 인덱스를 얻어내는 함수
+            $(this).html(function(index,html){return html+k;})
+        }) //$(this) : 여러개의 h1 중 현재 클릭된 h1(click의 주체)
+    })
+
+    $(function() {
+        $('h1').on(
+            {
+                mouseenter:function(){$(this).addClass('reverse')},
+                mouseleave:function(){$(this).removeClass('reverse')}
+            }
+        )
+    })
+
+    $(function(){
+        $('h1').hover(
+            function(event){$(this).addClass('reverse')}, 
+            function(event){$(this).removeClass('reverse')}
+        )
+    });
+
+    $(function(){
+        $('h1').on('click', function(){
+            $(this).html('CLICK') //내용을 CLICK으로 변경
+            $(this).off(); //이벤트 제거
+        })
+    })
+
+</script>
+</head>
+<body>
+    <!-- 이벤트 연결 / 제거  -->
+    <h1>Header-0</h1>
+    <h1>Header-1</h1>
+    <h1>Header-2</h1>
+</body>
+</html>

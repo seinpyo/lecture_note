@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>05_DOM_Operation-3.html</title>
+<style type="text/css">
+    .item_1 {background: red; color: white;}
+    .item_2 {background: pink; color: white;}
+    .item_3 {background: orange; color: white;}
+
+</style>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+    // $(function(){
+    //     $('img').attr('width','300');
+    //     //img태그의 width 를 300으로 변경
+    // })
+    // $(function(){
+    //     let w = $('img').attr('width');
+    //     header1 = document.createElement('h1');
+    //     textNode = document.createTextNode(w);
+    //     header1.appendChild( textNode );
+    //     document.body.appendChild(header1);
+    // })
+
+    // $(function(){
+    //     $('img').attr('width', function(index){
+    //         return (index+1)*100;
+    //     });
+    
+    // })
+
+    $(function(){
+        $('img').attr({'width': function(index){
+            return (index+1)*100;
+        }, 'height':200});
+    })
+
+    $(function(){
+        $('img').removeAttr('width');
+    })
+
+</script>
+</head>
+<body>
+
+    <!-- 문서 객체의 속성 검사 -->
+    <h1 class='item_1'> Tulips </h1>
+    <img src="images/Tulips.jpg" width="150"/>
+    <h1 class='item_2'> Penguins </h1>
+    <img src="images/Penguins.jpg" width="150"/>
+    <h1 class='item_3'> Jellyfish </h1>
+    <img src="images/Jellyfish.jpg" width="150"/>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>04_DOM_Search.html</title>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+    /*$(function () {
+        $('h3:even').css({background:'black', color:'white'})
+        $('h3').filter(':even').css({background:'black', color:'white'})
+    })
+
+    $(function () {
+        $('h3').filter(':odd').css({background:'red', color:'white'})
+    })
+
+    $(function () {
+        $('h3').filter(function (index) {
+            return index % 3 == 0
+        }).css({background:'blue', color:'white'});
+    })
+    //filter내의 익명함수가 전체 index를 대상으로 3의 배수인 인덱스만 true를 리턴
+    //true가 리턴된 인덱스에만 css를 적용한다
+    
+    $(function () {
+        $('h3').filter(function (index) {
+            return index==3 || index ==4
+        }).css({background:'purple', color:'white'});
+    })*/
+
+    /*$(function () {
+        $('h3').css({background:'orange', color:'white'}).filter(':even').css('color','red');
+    })*/
+    //모든 h3에 css적용 -> 짝수번째에만 추가로 css적용
+
+    // $(function () {
+    //     $('h3').css({background:'orange'});
+    //     $('h3:even').css({color:'white'});
+    //     $('h3:odd').css({color:'red'});
+    // })
+
+    /*$(function () {
+        $('h3').css({background:'orange'}).filter(':even').css('color','red')
+        .end().filter(':odd').css('color','blue')
+    })*/
+
+    /*$(function () {
+        $('h1').css('background','gray').add('h2').css('color', 'red')
+    })*/
+    $(function name(params) {
+        $('h1').each(function () {
+        if($('h1').is('.select')){ $(this).css('color','red')}
+         //= $('h1.select').css('color','red'
+        //만약 h1태그에 클래스가 select가 있다면 그 객체(this)에 css 적용
+        })
+    })
+    
+
+</script>
+</head>
+<body>
+    <!-- 문서 객체의 특징 판별 -->
+    <h1 class="select">Header-0</h1>
+    <h1>Header-1</h1>
+    <h1 class="select">Header-2</h1>
+
+
+    <!-- <h1>Header-0</h1>
+    <h2>Header-1</h2>
+    <h1>Header-2</h1>
+    <h2>Header-3</h2>
+    <h1>Header-4</h1> -->
+</body>
+</html>

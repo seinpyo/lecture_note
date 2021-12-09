@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>05_DOM_Operation-4.html</title>
+
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+
+    //1) 방법
+    $(function(){
+        $('h1').css('border','2px dashed black');
+    })
+
+    //2) 방법
+    $( function() {
+        let color = ['red', 'green', 'blue'];
+        $('h1').css('background', function(index){ return color[index] })
+    })
+
+    //3) 방법
+    $( function() {
+        let color = ['purple', 'yellow', 'lavender'];
+        $('h1').css({
+            color : function(index) {return color[index]}
+        })
+    })
+</script>
+</head>
+<body>
+
+    <!-- 문서 객체의 스타일 검사 -->
+    <h1>Header-0</h1>
+    <h1>Header-1</h1>
+    <h1>Header-2</h1>
+
+</body>
+</html>

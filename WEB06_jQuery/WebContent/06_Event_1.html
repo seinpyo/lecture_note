@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>06_Event_1.html</title>
+
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $('div').click(function(){
+            //div중 클릭된 div를 this로 표현하고 그 div 속 h1을 선택하고 싶을 때 
+            let header = $('h1', this).text(); //h1 중 클릭된 div 내부의 h1의 내용(text)
+            let paragraph = $('p', this).text();
+            let k = header + " : " + paragraph;
+            $('body').append($('<h1>' + k + '</h1>') )
+        })
+    })
+
+</script>
+</head>
+<body>
+    <!--매개변수-->
+    <div><h1>Header1</h1><p>Paragraph1</p></div>
+    <div><h1>Header2</h1><p>Paragraph2</p></div>
+    <div><h1>Header3</h1><p>Paragraph3</p></div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>05_DOM_Operation-8</title>
+
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+
+
+$(function(){
+    $('h1').html(function(index, html){
+        return '※' + html + '※';
+    })
+    $('h2').text(function(index, text){
+        return '※' + text + '※';
+    })
+}) 
+
+
+</script>
+</head>
+<body>
+    <!-- 문서 객체의 내부 추가 -->
+    <h1>header-0</h1>
+    <h1>header-1</h1>
+    <h1>header-2</h1>
+    <h2>header-0</h2>
+    <h2>header-1</h2>
+    <h2>header-2</h2>
+    
+</body>
+</html>
