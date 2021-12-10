@@ -26,13 +26,10 @@
 <script src="script/jquery-3.6.0.js"></script>
 <script type="text/javascript">
     $(function() {
-        $('textarea').keyup( function(event){
-            let inputlength = $(this).val().length; 
-            //textarea에서 글자수를 얻어 저장
-            let remain = 150-inputlength;
-            $('h3').html(remain); //남은 글자 표시 
-            if(remain>=0) $('h3').css('color', 'black') //양수는 검정색
-            else $('h3').css('color','red') //음수 빨강
+        $('.outer').mouseover(function(){
+            $('body').append('<h3>MouseOver</h3')
+        }).mouseenter(function(){
+            $('body').append('<h3>MouseEnter</h3')
         })
     })
 
@@ -43,5 +40,6 @@
     <div><p>무슨 일이 일어나고 있나요?</p> <h3>140</h3>
     <textarea cols="70" rows="5"></textarea>
     </div>
+    
 </body>
 </html>

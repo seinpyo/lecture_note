@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>18_ImageControl03</title>
+<style type="text/css">  
+</style>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+    let number = 1;
+    $(function(){
+        $('img').click(function(){
+            number++;
+            $('img').attr('src','images/'+ number +'.jpg');
+            if(number==10) number=0;
+        })
+    })
+
+</script>
+</head>
+<body>
+    <img src = "images/1.jpg">
+</body>
+</html>

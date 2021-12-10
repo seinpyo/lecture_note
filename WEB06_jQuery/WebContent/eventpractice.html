@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>test</title>
+<style type="text/css">
+    #wrap {
+        position: relative;
+        width: 1100px;
+        height: 400px;
+        margin: 0 auto;
+        border: 1px solid black;
+    }
+    .region{
+        position: relative;
+        width: 300px;
+        height: 300px;
+        margin-right:50px;
+        margin-top:50px;
+        float: left;
+        text-align: center;
+        line-height: 300px;
+        border-radius: 50%;
+        font-size: 140%;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    #first {
+        background: red;
+        margin-left: 50px;
+    }
+    #second {
+        background: orange;
+        
+    }
+    #third{
+        margin-right:0px ;
+        background: green
+    }
+    #print{
+        position:relative;
+        clear:both;
+        width: 300px;
+        height: 50px;
+        background: #333333;
+        color: white;
+        margin: 50px auto;
+        text-align: center;
+        line-height: 50px;
+    }
+</style>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+    
+
+
+$(function(){
+    $('.region').on('click', function(event){
+        let k = $(this).html();
+        $('#print').html(k + '을/를 클릭했습니다') 
+	})
+})
+
+$(function() {
+    $('.region').mouseover(function(event){
+        let k = $(this).html();
+
+        $('#print').html(k + '(으)로 들어왔습니다') 
+    })
+})
+
+$(function() {
+    $('.region').mouseleave(function(event){
+        let k = $(this).html();
+        $('#print').html(k+"을/를 떠났습니다") 
+    })
+})
+
+$(function() {
+    $('.region').dblclick(function(event){
+        let k = $(this).html();
+        $('#print').html(k + '을/를 더블클릭했습니다') 
+    })
+})
+
+$(function() {
+    $('#wrap').mouseleave(function(event){
+        let k = $(this).html();
+        $('#print').html("마우스 상태") 
+    })
+})
+
+</script>
+</head>
+<body>
+    <div id="wrap"> 
+        <div id="first" class="region"> 영역1 </div> 
+        <div id="second" class="region"> 영역2 </div>
+        <div id="third" class="region"> 영역3 </div>
+    </div>
+    <div id=print> 마우스 상태 </div>
+</body>
+</html>
