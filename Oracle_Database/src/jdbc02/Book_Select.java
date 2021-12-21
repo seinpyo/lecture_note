@@ -13,7 +13,7 @@ public class Book_Select {
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, "scott", "tiger");	
-			String sql = "SELECT * FROM BOOKLIST ORDER BY NUM";
+			String sql = "SELECT * FROM BOOKLIST";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
