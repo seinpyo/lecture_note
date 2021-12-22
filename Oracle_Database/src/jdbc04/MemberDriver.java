@@ -28,13 +28,37 @@ public class MemberDriver {
 					update(sc);
 					break;
 				case"4": 
-				//	delete(sc));
+					delete(sc);
 					break;
 				default : System.out.println("메뉴 선택이 잘못되었습니다.");
 			}
 		}
 		System.out.println("프로그램을 종료합니다.");
 	}
+
+	private static void delete(Scanner sc) {
+		MemberDao mdao = MemberDao.getInstance();
+		MemberDto mdto = null;
+		int num, result;
+		String input;
+		while(true) {
+			System.out.print("삭제할 회원 번호를 입력하세요(필수) : ");
+			input = sc.nextLine();
+			if(input.equals("")) System.out.print("회원 번호 입력은 필수 입니다.\n");
+			else break;
+		}
+			num = Integer.parseInt(input);
+			mdto=mdao.getMember(num);
+			if (mdto==null) {
+				System.out.println("해당 회원이 없습니다.");
+				return;
+			} else {
+				result = mdao.delete(num);
+			}
+			if(result==1)System.out.println("레코드 삭제 성공");
+			else System.out.println("레코드 삭제 실패");
+	}
+		
 
 	private static void update(Scanner sc) {
 		MemberDao mdao = MemberDao.getInstance();
@@ -62,45 +86,70 @@ public class MemberDriver {
 		System.out.println("검색된 회원의 정보를 수정합니다.");
 		System.out.println("수정을 원하지 않는 항목은 엔터를 눌러주세요\n");
 		
-		System.out.println("수정할 이름을 입력하세요.");
+		System.out.printf("수정할 이름을 입력하세요.(기존 이름 : %s) ",mdto.getName());
 		String name = sc.nextLine();
 		if(!name.equals("")) mdto.setName(name); 
 		
-		System.out.println("수정할 전화번호를 입력하세요.");
+		System.out.printf("수정할 전화번호를 입력하세요. (기존 전화번호 : %s) ", mdto.getPhone());
 		String phone = sc.nextLine();
 		if(!phone.equals("")) mdto.setPhone(phone); 
 		
-		System.out.println("수정할 성별 입력하세요.");
+		System.out.printf("수정할 성별 입력하세요.(M/F) (기존 성별 : %s) ", mdto.getGender());
 		String gender = sc.nextLine();
 		if(!gender.equals("")) mdto.setGender(gender); 
 		
-		System.out.println("수정할 포인트를 입력하세요.");
+		System.out.printf("수정할 포인트를 입력하세요.(기존 포인트 : %d) ", mdto.getBpoint());
 		String bpoint = sc.nextLine();
 		if(!bpoint.equals("")) mdto.setBpoint(Integer.parseInt(bpoint)); 
 		
-		System.out.printf("수정할 생일을 입력하세요(YYYY-MM-DD) : ");
+		System.out.printf("수정할 생일을 입력하세요(YYYY-MM-DD) (기존 생일 : %s) ", mdto.getBirth() );
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		java.util.Date d = null;
+		java.util.Date day = null;
 		while(true) {
 			try {
-				d=sdf.parse(sc.nextLine());
+				String b = sc.nextLine();
+				if(b.equals("")) break; //여기서 break 되면 day=null;
+				day=sdf.parse(b);
 				break;
 			} catch (ParseException e) {
-				System.out.println("입력 형식을 지켜 다시 입력해주세요.(입력예 : 1999-12-31)");
+				System.out.println("입력 형식을 지켜 다시 입력해주세요.(입력예 : 1999-12-31) ");
 			}
 		}
 		
-		/*
-		 * java.sql.Date birth = new java.sql.Date(d.getTime()); mdto.setBirth(birth);
-		 * 
-		 * Calendar c = Calendar.getInstance(); Calendar today = Calendar.getInstance();
-		 * c.setTime(d); int age = today.get(Calendar.YEAR) - c.get(Calendar.YEAR) + 1;
-		 * mdto.setAge(age);
-		 * 
-		 * int result = mdao.update(mdto); if(result==1)System.out.println("레코드 수정 성공");
-		 * else System.out.println("레코드 수정 실패");
-		 */
-		
+		 if(day!=null) {
+			 java.sql.Date birth = new java.sql.Date(day.getTime()); 
+			 mdto.setBirth(birth);
+			 
+			 Calendar c = Calendar.getInstance(); 
+			 Calendar today = Calendar.getInstance();
+			 c.setTime(day); 
+			 int age = today.get(Calendar.YEAR) - c.get(Calendar.YEAR) + 1;
+			 mdto.setAge(age);
+		 }
+
+		 
+		 System.out.printf("수정할 가입일자를 입력하세요(YYYY-MM-DD) (기존 가입일자 : %s) ", mdto.getJoindate());
+			sdf = new SimpleDateFormat("yyyy-MM-dd");
+			day = null;
+			while(true) {
+				try {
+					String b = sc.nextLine();
+					if(b.equals("")) break; //여기서 break 되면 day=null;
+					day=sdf.parse(b);
+					break;
+				} catch (ParseException e) {
+					System.out.println("입력 형식을 지켜 다시 입력해주세요.(입력예 : 1999-12-31)");
+				}
+			}
+			
+			 if(day!=null) {
+				 java.sql.Date join = new java.sql.Date(day.getTime()); 
+				 mdto.setJoindate(join);
+			 }
+
+		 int result = mdao.update(mdto); if(result==1)System.out.println("레코드 수정 성공");
+		 else System.out.println("레코드 수정 실패");
+	 
 	}
 
 	private static void insert(Scanner sc) {

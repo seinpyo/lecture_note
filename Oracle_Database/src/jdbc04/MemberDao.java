@@ -84,7 +84,7 @@ public class MemberDao {
 	}
 	public int update(MemberDto mdto){
 		int result = 0;
-		String sql = "UPDATE MEMBERLIST SET NAME=?, PHONE=?, GENDER=?, BPOINT=?, BIRTH=?, AGE=? WHERE MEMBERNUM = ?";
+		String sql = "UPDATE MEMBERLIST SET NAME=?, PHONE=?, GENDER=?, BPOINT=?, BIRTH=?, AGE=?, JOINDATE=? WHERE MEMBERNUM=?";
 		con = getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -94,7 +94,8 @@ public class MemberDao {
 			pstmt.setInt(4, mdto.getBpoint());
 			pstmt.setDate(5, mdto.getBirth());
 			pstmt.setInt(6, mdto.getAge());
-			pstmt.setInt(7, mdto.getMembernum());
+			pstmt.setDate(7, mdto.getJoindate());
+			pstmt.setInt(8, mdto.getMembernum());
 
 			result = pstmt.executeUpdate();
 			
@@ -103,6 +104,7 @@ public class MemberDao {
 		}
 		return result;
 	}
+	
 	public MemberDto getMember(int num){
 		MemberDto mdto = null;
 		String sql = "SELECT * FROM MEMBERLIST WHERE MEMBERNUM = ?";
@@ -125,17 +127,17 @@ public class MemberDao {
 			}
 			
 		} catch (SQLException e) {e.printStackTrace();
-		} finally { close();
-		}
+		} finally { close(); }
 		return mdto;
 	}
 	public int delete(int num){
 		int result = 0;
-		String sql = "";
+		String sql = "DELETE FROM MEMBERLIST WHERE MEMBERNUM=?";
 		con = getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
-			
+			pstmt.setInt(1, num);
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {e.printStackTrace();
 		} finally { close();
 		}
