@@ -75,20 +75,19 @@ public class RentDao {
 		return state;
 	}	
 	
-	public int insert(RentDto rdto) {
+	public int insert( RentDto rdto ){
 		int result = 0;
 		con = DBManager.getConnection();
-		String sql = "INSERT INTO RENTLIST(RENTDATE,NUM,BOOKNUM,MEMBERNUM,DISCOUNT) VALUES(SYSDATE,RENT_SEQ.NEXTVAL,?,?,?)";
+		String sql = "insert into rentlist values(sysdate, rent_seq.nextVal, ? , ? , ? )";
+		
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, rdto.getBooknum());
-			pstmt.setInt(2, rdto.getMembernum());
-			pstmt.setInt(3, rdto.getDiscount());
-			
+			pstmt.setInt(1,  rdto.getBooknum() );
+			pstmt.setInt(2,  rdto.getMembernum() );
+			pstmt.setInt(3,  rdto.getDiscount() );
 			result = pstmt.executeUpdate();
-		} catch (SQLException e) {e.printStackTrace();
-		} finally { DBManager.close(con, pstmt, rs);
-		}
+		} catch (SQLException e) { e.printStackTrace();
+		} finally {	DBManager.close( con, pstmt, rs ); }
 		return result;
 	}
 
@@ -140,9 +139,44 @@ public class RentDao {
 	public int delete(int num) {
 		int result = 0;
 		con = DBManager.getConnection();
+		String sql = "DELETE FROM RENTLIST WHERE NUM = ?";
 		
-		DBManager.close(con, pstmt, rs);
+		try {
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {e.printStackTrace();
+		} finally { DBManager.close(con,pstmt,rs);		
+		}
+		
 		return result;
+	}
+
+	public ArrayList<RentDetailDto> selectAll() {
+		
+		ArrayList<RentDetailDto> list = new ArrayList<>();
+		con = DBManager.getConnection();
+		String sql = "SELECT * FROM RENTDETAIL";
+		
+		try {
+			pstmt=con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				RentDetailDto rdto = new RentDetailDto();
+				rdto.setRentdate(rs.getString("rentdate"));
+				rdto.setRentnum(rs.getInt("rentnum"));
+				rdto.setMembernum(rs.getInt("membernum"));
+				rdto.setMembername(rs.getString("membername"));
+				rdto.setPrice(rs.getInt("price"));
+				rdto.setBooknum(rs.getInt("booknum"));
+				rdto.setSubject(rs.getString("subject"));
+				list.add(rdto);
+			}
+		} catch (SQLException e) {e.printStackTrace();
+		} finally { DBManager.close(con, pstmt, rs);
+		}
+		
+		return list;
 	}
 }
 	
