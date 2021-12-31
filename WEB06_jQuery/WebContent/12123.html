@@ -17,46 +17,41 @@ img{ width:600px; height:400px; }
 </style>
 <script src="script/jquery-3.6.0.js"></script>
 <script type="text/javascript">
-var num = 0; 
+
+var num=0;
 var playing = false;
 
     $(function(){
-    $('.con').click(function(){ 
-        if(playing==false){
-            num = $(this).index(); 
-            var dist = -600 * num;
-            $('#imgs').animate({left:dist});
-            $('li').removeClass('select');
-            $('li').eq(num).addClass('select');
-            } 
-        });
-    });
+    $('.con').click(function(){ //ul로 바꿀 경우 숫자가 실행안됨..
+        num = $(this).index();
+        var dist = -600 * num;
+        $('#imgs').animate({left:dist});
+        $('li').removeClass('select');
+        $('li').eq(num).addClass('select');
+        console.log(num);
+        }
+    );
+});
 
 $(function(){
-
     var timer;
     var dist;
-    
     $('#play').click(function(){
         if(playing==true) {
             playing=false;
             document.getElementById('play').innerHTML = '▶';
             clearInterval(timer);
-            $('li').removeClass('select');
             console.log(playing);
         }else{
             playing=true;
-            console.log(playing);
             document.getElementById('play').innerHTML = '■';
-            $('li').removeClass('select');
-            $('#play').eq(num).addClass('select');
-            timer=setInterval(function(){
-                dist = -600 * num;
-                if(num==7)num=-1; 
-                $('#imgs').animate({ left : dist },1000); 
-                num++; 
-                console.log(num);
+            timer = setInterval(function(){
+                dist = -600 * (num);
+                if(num==7) num=-1;
+                $('#imgs').animate({ left : dist },1000);
+                num++;
             }, 1000);
+            
         }
     });
 });
@@ -76,7 +71,7 @@ $(function(){
             <li class='con'>6</li>
             <li class='con'>7</li>
             <li class='con'>8</li>
-            <li id='play'>▶</li> 
+            <li id='play'>▶</li>
         </ul>
     </div>
 </div>
