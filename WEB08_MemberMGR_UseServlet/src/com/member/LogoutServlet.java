@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class LogoutServlet
  */
-@WebServlet({ "/LogoutServlet", "/Logout.do" })
+@WebServlet("/logout.do")
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,14 +31,15 @@ public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		//세션 삭제
 		session.invalidate();
-		
-		//다시 로그인 창으로 돌아감
 		RequestDispatcher dp = request.getRequestDispatcher("member/loginForm.jsp");
 		dp.forward(request, response);
-		
+	
 	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

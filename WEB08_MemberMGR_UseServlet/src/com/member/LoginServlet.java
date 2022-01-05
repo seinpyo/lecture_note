@@ -16,7 +16,7 @@ import com.dto.MemberDto;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet({ "/LoginServlet", "/login.do" })
+@WebServlet("/login.do")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -34,12 +34,18 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "member/loginForm.jsp";
 		
-		//세션 가지고 오기
+		//서블릿에서 세션은 아래와 같이 request에서 getSession()으로 전달받아야 사용 가능함
 		HttpSession session = request.getSession();
-		if(session.getAttribute("loginUser") != null ) {
-			//loginUser(doPost()에서 생성됨) -> 로그인한 사람이 없으면 null;
-			url = "main.do"; // 이 경로에 들어온 사람이 이미 로그인 되어 있다면 포워딩 		
-		}	
+		//.jsp파일에는 이미 jequest와 response와 session, application등이
+		//존재하기 때문에 session을 바로 사용하는 것이 가능하지만 서블릿은 불가
+		//request와 response를 전달받아 사용하기 때문에
+		//전달된 request를 통해 session을 꺼내어 사용
+		
+		if (session.getAttribute("loginUser") != null ) {
+			//loginUser 세션값이 null이 아니라면
+			url = "main.do"; //누군가 로그인되어 있는 상태라면 포워딩될 경로를 변경
+		}
+		
 		RequestDispatcher dp = request.getRequestDispatcher(url);
 		dp.forward(request, response);
 	}
@@ -48,37 +54,35 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//전달된 아이디 비밀번호를 변수에 저장
+		//전달된 아이디 비번 변수
 		String id = request.getParameter("userid");
 		String pwd = request.getParameter("pwd");
-		//전달된 id로 member테이블에서 회원을 검색 -> pwd 비교
+		//전달된 id로 member 테이블에서 회원을 검색하여
+		//결과에 따라 pwd와 비교, 정상 로그인 여부를 결정함 
 		
-		//로그인 실패시 포워딩할 경로를 지정하고 정상 로그인 시 url값을 변경 시킨다
+		//로그인 실패했을 때를 대비해 포워딩할 경로를 먼저 설정함
 		String url = "member/loginForm.jsp";
+		//정상 로그인시에 url값이 main.jsp로 변경됨
 		
-		//Dao의 매서드를 호출하기 위해 객체 생성
-		MemberDao mdao = MemberDao.getInstacne();
+		//Dao의 메소드를 호출하기 위해 겍체 생성
+		MemberDao mdao = MemberDao.getInstance();
+		//아이디로 검색해서 해당 아이디의 멤버정보를 모두 dto 형태로 리턴받음
+		MemberDto mdto = mdao.getMember(id);
 		
-		//해당 id의 정보를 모두 가져와 dto에 저장하는 메서드
-		MemberDto mdto = mdao.getMember(id); 
-		
-		
-		if(mdto==null) {  //아이디가 존재하지 않을 때 
-			request.setAttribute("message", "존재하지 않는 회원 아이디입니다.");
-		} else if (mdto.getPwd()==null) { //오류로 회원정보에 비밀번호가 저장되지 않은 경우
-			request.setAttribute("message", "비밀번호 오류. 관리자에게 문의하세요.");
-		} else if (!mdto.getPwd().equals(pwd)) { //비밀번호가 일치하지 않을 때 
-			request.setAttribute("message", "비밀번호가 일치하지 않습니다.");
-		} else if (mdto.getPwd().equals(pwd)) { //로그인 성공
-			url = "main.do";
+		if(mdto == null) {
+			request.setAttribute("message", "아이디가 없어요");
+		} else if(mdto.getPwd()==null) {
+			request.setAttribute("message", "암호 오류. 관리자에게 문의하세요");
+		} else if( !mdto.getPwd().equals(pwd)) {
+			request.setAttribute("message", "비밀번호가 틀립니다");
+		} else if(mdto.getPwd().equals(pwd)) {
+			url="main.do";
 			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", mdto); //세션에 로그인한 사용자를 저장
-		} else { //모종의 이유로 로그인이 실패한 경우
-			request.setAttribute("message", "로그인 오류. 관리자에게 문의하세요.");
+			session.setAttribute("loginUser", mdto); //세션에 검색된 사용자를 저장함
+		} else { //어쨌든 로그인 실패
+			request.setAttribute("message", "무슨 이유에선지 로그인이 안됩니다");
 		}
-	 	
 		RequestDispatcher dp = request.getRequestDispatcher(url);
 		dp.forward(request, response);
-
 	}
 }

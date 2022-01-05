@@ -1,29 +1,23 @@
-package com.member;
+package com.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dao.MemberDao;
-import com.dto.MemberDto;
-
 /**
- * Servlet implementation class MainServlet
+ * Servlet implementation class MemberServlet
  */
-@WebServlet("/main.do")
-public class MainServlet extends HttpServlet {
+@WebServlet({ "/MemberServlet", "/member.do" })
+public class MemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MainServlet() {
+    public MemberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,23 +26,14 @@ public class MainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		//전체 학생을 조회해서 리스트로 리턴받고 
-		MemberDao mdao = MemberDao.getInstance();
-		ArrayList<MemberDto> list = mdao.selectMember();
 		
-		//리퀘스트에 저장해서
-		request.setAttribute("memberList", list);
-		
-		//main.jsp로 포워딩함
-		RequestDispatcher dp = request.getRequestDispatcher("main.jsp");
-		dp.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
