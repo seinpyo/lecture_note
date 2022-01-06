@@ -139,22 +139,26 @@ public class MemberDao {
 	}
 
 	public void editAdmin(String userid) {
-		String sql = "select admin from member where user id = ?";
+		String sql = "select admin from member where userid = ?";
 		con = getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
-			int admin=0;
-			pstmt.setString(1, userid);
-			rs=pstmt.executeQuery();
-			if(rs.next())
-				
-				
-				//////////////////////////////
-				
-				
+			int admin = 0;
+			pstmt.setString(1,  userid);
+			rs = pstmt.executeQuery();
+			if(rs.next()) admin = rs.getInt("admin");
+			pstmt.close();
+			
+			sql = "update member set admin=? where userid=?";
+			pstmt = con.prepareStatement(sql);
+			if( admin==1 )pstmt.setInt(1,  0);
+			else pstmt.setInt(1,  1);
+			pstmt.setString(2, userid);
 			pstmt.executeUpdate();
-		} catch (SQLException e) { e.printStackTrace(); 
-		} finally {close(); }
+			
+		} catch (SQLException e) {  e.printStackTrace();
+		} finally { close(); }
+		
 		
 	}
 

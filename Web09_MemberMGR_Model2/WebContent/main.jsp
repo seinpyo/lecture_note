@@ -6,16 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>main</title>
-<script type="text/javascript">
-  function withDrawConfirm(){
-	 var bool = confirm("탈퇴하시겠습니까?");
-	 if(bool){
-		 location.href="withdrawal.do?userid=" + "${loginUser.userid}";
-	 } else {
-		 
-	 }
- }
-</script>
 </head>
 <body>
 <table>
@@ -30,10 +20,9 @@
 	</tr>
 	<tr>
 		<td>
-			<input type="button" value="로그아웃" onClick = "location.href='logout.do'"/>
-			<input type="button" value="회원정보변경" onClick = "location.href='update.do?userid=${loginUser.userid}'"/>
-			<input type="button" value="회원탈퇴" onClick = "withDrawConfirm();"/>
-			<!-- 회원탈퇴 기능 추가 -->
+			<input type="button" value="로그아웃" onClick = "location.href='member.do?command=logout'"/>
+			<input type="button" value="회원정보변경" onClick = "location.href='member.do?command=updateForm'"/>
+			<input type="button" value="회원탈퇴" onClick = "location.href='member.do?command=deleteMember'"/>
 		</td>
 	</tr>
 </table>
@@ -56,7 +45,7 @@
 				<td>${mem.email}</td>
 				<td>
 					<c:choose>
-						<c:when test="${mem.admin==0}">일반사용자</c:when>
+						<c:when test="${mem.admin==0}">일반 사용자</c:when>
 						<c:otherwise>관리자</c:otherwise>
 					</c:choose>
 				</td>

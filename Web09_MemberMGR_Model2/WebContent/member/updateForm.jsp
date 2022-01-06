@@ -1,21 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:if test="${empty loginUser}">
-	<jsp:forward page='login.do' />
-</c:if>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript">
-	function updateCheck(){
+<title>회원정보 수정</title>
+<script type = "text/javascript">
+	function joinCheck(){
 		if( document.frm.name.value == ""){
 			alert("이름은 필수입력사항입니다");
 			document.frm.name.focus();
 			return false;
 		}
-
 		if( document.frm.pwd.value.length==0){
 			alert("비밀번호는 필수입력사항입니다.");
 			document.frm.pwd.focus();
@@ -32,11 +28,12 @@
 </head>
 <body>
 <h2>회원 정보 수정</h2>
-<form action="update.do" method="post" name="frm">
+<form action="member.do" method="post" name="frm">
+<input type="hidden" name="command" value="update">
 	<table>
 		<tr><td>이름</td>
 			<td><input type="text" name="name" value="${loginUser.name }">*</td></tr>
-		<tr><td>아이디</td><td>${loginUser.userid}<%-- ${updateMember.userid} --%>
+		<tr><td>아이디</td><td>${loginUser.userid}
 			<input type="hidden" name="userid" value="${loginUser.userid}"></td></tr>
 		<tr><td>비밀번호</td><td><input type="password" name="pwd" size="20" > *</td></tr>
 		<tr><td>비밀번호 확인</td>
@@ -58,9 +55,9 @@
 			</c:choose></td></tr>
 		<tr>	
 			<td colspan="2" align="center">
-				<input type="submit" value="확인" onClick="return updateCheck();">
+				<input type="submit" value="확인" onClick="return joinCheck();">
 				&nbsp;<input type="reset" value="취소">&nbsp;
-				<input type="button" value="뒤로가기" onClick="location.href='login.do'">
+				<input type="button" value="메인으로" onClick="member.do?command=main">
 			</td>
 		</tr>
 	</table>
