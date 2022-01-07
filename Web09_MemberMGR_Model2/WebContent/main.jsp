@@ -6,6 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>main</title>
+<script type = "text/javascript">
+	function deleteMember(){ 
+		console.log("탈퇴");
+		var bool = confirm("정말 탈퇴하시겠습니까?");
+		if(bool){
+			location.href = "member.do?command=deleteMember"
+		} 
+	}
+</script>
 </head>
 <body>
 <table>
@@ -22,7 +31,7 @@
 		<td>
 			<input type="button" value="로그아웃" onClick = "location.href='member.do?command=logout'"/>
 			<input type="button" value="회원정보변경" onClick = "location.href='member.do?command=updateForm'"/>
-			<input type="button" value="회원탈퇴" onClick = "location.href='member.do?command=deleteMember'"/>
+			<input type="button" value="회원탈퇴" onClick = "deleteMember();"/>
 		</td>
 	</tr>
 </table>
@@ -49,17 +58,17 @@
 						<c:otherwise>관리자</c:otherwise>
 					</c:choose>
 				</td>
-				<td>
+				<td width="150">
 				<!-- 본인의 등급은 수정 불가 -->
 				<c:if test ="${mem.userid != loginUser.userid}">
 					<!-- 관리자 <-> 일반사용자 전환 버튼 -->
 					<c:if test = "${mem.admin==0}">
 						<input type="button" value="관리자로 변경"
-						onClick="location.href='editadmin.do?userid=${mem.userid}'">
+						onClick="location.href='member.do?command=editAdmin&userid=${mem.userid}'">
 					</c:if>
 					<c:if test = "${mem.admin==1}">
 						<input type="button" value="일반회원으로 변경"
-						onClick="location.href='editadmin.do?userid=${mem.userid}'">
+						onClick="location.href='member.do?command=editAdmin&userid=${mem.userid}'">
 					</c:if>
 				</c:if>
 				</td>

@@ -20,6 +20,9 @@ public class ActionFactory {
 		 else if (command.equals("join")) ac = new JoinAction();
 		 else if (command.equals("updateForm")) ac = new UpdateFormAction();
 		 else if (command.equals("update")) ac = new UpdateAction();
+		 else if (command.equals("deleteMember")) ac = new DeleteMemberAction();
+		 else if (command.equals("main")) ac = new MainAction();
+		 else if (command.equals("editAdmin")) ac = new EditAdminAction();
 		 		 
 		 
 		 return ac; 

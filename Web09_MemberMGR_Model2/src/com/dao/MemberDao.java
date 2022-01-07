@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.dto.MemberDto;
 
@@ -113,5 +114,51 @@ public class MemberDao {
 		  } finally {close(); }
 		  return result;
 		  }
+
+	public void deleteMember(String userid) {
+		String sql = "delete from member where userid = ?";
+		con = getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userid);
+		} catch (SQLException e) {e.printStackTrace();
+		} finally { close(); }
+
+	}
+
+	public ArrayList<MemberDto> selectMember() {
+		ArrayList<MemberDto> list = new ArrayList<>();
+		String sql = "select * from member order by admin, name";
+		con = getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				MemberDto mdto = new MemberDto();
+				mdto.setName(rs.getString("name"));
+				mdto.setUserid(rs.getString("userid"));
+				mdto.setPwd(rs.getString("pwd"));
+				mdto.setPhone(rs.getString("phone"));
+				mdto.setEmail(rs.getString("email"));
+				mdto.setAdmin(rs.getInt("admin"));
+				list.add(mdto);
+			}
+		} catch (SQLException e) {e.printStackTrace();
+		} finally { close(); }
+		return list;
+	}
+
+	public void editAdmin(String userid, int admin) {
+		
+		String sql = "update member set admin = ? where userid = ?";
+		con = getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, admin);
+			pstmt.setString(2, userid);
+			pstmt.executeUpdate();
+		} catch (SQLException e) { e.printStackTrace();
+		}
+	}
 	
 }

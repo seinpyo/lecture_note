@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,7 @@
 			return false;
 		}
 		if( document.frm.pwd.value != document.frm.pwd_check.value){
-			alert("비밀번호와 비밀번호 확인 일치하지 않습니다");
+			alert("비밀번호와 비밀번호 확인이 일치하지 않습니다");
 			document.frm.pwd_check.focus();
 			return false;
 		}
@@ -57,7 +58,7 @@
 			<td colspan="2" align="center">
 				<input type="submit" value="확인" onClick="return joinCheck();">
 				&nbsp;<input type="reset" value="취소">&nbsp;
-				<input type="button" value="메인으로" onClick="member.do?command=main">
+				<input type="button" value="메인으로" onClick="location.href = 'member.do?command=main'">
 			</td>
 		</tr>
 	</table>
