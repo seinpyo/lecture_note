@@ -12,7 +12,7 @@ import com.board.dao.MemberDao;
 import com.board.dto.MemberDto;
 
 public class LoginAction implements Action {
-
+	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
@@ -23,6 +23,8 @@ public class LoginAction implements Action {
 		MemberDto mdto = mdao.getMember(userid);
 
 		String url = "member/loginForm.jsp";
+		HttpSession session = request.getSession();
+		if(session.getAttribute("loginuser")!=null) url="board.do?command=main";
 		
 		if (mdto == null) {
 			request.setAttribute("message", "존재하지 않는 회원 아이디 입니다.");
@@ -31,7 +33,6 @@ public class LoginAction implements Action {
 		} else if(!mdto.getPwd().equals(pwd)) {
 			request.setAttribute("message", "비밀번호가 일치하지 않습니다.");
 		} else if (mdto.getPwd().equals(pwd)) {
-			HttpSession session = request.getSession();
 			session.setAttribute("loginUser",mdto);
 			url = "board.do?command=main";
 		} else {
@@ -40,6 +41,6 @@ public class LoginAction implements Action {
 		
 		RequestDispatcher dp = request.getRequestDispatcher(url);
 		dp.forward(request, response);
+		
 	}
-
 }

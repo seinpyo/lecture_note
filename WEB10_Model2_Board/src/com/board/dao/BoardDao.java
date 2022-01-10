@@ -42,4 +42,66 @@ public class BoardDao {
 		
 		return list;
 	}
+
+	
+	public void viewCount(int num) {
+		String sql = "update board set READCOUNT=READCOUNT+1 where num=?";
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+		} catch (SQLException e) { e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs); }
+	}
+
+
+	public BoardDto getBoard(int num) {
+		BoardDto bdto = null;
+		String sql = "select * from board where num=?";
+		
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				bdto = new BoardDto();
+				bdto.setNum(rs.getInt("num"));
+				bdto.setPass(rs.getString("pass"));
+				bdto.setUserid(rs.getString("userid"));
+				bdto.setEmail(rs.getString("email"));
+				bdto.setTitle(rs.getString("title"));
+				bdto.setContent(rs.getString("content"));
+				bdto.setReadcount(rs.getInt("readcount"));
+				bdto.setWritedate(rs.getTimestamp("writedate"));
+			}
+		} catch (SQLException e) { e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs); }
+		
+		return bdto;
+	}
+
+
+	public void insertBoard(BoardDto bdto) {
+		String sql = "insert into board(num, userid, pass, email, title, content)"
+				+ " values (BOARD_SEQ.NEXTVAL, ?, ?, ?, ?, ?)";
+		
+		con=Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, bdto.getUserid());
+			pstmt.setString(2, bdto.getPass());
+			pstmt.setString(3, bdto.getEmail());
+			pstmt.setString(4, bdto.getTitle());
+			pstmt.setString(5, bdto.getContent());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) { e.printStackTrace();
+		} finally { Dbman.close(con,pstmt,rs); }
+	}
+
+	
 }

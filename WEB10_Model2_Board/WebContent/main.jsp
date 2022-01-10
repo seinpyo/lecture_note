@@ -21,9 +21,9 @@
 				<div style="float:left;"> 
 					${loginUser.name}(${loginUser.userid})님 로그인
 					<input type="button" value="회원정보수정"
-					onClick = "location.href=board.do?command=editMemberForm"/>
+					onClick = "location.href='board.do?command=editMemberForm'">
 					<input type="button" value="로그아웃"
-					onClick = "location.href=board.do?command=logout"/>
+					onClick = "location.href='board.do?command=logout'"/>
 				</div>
 				<div style="float:right;">
 					<a href='board.do?command=boardWriteForm'> 게시글 등록 </a>
@@ -37,14 +37,16 @@
 			<th>작성일</th>
 			<th>조회수</th>
 		</tr>
-		<c:forEach items="${boardList}" var="board">
+		<c:forEach items="${boardList}" var="board"> 
+			<!-- board 변수는 BoardDto 타입 변수가 됨 : boardList가 BoardDto타입이므로-->
 			<tr align="center">
-				<td>${board.num}</td>
-				<td align="left">${board.title}</td>
-				<td>${board.userid}</td>
-				<td>${board.writedate}</td>
-				<td>${board.readcount}</td>
-				
+				<td width="100">${board.num}</td>
+				<td align="left"> &nbsp;&nbsp;
+					<a href="board.do?command=boardView&num=${board.num}">${board.title}</a>
+				</td>
+				<td width="100">${board.userid}</td>
+				<td width="150">${board.writedate}</td>
+				<td width="100">${board.readcount}</td>
 			</tr>
 		</c:forEach>
 	</table>

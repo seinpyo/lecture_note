@@ -22,7 +22,6 @@ public class Dbman {
 		} catch (SQLException e) { e.printStackTrace(); }
 		
 		return con;
-
 	}
 	
 	public static void close(Connection con, PreparedStatement pstmt, ResultSet rs) {
