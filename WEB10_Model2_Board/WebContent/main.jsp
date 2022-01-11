@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:if test="${empty loginUser}">
-	<jsp:forward page = 'board.do?command=loginForm'/>
+	<jsp:forward page = 'board.do?command=index'/>
 </c:if>
 <!DOCTYPE html>
 <html>

@@ -39,3 +39,15 @@ VALUES(BOARD_SEQ.NEXTVAL, 'you', 'you@NAVER.COM', '1234', '마라탕', '맛있�
 SELECT * FROM BOARD
 
 update board set READCOUNT=READCOUNT+1 where num=1;
+
+create table reply (
+	num number(7) primary key, --댓글순번
+	boardnum number(5), 
+	userid varchar2(20),
+	writedate date default sysdate,
+	content varchar2(1000)
+)
+
+create sequence reply_seq start with 1 increment by 1;
+
+select * from reply

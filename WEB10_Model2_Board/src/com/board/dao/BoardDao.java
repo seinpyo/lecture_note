@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.board.dto.BoardDto;
+import com.board.dto.ReplyDto;
 import com.board.util.Dbman;
 
 public class BoardDao {
@@ -103,5 +104,92 @@ public class BoardDao {
 		} finally { Dbman.close(con,pstmt,rs); }
 	}
 
-	
+
+	public void updateBoard(BoardDto bdto) {
+		String sql = "update board set userid=?, pass=?, email=?, title=?, content=? where num=?";
+		
+		con=Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bdto.getUserid());
+			pstmt.setString(2, bdto.getPass());
+			pstmt.setString(3, bdto.getEmail());
+			pstmt.setString(4, bdto.getTitle());
+			pstmt.setString(5, bdto.getContent());
+			pstmt.setInt(6, bdto.getNum());
+			pstmt.executeUpdate();
+		} catch (SQLException e) { e.printStackTrace();
+		} finally {Dbman.close(con, pstmt, rs);} 
+	}
+
+
+	public void deleteBoard(int num) {
+		String sql = "delete from board where num=?";
+		
+		con=Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {e.printStackTrace();
+		} finally {Dbman.close(con, pstmt, rs);}
+	}
+
+
+	public void insertReply(ReplyDto rdto) {
+		String sql = "insert into reply(num, boardnum, userid, content) "
+				+ "values (reply_seq.nextVal, ?, ?, ?)";
+		
+		con=Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, rdto.getBoardnum());
+			pstmt.setString(2, rdto.getUserid());
+			pstmt.setString(3, rdto.getContent());
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {e.printStackTrace();
+		} finally {Dbman.close(con, pstmt, rs);}
+	}
+
+
+	public ArrayList<ReplyDto> selectReply(int num) {
+		ArrayList<ReplyDto> list = new ArrayList<>();
+		String sql = "select * from reply where boardnum=? order by num desc";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				ReplyDto rdto = new ReplyDto();
+				rdto.setNum(rs.getInt("num"));
+				rdto.setBoardnum(rs.getInt("boardnum"));
+				rdto.setUserid(rs.getString("userid"));
+				rdto.setWritedate(rs.getTimestamp("writedate"));
+				rdto.setContent(rs.getString("content"));
+				list.add(rdto);
+			}
+		} catch (SQLException e) { e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs); }
+		
+		return list;
+	}
+
+
+	public void deleteReply(int num) {
+		String sql = "delete from reply where num=?";
+		
+		con=Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {e.printStackTrace();
+		} finally {Dbman.close(con, pstmt, rs);}
+	}
+
 }
