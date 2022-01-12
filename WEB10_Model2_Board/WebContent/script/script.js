@@ -119,6 +119,7 @@ function open_win(num, name){
 	
 }
 
+
 function passCheck(){
 	if( document.frm.pass.value.length==0){
 		alert("비밀번호를 입력해주세요.");

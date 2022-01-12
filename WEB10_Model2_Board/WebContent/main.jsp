@@ -42,14 +42,47 @@
 			<tr align="center">
 				<td width="100">${board.num}</td>
 				<td align="left"> &nbsp;&nbsp;
-					<a href="board.do?command=boardView&num=${board.num}">${board.title}</a>
+					<a href="board.do?command=boardView&num=${board.num}">
+					${board.title}
+					<c:if test="${board.replycnt>0}">
+						<span style="color:red; font-weight:bold;">
+							[${board.replycnt}]
+						</span>
+					</c:if>
+					</a>
 				</td>
 				<td width="100">${board.userid}</td>
 				<td width="150">${board.writedate}</td>
 				<td width="100">${board.readcount}</td>
 			</tr>
 		</c:forEach>
-	</table>
+	</table><br><br>
+	<!-- 페이지 표시 -->
+	<div id="paging" align="center" style="font-size:110%; font-wight:bold;">
+		<!-- 페이지가 클릭될때마다 이동할 링크 기본 경로를 변수에 저장 -->
+		<c:url var="action" value="board.do?command=main"/>
+		<c:if test="${paging.prev}">
+			<a href="${action}&page=${paging.beginPage-1}">◀</a>&nbsp;
+			<!-- 링크되는 주소  : board.do?command=main&page=??-->
+		</c:if>
+		
+		<!-- 실제 페이지들이 표시되는 곳 -->
+		<c:forEach begin="${paging.beginPage}" end="${paging.endPage}" var="index">
+			
+			<c:choose>
+				<c:when test="${paging.page==index}">
+					<span style="color:red">${index}&nbsp;</span>
+				</c:when>
+				<c:otherwise>
+					<a href="${action}&page=${index}">${index}</a> &nbsp;
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		
+		<c:if test="${paging.next}">
+			<a href="${action}&page=${paging.endPage+1}">▶</a>&nbsp;
+		</c:if>
+	</div>
 </div>
 </body>
 </html>

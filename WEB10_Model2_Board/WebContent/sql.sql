@@ -51,3 +51,33 @@ create table reply (
 create sequence reply_seq start with 1 increment by 1;
 
 select * from reply
+select count(*) from board;
+select rownum, num, title, content from board order by num desc; 
+--rownum, *는 사용 불가 
+--서브쿼리로 단순화 가능 -> 
+select rownum, sub.* from (select * from board order by num desc) sub;  
+
+select * from 
+(select rownum as rn, sub.* from (select * from board order by num desc) sub)  
+where rn>=11 and rn<20; 
+
+
+select * from 
+(select * from 
+(select rownum as rn, sub.* from (select * from board order by num desc) sub)  
+where rn>=11)
+where rn<=20;
+
+
+alter table board add replycnt number(3) default 0;
+
+
+
+
+
+
+
+
+
+
+
