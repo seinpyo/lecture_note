@@ -23,6 +23,8 @@ function idCheck(){
 	var inputid = document.frm.userid.value;
 	var opt ="toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=500, height=200";
 	window.open("board.do?command=idcheck&userid=" + inputid, "idcheck", opt);
+	//window.open(URL, name, specs, replace); -> 전부 옵셔널
+	//window.open(URL, name, specs); 
 }
 
 function idok(userid){
