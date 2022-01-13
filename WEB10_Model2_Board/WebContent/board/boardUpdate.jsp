@@ -19,7 +19,7 @@
 			<th>작성자</th>
 			<td>
 				${ board.userid }
-				<input type="hidden" name="userid" value="${ loginUser.userid }">
+				<input type="hidden" name="userid" value="${loginUser.userid}">
 				<!-- loginUser는 세션 정보이므로 사용가능 
 				비밀번호만 알면 글을 수정, 삭제할 수 있으므로 현재 글을 삭제한 사람과 
 				로그인한 사람이 다를 수 있으므로 이를 검사해 금지하거나 할 경우 loginUser.useruid,
