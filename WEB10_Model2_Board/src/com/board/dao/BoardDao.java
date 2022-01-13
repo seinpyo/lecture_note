@@ -214,7 +214,6 @@ public class BoardDao {
 		return count;
 	}
 
-
 	public int getReplycnt(int num) {
 		int cnt = 0; 
 		String sql = "select count(*) as cnt from reply where boardnum=?";
@@ -228,5 +227,4 @@ public class BoardDao {
 		} finally {Dbman.close(con, pstmt, rs);}
 		return cnt;
 	}
-
 }
