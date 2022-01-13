@@ -15,7 +15,7 @@
 	<div class="box">LOG IN</div>
 	<div class="box">
 		<div class="label">아이디</div>
-		<div class="item"> 
+		<div class="item">
 			<input type="text" name="userid" id="loginid" size="20">
 		</div>
 	</div>
