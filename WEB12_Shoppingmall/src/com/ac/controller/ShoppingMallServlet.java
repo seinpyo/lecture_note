@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ac.controller.action.Action;
+
 /**
  * Servlet implementation class ShoppingMallServlet
  */
@@ -26,16 +28,17 @@ public class ShoppingMallServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		request.setCharacterEncoding("UTF-8");
 		
-		String command = request.getParameter("commnad");
+		String command = request.getParameter("command");
+		System.out.println(command);
 		
 		ActionFactory af = ActionFactory.getInstance();
 		Action ac = af.getAction(command);
 		
-		if(ac!=null) ac.execute(request,response);
-		else System.out.println("ac가 null입니다. command : " + command);
-		
+		if (ac != null) ac.execute(request, response);
+		else System.out.println("command 값을 확인하세요");
 	}
 
 	/**
