@@ -18,11 +18,8 @@
 		<input type="button" value="join" class="cancel" 
 		onclick="location.href='shop.do?command=contract'">
 		<input type="button" value="아이디 비밀번호 찾기" class="submit" onclick="find_id()">
-		
-		
 	</div>
+	<div> ${message}</div>
 </form>
 </article>
-
-
 <%@ include file = "../footer.jsp" %>
