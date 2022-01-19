@@ -72,5 +72,26 @@ form  .submit, form  .cancel {	height: 30px;	width: 150px; 	border: 1px solid #6
 form  .submit {	background-image: url(../images/submit_back.jpg); }
 form  .cancel {  	background-image: url(../images/cancel_back.jpg);  }
 
-
+body{ overflow-x: hidden;}
+#popup{padding: 0 10px; font-family:Verdana;}
+table#zipcode{
+	border-collapse:collapse; 
+	border-top:3px solid #6f0c78; 
+	border-bottom:3px solid #6f0c78;
+	margin-top:15px; 
+	width:100%; 
+	font-size:110%
+}
+table#zipcode th, table#zipcode td{
+	text-align:center;
+	border-bottom:1px dotted #6f0c78;
+}
+table th, td{ padding 10px; }
+table#zipcode a{
+	dispaly:block; 
+	height:20px; 
+	text-decoration:none;
+	padding: 10px
+}
+table#zipcode a.hover{ font-weigth: bold; }
 
