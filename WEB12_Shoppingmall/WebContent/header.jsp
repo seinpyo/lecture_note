@@ -28,7 +28,7 @@
 				</c:when>
 				<c:otherwise>
 					<li>${loginUser.name}(${loginUser.id})</li>
-					<li><a href="shop.do?command=mEditForm&id=${loginUser.id}">	정보수정</a></li>
+					<li><a href="shop.do?command=editForm">	정보수정</a></li>
 					<li><a href="shop.do?command=logout">LogOut</a></li>
 				</c:otherwise>
 			</c:choose>
