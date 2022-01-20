@@ -25,7 +25,7 @@
 	</fieldset>
 	<div class="clear"></div>
 	<div id="buttons">
-	    <input type="button" value="회원가입" class="submit" onclick="go_update()"> 
+	    <input type="button" value="정보 수정" class="submit" onclick="go_update()"> 
 	    <input type="reset" value="취소" class="cancel">
 	</div>
 </form>
