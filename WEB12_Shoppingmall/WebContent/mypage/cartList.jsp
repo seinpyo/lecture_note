@@ -12,7 +12,7 @@
 		</c:when>
 		<c:otherwise>
 			<table id="cartList">
-				<tr><th>상품명</th><th>수 량><th>가 격</th><th>주문일</th><th>삭제</th></tr>
+				<tr><th>상품명</th><th>수 량<th>가 격</th><th>주문일</th><th>삭제</th></tr>
 					<c:forEach items="${cartList}" var="cartVo">
 						<tr><td><a href="shop.do?command=productDetail&pseq=${cartVo.pseq}">
 						<h3>${cartVo.pname}</h3> </a></td><td>${cartVo.quantity}</td>
