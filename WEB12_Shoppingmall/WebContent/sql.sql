@@ -179,7 +179,7 @@ insert into qna(qseq, subject, content, id) values(qna_seq.nextval,'사이즈교
 insert into qna(qseq, subject, content, id) values(qna_seq.nextval,'배송', '언제 받을 수 있나요?', 'scott');
 insert into qna(qseq, subject, content, id) values(qna_seq.nextval,'불량 교환', '교환 환불 전차를 유선으로 안내 부탁드립니다', 'scott');
 
-select * from cart
+select * from order_detail
 
 
 --cart안의 상품 번호와 사용자 아이디로 상품 이름과 사용자 이름을 함께 조회하는 view 생성
@@ -191,11 +191,13 @@ select * from cart_view
 
 --orders와 order_detail을 join해 주문번호(oseq)별 상품 조회 
 create or replace view order_view as 
-select d.odseq,o.oseq, o.indate, o.id, m.name as mname, m.zip_num, m.address, m.phone, d.pseq, p.name as pname, d.quantity, d.result
+select d.odseq, o.oseq, o.indate, o.id, m.name as mname, m.zip_num, m.address, m.phone, d.pseq, p.name as pname,p.price2, d.quantity, d.result
 from orders o, order_detail d, product p, member m
 where o.oseq = d.oseq and o.id=m.id and d.pseq=p.pseq
 
+select * from orders;
 select * from order_view;
+select * from cart_view;
 
 --신상품 view (가장 최근에 업로드 된 4개만 출력)
 create or replace view new_pro_view
@@ -207,6 +209,7 @@ order by indate desc)
 where rownum <= 4;
 
 select * from new_pro_view
+select * from qna
 
 --베스트 상품 view
 create or replace view best_pro_view
@@ -219,3 +222,9 @@ where rownum <= 4;
 select * from best_pro_view
 
 select count(*) from address
+
+update order_detail set result=2 where oseq=21;
+
+select * from order_detail
+select * from orders
+select max(oseq) as max_oseq from orders
