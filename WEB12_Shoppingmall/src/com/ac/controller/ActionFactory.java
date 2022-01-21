@@ -16,8 +16,16 @@ import com.ac.controller.action.LoginAction;
 import com.ac.controller.action.LoginFormAction;
 import com.ac.controller.action.LogoutAction;
 import com.ac.controller.action.MemberUpdateAction;
+import com.ac.controller.action.MyPageAction;
+import com.ac.controller.action.OrderAllAction;
 import com.ac.controller.action.OrderInsertAction;
+import com.ac.controller.action.OrderListAction;
+import com.ac.controller.action.OrderOneAction;
 import com.ac.controller.action.ProductDetailAction;
+import com.ac.controller.action.QnaListAction;
+import com.ac.controller.action.QnaViewAction;
+import com.ac.controller.action.QnaWriteAction;
+import com.ac.controller.action.QnaWriteFormAction;
 
 public class ActionFactory {
 	private ActionFactory() {}
@@ -45,6 +53,14 @@ public class ActionFactory {
 		else if (command.equals("cartList")) ac = new CartListAction();
 		else if (command.equals("cartDelete")) ac = new CartDeleteAction();
 		else if (command.equals("orderInsert")) ac = new OrderInsertAction();
+		else if (command.equals("orderList")) ac = new OrderListAction();
+		else if (command.equals("myPage")) ac = new MyPageAction();
+		else if (command.equals("orderAll")) ac = new OrderAllAction();
+		else if (command.equals("orderOne")) ac = new OrderOneAction();
+		else if (command.equals("qnaList")) ac = new QnaListAction();
+		else if (command.equals("qnaView")) ac = new QnaViewAction();
+		else if (command.equals("qnaWriteForm")) ac = new QnaWriteFormAction();
+		else if (command.equals("qnaWrite")) ac = new QnaWriteAction();
 		
 		return ac;
 	}
