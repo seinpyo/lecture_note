@@ -108,4 +108,39 @@ public class MemberDao {
 		} finally { Dbman.close(con,pstmt,rs); }
 	
 		}
+
+	public MemberVO getMemberByName(String name, String phone) {
+		MemberVO mvo = null;
+		String sql="select * from member where name=? and phone=?";
+		con = Dbman.getConnection();
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, phone);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				mvo = new MemberVO();
+				mvo.setId(rs.getString("id"));
+				mvo.setName(rs.getString("name"));
+				mvo.setPhone(rs.getString("phone"));
+			}
+		} catch (SQLException e) {e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs); }
+		return mvo;
+	}
+
+	public void resetPw(MemberVO mvo) {
+		String sql = "update member set pwd=? where id=?";
+		con = Dbman.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mvo.getPwd());
+			pstmt.setString(2, mvo.getId());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {e.printStackTrace();
+		} finally { Dbman.close(con, pstmt, rs); }
+	}
+
+	
 }
