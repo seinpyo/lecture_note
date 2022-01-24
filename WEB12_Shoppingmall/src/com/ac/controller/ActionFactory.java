@@ -7,6 +7,13 @@ import com.ac.controller.action.CartListAction;
 import com.ac.controller.action.CategoryAction;
 import com.ac.controller.action.ContractAction;
 import com.ac.controller.action.EditFormAction;
+import com.ac.controller.action.FindAccountAction;
+import com.ac.controller.action.FindIdFormAction;
+import com.ac.controller.action.FindIdStep1Action;
+import com.ac.controller.action.FindIdStep2Action;
+import com.ac.controller.action.FindPwFormAction;
+import com.ac.controller.action.FindPwStep1Action;
+import com.ac.controller.action.FindPwStep2Action;
 import com.ac.controller.action.FindZipNumAction;
 import com.ac.controller.action.IdCheckFormAction;
 import com.ac.controller.action.IndexAction;
@@ -26,6 +33,10 @@ import com.ac.controller.action.QnaListAction;
 import com.ac.controller.action.QnaViewAction;
 import com.ac.controller.action.QnaWriteAction;
 import com.ac.controller.action.QnaWriteFormAction;
+import com.ac.controller.action.ResetPwAction;
+import com.ac.controller.admin.action.AdminAction;
+import com.ac.controller.admin.action.AdminLoginaction;
+import com.ac.controller.admin.action.AdminProductListAction;
 
 public class ActionFactory {
 	private ActionFactory() {}
@@ -61,6 +72,17 @@ public class ActionFactory {
 		else if (command.equals("qnaView")) ac = new QnaViewAction();
 		else if (command.equals("qnaWriteForm")) ac = new QnaWriteFormAction();
 		else if (command.equals("qnaWrite")) ac = new QnaWriteAction();
+		else if (command.equals("findAccount")) ac = new FindAccountAction();
+		else if (command.equals("findIdForm")) ac = new FindIdFormAction();
+		else if (command.equals("findIdStep1")) ac = new FindIdStep1Action();
+		else if (command.equals("findIdStep2")) ac = new FindIdStep2Action();
+		else if (command.equals("findPwForm")) ac = new FindPwFormAction();
+		else if (command.equals("findPwStep1")) ac = new FindPwStep1Action();
+		else if (command.equals("findPwStep2")) ac = new FindPwStep2Action();
+		else if (command.equals("resetPw")) ac = new ResetPwAction();
+		else if (command.equals("admin")) ac = new AdminAction();
+		else if (command.equals("adminLogin")) ac = new AdminLoginaction();
+		else if (command.equals("adminProductList")) ac = new AdminProductListAction();
 		
 		return ac;
 	}
