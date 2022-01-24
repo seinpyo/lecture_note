@@ -15,28 +15,35 @@
 <h1> 게시글 상세보기 </h1>
 <table>
 	<tr>
-		<th>작성자</th>
+		<th width="100">작성자</th>
 		<td>${ board.userid }</td>
-	</tr>
-	<tr>
-		<th>이메일</th>
+		<th width="100">이메일</th>
 		<td>${ board.email }</td>
 	</tr>
 	<tr>
-		<th>작성일</th>
+		<th width="100">작성일</th>
 		<td><fmt:formatDate value="${ board.writedate }"/></td>
-	</tr>
-	<tr>
 		<th>조회수</th>
 		<td>${ board.readcount }</td>
 	</tr>
 	<tr>
-		<th>제목</th>
+		<th width="100">제목</th>
 		<td colspan="3">${ board.title }</td>
 	</tr>
 	<tr>
 		<th>내용</th>
-		<td colspan="3"><pre>${ board.content }</pre></td>
+		<td><pre>${ board.content }</pre></td>
+		<th width="100">이미지</th>
+		<td width="220" align="center">
+		 <c:choose>
+		 	<c:when test="${empty board.imgfilename}">
+		 		<img src="images/noname.jpg" width="200">
+		 	</c:when>
+		 	<c:otherwise>
+		 		<img src ="images/${board.imgfilename}" width="200">
+		 	</c:otherwise>
+		 </c:choose>
+		</td>
 	</tr>
 </table>
 <input type="button" value="리스트" onClick="location.href='board.do?command=main'">

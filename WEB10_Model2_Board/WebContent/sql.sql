@@ -68,12 +68,9 @@ select * from
 where rn>=11)
 where rn<=20;
 
-
 alter table board add replycnt number(3) default 0;
 
-
-
-
+alter table board add imgfilename varchar2(50);
 
 
 

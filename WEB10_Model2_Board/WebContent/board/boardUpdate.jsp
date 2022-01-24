@@ -12,7 +12,8 @@
 <body>
 <div id="wrap" align="center">
 <h1>게시글 수정</h1>
-<form name="frm" method="post" action="board.do?command=boardUpdate">
+<form name="frm" method="post" action="board.do?command=boardUpdate&num=${board.num}" enctype="multipart/form-data">
+<!-- command는 input type="hidden"이 아니라 form action으로 보낸다(servlet에서 multipart/form-data 못받음) -->
 <input type="hidden" name="num" value="${board.num}">
 	<table>
 		<tr>
@@ -49,6 +50,22 @@
 			<th>내용</th>
 			<td>
 				<textarea cols="70" rows="15" name="content">${board.content}</textarea> *필수
+			</td>
+		</tr>
+		<tr>
+			<th>이미지</th>
+			<td>
+				<c:choose>
+					<c:when test="${empty board.imgfilename}">
+						<img src="images/noname.jpg" height="50"><br>
+					</c:when>
+					<c:otherwise>
+						<img src="images/${board.imgfilename}" height="50"><br>
+					</c:otherwise>
+				</c:choose>
+				<input type="file" name="imgfilename"><br>
+				파일을 수정할 때만 선택하세요
+				<input type="hidden" name="oldfilename" value="${board.imgfilename}">
 			</td>
 		</tr>
 	</table>
