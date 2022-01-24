@@ -95,3 +95,8 @@ function go_update(){
 	}
 }
 
+function find_account(){
+	var url="shop.do?command=findAccount";
+	var opt = "toolbar=no, menubar=no, resizable=no, width=700, height=500, top=300, left=300";
+	window.open(url, "Find Id/Pw", opt);
+}

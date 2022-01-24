@@ -17,7 +17,7 @@
 		<input type="submit" value="Login" class="submit" onclick="return loginCheck()">
 		<input type="button" value="join" class="cancel" 
 		onclick="location.href='shop.do?command=contract'">
-		<input type="button" value="아이디 비밀번호 찾기" class="submit" onclick="find_id()">
+		<input type="button" value="아이디 비밀번호 찾기" class="submit" onclick="find_account();">
 	</div>
 	<div> ${message}</div>
 </form>
