@@ -10,7 +10,7 @@
 	<tr>
 		<td width="642"> 
 			상품명 <input type="text" name="key" value="${key}">
-			<input class="btn" type="button" name="btn_serach" value="검색" onClick="go_seach();">
+			<input class="btn" type="button" name="btn_serach" value="검색" onClick="go_search();">
 			<input class="btn" type="button" name="btn_total" value="전체보기" onClick="go_total();">
 			<input class="btn" type="button" name="btn_write" value="상품 등록" onClick="go_wrt();">
 		</td>
@@ -53,7 +53,7 @@
                 <span style="color:red">${index}&nbsp;</span>
             </c:when>
             <c:otherwise>
-                <a href="${action}&page=${index}">${index}</a> &nbsp;
+                <a href="${action}&page=${index}&key=${key}">${index}</a> &nbsp;
             </c:otherwise>
         </c:choose>
     </c:forEach>
