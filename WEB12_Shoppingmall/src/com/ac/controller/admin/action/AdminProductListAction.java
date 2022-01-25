@@ -27,21 +27,41 @@ public class AdminProductListAction implements Action {
 		else {
 			
 			int page = 1;
-			if(request.getParameter("page") != null) page = Integer.parseInt(request.getParameter("page"));
+			if(request.getParameter("page") != null) {
+				page = Integer.parseInt(request.getParameter("page"));
+				session.setAttribute("page", page);
+			} else if (session.getAttribute("page")!=null) {
+				page = (int) session.getAttribute("page");
+			} else {
+				page = 1;
+				session.removeAttribute("page");
+			}
 			
 			Paging paging = new Paging();
 			paging.setPage(page);
 			
 			AdminDao adao = AdminDao.getInstance();
 			
-			int count = adao.getAllCount(); //총게시물 수 얻어오기
+			String key="";
+			if(request.getParameter("key")!=null) {
+				key = request.getParameter("key");
+				session.setAttribute("key",key);
+			} else if(session.getAttribute("key")!=null) {
+				key = (String)session.getAttribute("key");
+			} else {
+				session.removeAttribute("key");
+				key="";
+			}
+			
+			int count = adao.getAllCount("product", "name", key); //총게시물 수 얻어오기 
+			//product:테이블명, name:필드명
 			paging.setTotalCount(count); //실행 시 paging() 메소드도 함께 실행됨
 			request.setAttribute("paging", paging);
 			
-			ArrayList<ProductVO> productList = adao.listProduct(paging); 
+			ArrayList<ProductVO> productList = adao.listProduct(paging, key); 
 			request.setAttribute("productList", productList);
+			request.setAttribute("key", key);
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
-
 }
