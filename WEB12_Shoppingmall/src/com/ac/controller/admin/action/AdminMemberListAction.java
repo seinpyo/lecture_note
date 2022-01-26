@@ -11,21 +11,20 @@ import javax.servlet.http.HttpSession;
 import com.ac.controller.action.Action;
 import com.ac.dao.AdminDao;
 import com.ac.dto.AdminVO;
-import com.ac.dto.ProductVO;
+import com.ac.dto.MemberVO;
 import com.ac.util.Paging;
 
-public class AdminProductListAction implements Action {
+public class AdminMemberListAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		
-		String url = "admin/product/productList.jsp";
+
+		String url = "admin/member/memberList.jsp";
 		HttpSession session = request.getSession();
 		AdminVO avo = (AdminVO) session.getAttribute("loginAdmin");
 		if(avo==null) url = "shop.do?command=admin";
 		else {
-			
 			String sub = request.getParameter("sub");
 			if(sub!=null) {
 				session.removeAttribute("key");
@@ -33,22 +32,22 @@ public class AdminProductListAction implements Action {
 			}
 			
 			int page = 1;
-			if(request.getParameter("page") != null) {
+			if(request.getParameter("page")!=null) {
 				page = Integer.parseInt(request.getParameter("page"));
 				session.setAttribute("page", page);
 			} else if (session.getAttribute("page")!=null) {
 				page = (int) session.getAttribute("page");
 			} else {
-				page = 1;
+				page=1;
 				session.removeAttribute("page");
 			}
-			
+		
 			Paging paging = new Paging();
 			paging.setPage(page);
 			
 			AdminDao adao = AdminDao.getInstance();
 			
-			String key="";
+			String key = "";
 			if(request.getParameter("key")!=null) {
 				key = request.getParameter("key");
 				session.setAttribute("key",key);
@@ -59,15 +58,15 @@ public class AdminProductListAction implements Action {
 				key="";
 			}
 			
-			int count = adao.getAllCount("product", "name", key); //총게시물 수 얻어오기 
-			//product:테이블명, name:필드명
-			paging.setTotalCount(count); //실행 시 paging() 메소드도 함께 실행됨
+			int count = adao.getAllCount("member", "name", key);
+			paging.setTotalCount(count);
 			request.setAttribute("paging", paging);
 			
-			ArrayList<ProductVO> productList = adao.listProduct(paging, key); 
-			request.setAttribute("productList", productList);
+			ArrayList<MemberVO> memberList = adao.listMember(paging,key);
+			request.setAttribute("memberList", memberList);
 			request.setAttribute("key", key);
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
+
 }

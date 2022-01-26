@@ -11,29 +11,24 @@ import javax.servlet.http.HttpSession;
 import com.ac.controller.action.Action;
 import com.ac.dao.AdminDao;
 import com.ac.dto.AdminVO;
-import com.ac.dto.ProductVO;
+import com.ac.dto.OrderVO;
 import com.ac.util.Paging;
 
-public class AdminProductListAction implements Action {
+public class AdminOrderListAction implements Action {
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
-		
-		String url = "admin/product/productList.jsp";
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String url = "admin/order/orderList.jsp";
 		HttpSession session = request.getSession();
 		AdminVO avo = (AdminVO) session.getAttribute("loginAdmin");
-		if(avo==null) url = "shop.do?command=admin";
-		else {
+		
+		if(avo == null ) {
+			url = "shop.do?command=admin";
+		} else {
 			
-			String sub = request.getParameter("sub");
-			if(sub!=null) {
-				session.removeAttribute("key");
-				session.removeAttribute("page");
-			}
-			
-			int page = 1;
-			if(request.getParameter("page") != null) {
+			int page=1;
+			if(request.getParameter("page")!=null) {
 				page = Integer.parseInt(request.getParameter("page"));
 				session.setAttribute("page", page);
 			} else if (session.getAttribute("page")!=null) {
@@ -51,21 +46,21 @@ public class AdminProductListAction implements Action {
 			String key="";
 			if(request.getParameter("key")!=null) {
 				key = request.getParameter("key");
-				session.setAttribute("key",key);
-			} else if(session.getAttribute("key")!=null) {
+				session.setAttribute("key", key);
+			} else if (session.getAttribute("key")!=null) {
 				key = (String)session.getAttribute("key");
 			} else {
 				session.removeAttribute("key");
 				key="";
 			}
 			
-			int count = adao.getAllCount("product", "name", key); //총게시물 수 얻어오기 
-			//product:테이블명, name:필드명
-			paging.setTotalCount(count); //실행 시 paging() 메소드도 함께 실행됨
+			int count = adao.getAllCount("order_view", "mname", key);
+			
+			paging.setTotalCount(count);
 			request.setAttribute("paging", paging);
 			
-			ArrayList<ProductVO> productList = adao.listProduct(paging, key); 
-			request.setAttribute("productList", productList);
+			ArrayList<OrderVO> orderList = adao.listOrder(paging,key);
+			request.setAttribute("orderList", orderList);
 			request.setAttribute("key", key);
 		}
 		request.getRequestDispatcher(url).forward(request, response);
