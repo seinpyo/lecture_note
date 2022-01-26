@@ -25,9 +25,6 @@ public class Paging {
 		prev = (beginPage==1)?false:true;
 		startNum = (page-1)*displayRow+1;
 		endNum = page*displayRow;
-		
-		System.out.println(beginPage+" " + endPage + " " + startNum + " " + endNum + " "
-				+ totalCount); //나중에 지울것
 	}
 
 	public int getPage() {
