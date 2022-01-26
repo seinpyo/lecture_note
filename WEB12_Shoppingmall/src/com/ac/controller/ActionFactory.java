@@ -36,6 +36,9 @@ import com.ac.controller.action.QnaWriteFormAction;
 import com.ac.controller.action.ResetPwAction;
 import com.ac.controller.admin.action.AdminAction;
 import com.ac.controller.admin.action.AdminLoginaction;
+import com.ac.controller.admin.action.AdminMemberListAction;
+import com.ac.controller.admin.action.AdminOrderListAction;
+import com.ac.controller.admin.action.AdminOrderSaveAction;
 import com.ac.controller.admin.action.AdminProductDetailAction;
 import com.ac.controller.admin.action.AdminProductListAction;
 import com.ac.controller.admin.action.AdminProductUpdateAction;
@@ -93,6 +96,9 @@ public class ActionFactory {
 		else if (command.equals("adminProductDetail")) ac = new AdminProductDetailAction();
 		else if (command.equals("adminProductUpdateForm")) ac = new AdminProductUpdateFormAction();
 		else if (command.equals("adminProductUpdate")) ac = new AdminProductUpdateAction();
+		else if (command.equals("adminOrderList")) ac = new AdminOrderListAction();
+		else if (command.equals("adminOrderSave")) ac = new AdminOrderSaveAction();
+		else if (command.equals("adminMemberList")) ac = new AdminMemberListAction();
 		
 		return ac;
 	}
