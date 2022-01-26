@@ -10,8 +10,8 @@
 	<tr>
 		<td width="642"> 
 			상품명 <input type="text" name="key" value="${key}">
-			<input class="btn" type="button" name="btn_serach" value="검색" onClick="go_search();">
-			<input class="btn" type="button" name="btn_total" value="전체보기" onClick="go_total();">
+			<input class="btn" type="button" name="btn_serach" value="검색" onClick="go_search('adminProductList');">
+			<input class="btn" type="button" name="btn_total" value="전체보기" onClick="go_total('adminProductList');">
 			<input class="btn" type="button" name="btn_write" value="상품 등록" onClick="go_wrt();">
 		</td>
 	</tr>
@@ -40,28 +40,14 @@
 				</c:choose>
 	</c:forEach>
 </table>
+<br><br>
 
-<div id="paging" align="center" style="font-size:110%; font-wight:bold;">
-    <c:url var="action" value="shop.do?command=adminProductList"/>
-    <c:if test="${paging.prev}">
-        <a href="${action}&page=${paging.beginPage-1}">◀</a>&nbsp;
-    </c:if>
-
-    <c:forEach begin="${paging.beginPage}" end="${paging.endPage}" var="index">
-        <c:choose>
-            <c:when test="${paging.page==index}">
-                <span style="color:red">${index}&nbsp;</span>
-            </c:when>
-            <c:otherwise>
-                <a href="${action}&page=${index}&key=${key}">${index}</a> &nbsp;
-            </c:otherwise>
-        </c:choose>
-    </c:forEach>
-
-    <c:if test="${paging.next}">
-        <a href="${action}&page=${paging.endPage+1}">▶</a>&nbsp;
-    </c:if>
-</div>
+<jsp:include page="/admin/paging/paging.jsp">
+	<jsp:param name="command" value="shop.do?command=adminProductList"/>
+</jsp:include>
+<!-- include로 paging.jsp를 불러 오면서 그 페이지에 파라미터로써 command 변수를 전달 -->
+<!-- command 이외에 변경될 값이 필요하다면 추가로 파라미터로 보내면 됨 -->
+<br><br>
 </article>
 
 <%@ include file="/admin/footer.jsp" %>
