@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+       
+ 	<bean class ="student.dto.DataBaseConnectionInfo" id="dbconinfo1">
+    	<property name="url" value="jdbc:oracle:thin:@192.168.0.27:1521:xe"/>
+    	<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+    	<property name="id" value="scott"/>
+    	<property name="pw" value="tiger"/>
+    </bean> 
+    
+     <bean class ="student.dto.DataBaseConnectionInfo" id="dbconinfo2">
+    	<property name="url" value="jdbc:oracle:thin:@192.168.0.27:1521:xe"/>
+    	<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+    	<property name="id" value="system"/>
+    	<property name="pw" value="adminuser"/>
+    </bean> 
+    
+	<bean class ="student.dao.StudentDao" id="studentdao">
+		<constructor-arg ref="dbconinfo1"></constructor-arg>
+	</bean>
+	
+	<bean class ="student.service.InsertService" id="insertservice">
+		<constructor-arg ref="studentdao"></constructor-arg> <!-- 의존주입 -->
+	</bean>
+	<bean class ="student.service.SelectAllService" id="selectallservice">
+		<constructor-arg ref="studentdao"></constructor-arg>
+	</bean>
+	<bean class ="student.service.SelectOneService" id="selectoneservice">
+		<constructor-arg ref="studentdao"></constructor-arg>
+	</bean>
+	<bean class ="student.service.UpdateService" id="updateservice">
+		<constructor-arg ref="studentdao"></constructor-arg>
+	</bean>
+	
+	<bean class="student.dto.EMSInformationService" id="informationservice">
+		<property name="info">
+			<value> Education Management System program was developed in 2015</value>
+		</property>
+		<property name="copyRight">
+			<value> COPYRIGHT(C) 2015 EMS CO., LTD. ALLRIGHT RESERVED. CONTACT MASTER FOR MOR INFOMATION. </value>
+		</property>
+		<property name="ver" value="The version is 1.0"/>
+		<property name="sYear" value="2012"/>
+		<property name="sMonth" value="10"/>
+		<property name="sDay" value="19"/>
+		<property name="eYear" value="2021"/>
+		<property name="eMonth" value="11"/>
+		<property name="eDay" value="19"/>
+		<property name="developers">
+			<list>
+				<value>Cheney</value>
+				<value>Eloy</value>
+				<value>Jasper</value>
+				<value>Dilion</value>
+				<value>Kian</value>
+			</list>
+		</property>
+		<property name="administrators">
+			<map>
+				<entry>
+					<key><value>Jasper</value></key>
+					<value>jasper@springPjt.org</value>
+				</entry>
+			</map>
+		</property>
+		<property name="dbInfos">
+			<map>
+				<entry>
+					<key><value>dev</value></key>
+					<ref bean="dbconinfo1"/>
+				</entry>
+				<entry>
+					<key><value>real</value></key>
+					<ref bean="dbconinfo2"/>
+				</entry>
+			</map>
+		</property>
+	</bean>
+</beans>
