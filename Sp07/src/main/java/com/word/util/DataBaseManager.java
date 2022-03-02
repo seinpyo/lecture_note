@@ -6,17 +6,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class DataBaseManager {
 	private String driver;
 	private String url;
 	private String id;
 	private String pw;
 	
+	@Autowired 
+	
 	private DataBaseUserinfo dbi;
 	
-	public DataBaseManager(DataBaseUserinfo dbi) {
-		this.dbi = dbi;
-	}
+//	public DataBaseManager(DataBaseUserinfo dbi) {
+//		this.dbi = dbi;
+//	}
 	
 	public Connection getConnection() {
 		Connection con = null;
