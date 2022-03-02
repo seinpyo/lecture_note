@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<context:annotation-config/> 
+	
+	<bean id="dbuserinfo" class="com.word.util.DataBaseUserinfo">
+		<property name="url" value="jdbc:oracle:thin:@192.168.0.27:1521:xe"/>
+		<property name="id" value="scott"/>
+		<property name="pw" value="tiger"/>
+		<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+	</bean>
+	
+	<bean id="dbmanager" class="com.word.util.DataBaseManager">
+		<!-- <constructor-arg ref="dbuserinfo"></constructor-arg> --> <!-- 의존 주입 -->
+	</bean>
+	
+	<bean id="worddao" class="com.word.dao.WordDao">
+		<!-- <constructor-arg ref="dbmanager"></constructor-arg> -->
+	</bean>
+	
+	<bean id="registerService" class="com.word.service.WordInsertService">
+		<!-- <constructor-arg ref="worddao"></constructor-arg> -->
+	</bean>
+	
+	<bean id="searchservice" class="com.word.service.WordSearchService">
+		<!-- <constructor-arg ref="worddao"></constructor-arg> -->
+	</bean>
+</beans>
