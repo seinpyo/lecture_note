@@ -71,6 +71,7 @@ public class MemberDao {
 			pstmt.setString(3, mdto.getPwd());
 			pstmt.setString(4, mdto.getPhone());
 			pstmt.setString(5, mdto.getUserid());
+			pstmt.executeUpdate();
 		} catch (SQLException e) { e.printStackTrace();
 		} finally { dbm.close(con,pstmt,rs); } 
 		return result;

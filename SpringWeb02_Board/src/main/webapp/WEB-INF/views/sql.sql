@@ -1,6 +1,7 @@
 
 
-select * from member2
+
+update member2 set pwd='1234' where userid='yoon' 
 
 CREATE TABLE BOARD(
 	NUM NUMBER(5) PRIMARY KEY,
@@ -32,9 +33,9 @@ CREATE TABLE MEMBER2(
 insert into member2 (name, userid, pwd, email, phone) values('홍길동', 'hong', '1234', 'hong@gmail.com', '010-1111-1111')
 select * from member2;
 
-CREATE REPLY2(
+CREATE table REPLY2(
 	NUM NUMBER(7) PRIMARY KEY,
-	BOARDNUM NUMBER(5), --게시물 번호
+	BOARDNUM NUMBER(5),
 	USERID VARCHAR2(20),
 	WRITEDATE DATE DEFAULT SYSDATE,
 	CONTENT VARCHAR2(1000)
@@ -43,3 +44,4 @@ CREATE REPLY2(
 CREATE SEQUENCE REPLY_SEQ START WITH 1 INCREMENT BY 1;
 
 update member2 set name='홍길서' where userid='hong'
+select reply2

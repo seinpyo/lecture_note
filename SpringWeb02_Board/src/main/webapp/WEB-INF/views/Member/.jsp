@@ -15,7 +15,7 @@
 <h1>회원 정보 수정</h1>
 	<form action="memberEdit" method="post" name="frm">
 	<input type="hidden" name="command" value="join">
-	<table class="list">
+	<table>
 		<tr>
 			<th>아이디</th>
 			<td>${loginUser.userid}<input type = "hidden" name="id" value="${loginUser.userid}">
@@ -23,7 +23,7 @@
 		</tr>
 		<tr>	
 			<th>비밀번호</th>
-			<td><input type = "password" name="pw" size="20"> &nbsp; * </td>
+			<td><input type = "password" name="pw" size="20" > &nbsp; * </td>
 		</tr>
 		<tr>	
 			<th>비밀번호 확인</th>
@@ -46,6 +46,7 @@
 	<input type = "submit" value="수정" onClick="return editCheck();"/>
 	<input type = "reset" value="다시 작성" >
 	<input type = "button" value="목록으로" onClick="location.href='main'">
+	
 	</form>
 </div>
 </body>

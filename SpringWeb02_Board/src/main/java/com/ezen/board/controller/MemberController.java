@@ -113,7 +113,7 @@ public class MemberController {
 		mdto.setUserid(request.getParameter("id"));
 		mdto.setEmail(request.getParameter("email"));
 		mdto.setPhone(request.getParameter("phone"));
-		mdto.setPwd(request.getParameter("pwd"));
+		mdto.setPwd(request.getParameter("pw"));
 		mdto.setName(request.getParameter("name"));
 		
 		int result = ms.updateMember(mdto);
