@@ -16,4 +16,14 @@ public class MemberService {
 		MemberDto mdto = mdao.getMember(id);
 		return mdto;
 	}
+
+	public int insertMember(MemberDto mdto) {
+		int result = mdao.insertMember(mdto);
+		return result;
+	}
+
+	public int updateMember(MemberDto mdto) {
+		int result = mdao.updateMember(mdto);
+		return result;
+	}
 }

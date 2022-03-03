@@ -13,18 +13,18 @@
 <body>
 <div id="wrap" align="center">
 	<h1> 게시글 리스트 </h1>
-	<table class="list ">
+	<table class="list">
 		<tr>
 			<td colspan="5" style="border:white; text-align:right;">
 				<div style="float:left;"> 
 					${loginUser.name}(${loginUser.userid})님 로그인
 					<input type="button" value="회원정보수정"
-					onClick = "location.href='board.do?command=editMemberForm'">
+					onClick = "location.href='memberEditForm'">
 					<input type="button" value="로그아웃"
-					onClick = "location.href='board.do?command=logout'"/>
+					onClick = "location.href='logout'"/>
 				</div>
 				<div style="float:right;">
-					<a href='board.do?command=boardWriteForm'> 게시글 등록 </a>
+					<a href='boardWriteForm'> 게시글 등록 </a>
 				</div>
 			</td>
 		</tr>

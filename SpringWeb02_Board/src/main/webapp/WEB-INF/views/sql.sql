@@ -1,6 +1,6 @@
 
 
-select * from board
+select * from member2
 
 CREATE TABLE BOARD(
 	NUM NUMBER(5) PRIMARY KEY,
@@ -42,3 +42,4 @@ CREATE REPLY2(
 
 CREATE SEQUENCE REPLY_SEQ START WITH 1 INCREMENT BY 1;
 
+update member2 set name='홍길서' where userid='hong'

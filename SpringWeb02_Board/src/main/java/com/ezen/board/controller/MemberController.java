@@ -77,4 +77,58 @@ public class MemberController {
 		model.addAttribute("id", id);
 		return "Member/idcheck";
 	}
+	
+	@RequestMapping (value="/memberJoin", method=RequestMethod.POST)
+	public String memberJoin(HttpServletRequest request, Model model) {
+		
+		MemberDto mdto = new MemberDto();
+		mdto.setEmail(request.getParameter("email"));
+		mdto.setName(request.getParameter("name"));
+		mdto.setPhone(request.getParameter("phone"));
+		mdto.setPwd(request.getParameter("pw"));
+		mdto.setUserid(request.getParameter("id"));
+		
+		int result = ms.insertMember(mdto);
+		
+		if (result==1) model.addAttribute("message", "회원가입이 완료되었습니다. 로그인 후 이용하세요!");
+		else model.addAttribute("message", "회원가입 실패. 관리자에게 문의하세요!");
+		
+		return "Member/loginForm";
+	}
+	
+	
+	@RequestMapping("/memberEditForm")
+	public String memberEditForm(HttpServletRequest request, Model model) {
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("loginUser")==null) {
+			return "Member/loginForm";
+		}
+		return "Member/memberEditForm";
+	}
+	
+	@RequestMapping("/memberEdit") 
+	public String memberEdit(HttpServletRequest request, Model model) {
+		MemberDto mdto = new MemberDto();
+		mdto.setUserid(request.getParameter("id"));
+		mdto.setEmail(request.getParameter("email"));
+		mdto.setPhone(request.getParameter("phone"));
+		mdto.setPwd(request.getParameter("pwd"));
+		mdto.setName(request.getParameter("name"));
+		
+		int result = ms.updateMember(mdto);
+		
+		HttpSession session = request.getSession();
+		if(result==1) session.setAttribute("loginUser", mdto);
+		
+		return "redirect:/boardList";
+	}
+	
+	@RequestMapping("/logout") 
+	public String logout(HttpServletRequest request, Model model) {
+		
+		HttpSession session = request.getSession();
+		session.invalidate();
+		return "redirect:/";
+	}
 }

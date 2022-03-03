@@ -42,4 +42,38 @@ public class MemberDao {
 		return mdto;
 	}
 
+	public int insertMember(MemberDto mdto) {
+		int result = 0;
+		String sql = "insert into member2(name, userid, pwd, phone, email) "
+				+ "values(?,?,?,?,?)";
+		con = dbm.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mdto.getName());
+			pstmt.setString(2, mdto.getUserid());
+			pstmt.setString(3, mdto.getPwd());
+			pstmt.setString(4, mdto.getPhone());
+			pstmt.setString(5, mdto.getEmail());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) { e.printStackTrace();
+		} finally { dbm.close(con,pstmt,rs); } 
+		return result;
+	}
+
+	public int updateMember(MemberDto mdto) {
+		int result = 0;
+		String sql = "update member2 set name=?, email=?, pwd=?, phone=? where userid=?";
+		con = dbm.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mdto.getName());
+			pstmt.setString(2, mdto.getEmail());
+			pstmt.setString(3, mdto.getPwd());
+			pstmt.setString(4, mdto.getPhone());
+			pstmt.setString(5, mdto.getUserid());
+		} catch (SQLException e) { e.printStackTrace();
+		} finally { dbm.close(con,pstmt,rs); } 
+		return result;
+	}
+
 }

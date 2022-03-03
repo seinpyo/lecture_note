@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>아이디 중복 확인</title>
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/board.css'/>">
+<link rel="stylesheet" type="text/css" href="resources/css/board.css" />
 <script src ="<c:url value="/resources/script/board.js"/>"></script>
 </head>
 <body>

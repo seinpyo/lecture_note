@@ -33,7 +33,7 @@ public class BoardDao {
 				BoardDto bdto = new BoardDto();
 				bdto.setContent(rs.getString("content"));
 				bdto.setEmail(rs.getString("email"));
-				bdto.setImagename(rs.getString("imgfilename"));
+				bdto.setImagefilename(rs.getString("imgfilename"));
 				bdto.setNum(rs.getInt("num"));
 				bdto.setPass(rs.getString("pass"));
 				bdto.setReadcount(rs.getInt("readcount"));

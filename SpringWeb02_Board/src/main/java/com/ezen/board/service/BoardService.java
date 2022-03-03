@@ -19,4 +19,8 @@ public class BoardService {
 		
 		return list;
 	}
+
+	public void insertBoard(BoardDto bdto) {
+		
+	}
 }

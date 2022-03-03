@@ -11,7 +11,7 @@ public class BoardDto {
 	private String email;
 	private String title;
 	private String content;
-	private String imagename;
+	private String imagefilename;
 	private Timestamp writedate;
 	
 	public int getNum() {
@@ -62,11 +62,11 @@ public class BoardDto {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getImagename() {
-		return imagename;
+	public String getImagefilename() {
+		return imagefilename;
 	}
-	public void setImagename(String imagename) {
-		this.imagename = imagename;
+	public void setImagefilename(String imagefilename) {
+		this.imagefilename = imagefilename;
 	}
 	public Timestamp getWritedate() {
 		return writedate;

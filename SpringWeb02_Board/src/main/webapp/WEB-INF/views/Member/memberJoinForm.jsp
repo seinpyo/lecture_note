@@ -12,35 +12,36 @@
 </head>
 <body>
 <div id="wrap" align="center">
+<h1>사용자 등록</h1>
  '*'표시는 필수 입력 항목입니다.
 	<form action="memberJoin" method="post" name="frm">
 	<input type="hidden" name="command" value="join">
 	<table>
 		<tr>	
-			<td>이름</td>
+			<th>이름</th>
 			<td><input type = "text" name="name" size="20"> &nbsp; * </td>
 		</tr>
 		<tr>
-			<td>아이디</td>
+			<th>아이디</th>
 			<td><input type = "text" name="id" size="20"> &nbsp; * &nbsp;
 			<input type="button" value="중복체크" onClick="idCheck();"/>
 			<input type="hidden" name="re_id" />
 			</td>
 		</tr>
 		<tr>	
-			<td>비밀번호</td>
+			<th>비밀번호</th>
 			<td><input type = "password" name="pw" size="20"> &nbsp; * </td>
 		</tr>
 		<tr>	
-			<td>비밀번호 확인</td>
+			<th>비밀번호 확인</th>
 			<td><input type = "password" name="pw_check" size="20"> &nbsp; * </td>
 		</tr>
 		<tr>
-			<td>이메일</td>
+			<th>이메일</th>
 			<td><input type = "text" name="email" size="20"></td>
 		</tr>
 		<tr>
-			<td>전화번호</td>
+			<th>전화번호</th>
 			<td><input type = "text" name="phone" size="20"></td>
 		</tr>
 	</table><br><br>
