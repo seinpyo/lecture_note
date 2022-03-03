@@ -11,3 +11,14 @@ function loginCheck() {
 		return true;
 	}
 }
+
+function idCheck() {
+	if(document.frm.id.value=="") {
+		alert('아이디를 입력해 주세요');
+		document.frm.id.focus();
+		return;
+	}
+	var id = document.frm.id.value;
+	var opt = "toolbar=no, menubar=no, resizable=no, width=450, height=200";
+	window.open("idcheck?id="+id, "중복체크", opt);
+}

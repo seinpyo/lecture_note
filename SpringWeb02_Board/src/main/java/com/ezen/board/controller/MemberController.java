@@ -58,4 +58,23 @@ public class MemberController {
 		
 		return url;
 	}
+	
+	@RequestMapping(value="/memberJoinForm", method=RequestMethod.GET)
+	public String memberJoinForm() {
+		return "Member/memberJoinForm";
+	}
+	
+	@RequestMapping("/idcheck") 
+	public String idcheck(HttpServletRequest request, Model model) {
+		
+		String id = request.getParameter("id");
+		MemberDto mdto = ms.getMember(id);
+		if (mdto == null) {
+			model.addAttribute("result", -1);
+		} else {
+			model.addAttribute("result", 1);
+		}
+		model.addAttribute("id", id);
+		return "Member/idcheck";
+	}
 }

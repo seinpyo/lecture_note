@@ -25,9 +25,9 @@
 	</div>
 	<div class="box">
 		<div  id="footer">
-			<input type="submit" value="로그인" onclick="return loginCheck();"/>
+			<input type="submit" value="로그인" onClick="return loginCheck();"/>
 			<input type="reset" value="다시작성"/>
-			<input type="button" value="회원가입" onclick="location href='memberJoinForm'"/>
+			<input type="button" value="회원가입" onClick="location href='memberJoinForm'">
 		</div>
 	</div>
 	
