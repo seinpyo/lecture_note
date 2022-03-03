@@ -2,6 +2,7 @@ package com.ezen.board.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ezen.board.dto.BoardDto;
-import com.ezen.board.dto.ReplyVO;
 import com.ezen.board.service.BoardService;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -64,7 +64,7 @@ public class BoardController {
 		BoardDto bdto = new BoardDto();
 		bdto.setContent(multi.getParameter("content"));
 		bdto.setEmail(multi.getParameter("email"));
-		bdto.setImagefilename(multi.getParameter("imgfilename"));
+		bdto.setImagefilename(multi.getFilesystemName("imgfilename"));
 		bdto.setPass(multi.getParameter("pass"));
 		bdto.setTitle(multi.getParameter("title"));
 		bdto.setUserid(multi.getParameter("userid"));
@@ -82,11 +82,25 @@ public class BoardController {
 		
 		int num = Integer.parseInt(request.getParameter("num"));
 		
-		BoardDto bdto = bs.boardView(num);
-		model.addAttribute("board", bdto);
+//		BoardDto bdto = bs.boardView(num);
+//		model.addAttribute("board", bdto);
+//		
+//		ArrayList<ReplyVO> list = bs.getReplysOne(num);
+//		model.addAttribute("replyList", list);
 		
-		ArrayList<ReplyVO> list = bs.getReplysOne(num);
-		model.addAttribute("replyList", list);
+		HashMap<String, Object> paramMap = new HashMap<>();
+	
+		//1)
+		paramMap.compute("bdto", null);
+		paramMap.compute("replyList", null);
+		paramMap.put("num", num);
+		bs.boardView(paramMap);
+		
+		
+		//2)
+		paramMap = bs.boardView(num);
+		
+		
 		
 		return "board/boardView";
 	}

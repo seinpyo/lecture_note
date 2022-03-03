@@ -44,4 +44,8 @@ CREATE table REPLY2(
 CREATE SEQUENCE REPLY_SEQ START WITH 1 INCREMENT BY 1;
 
 update member2 set name='홍길서' where userid='hong'
-select reply2
+select * from member2
+
+update board set readcount = readcount+1 where num=1
+select * from reply2
+insert into reply2 (num, boardnum, userid, content) values (reply_seq.nextVal, 165, 'yoon', '안녕하세요 ');

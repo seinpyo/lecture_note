@@ -45,7 +45,7 @@
 	</table><br><br>
 	<input type = "submit" value="수정" onClick="return editCheck();"/>
 	<input type = "reset" value="다시 작성" >
-	<input type = "button" value="목록으로" onClick="location.href='main'">
+	<input type = "button" value="목록으로" onClick="location.href='boardList'">
 	</form>
 </div>
 </body>

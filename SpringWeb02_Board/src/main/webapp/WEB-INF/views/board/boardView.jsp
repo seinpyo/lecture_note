@@ -7,8 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판</title>
-<link rel="stylesheet" type="text/css" href="css/board.css">
-<script src="script/script.js"></script>
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/board.css'/>">
+<script src ="<c:url value="/resources/script/board.js"/>"></script>
 </head>
 <body>
 <div id="wrap" align="center">
@@ -36,17 +36,17 @@
 		<th width="100">이미지</th>
 		<td width="300" align="center">
 		 <c:choose>
-		 	<c:when test="${empty board.imgfilename}">
+		 	<c:when test="${empty board.imagefilename}">
 		 		<img src="resources/upload/noname.jpg" width="200">
 		 	</c:when>
 		 	<c:otherwise>
-		 		<img src ="resources/upload/${board.imgfilename}" width="200">
+		 		<img src ="resources/upload/${board.imagefilename}" width="200">
 		 	</c:otherwise>
 		 </c:choose>
 		</td>
 	</tr>
 </table><br><br>
-<input type="button" value="리스트" onClick="location.href='main'">
+<input type="button" value="리스트" onClick="location.href='boardList'">
 <input type="button" value="수정" onClick="open_win('boardEditForm?num=${board.num}', 'update');">
 <input type="button" value="삭제" onClick="open_win('boardDeleteForm?${board.num}', 'delete');">
 <br><br>

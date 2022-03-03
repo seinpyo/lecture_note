@@ -92,7 +92,7 @@ public class BoardDao {
 	}
 
 	public void plusReadCount(int num) {
-		String sql = "update into board set reacount = readcount+1 where num=?";
+		String sql = "update board set readcount = readcount+1 where num=?";
 		con = dbm.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -104,7 +104,7 @@ public class BoardDao {
 
 	public ArrayList<ReplyVO> getReply(int num) {
 		ArrayList<ReplyVO> list = new ArrayList<>();
-		String sql = "select * from reply where boardnum = ? order by num desc";
+		String sql = "select * from reply2 where boardnum = ? order by num desc";
 		con = dbm.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
