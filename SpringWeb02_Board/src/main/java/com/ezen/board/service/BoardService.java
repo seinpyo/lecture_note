@@ -1,6 +1,7 @@
 package com.ezen.board.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,6 @@ public class BoardService {
 
 	public ArrayList<BoardDto> getBoardsMain() {
 		ArrayList<BoardDto> list = bdao.getBoardsMain();
-		
 		return list;
 	}
 
@@ -25,18 +25,44 @@ public class BoardService {
 		bdao.insert(bdto);
 	}
 
-	public BoardDto boardView(int num) {
-		//게시물 조회
-		BoardDto bdto = bdao.getBoard(num);
+
+	//hashmap을 사용할 경우 boardView 메서드
+	public HashMap<String, Object> boardView(int num) {
+		HashMap<String, Object> paramMap = new HashMap<>();
 		
 		//조회수 +1
 		bdao.plusReadCount(num);
+		
+		//게시물 조회 
+		BoardDto bdto = bdao.getBoard(num);
+		paramMap.put("bdto", bdto);
+		
+		//댓글 조회
+		ArrayList<ReplyVO> list = bdao.getReply(num);
+		paramMap.put("replyList", list);
+		
+		return paramMap;
+	}
 
-		return bdto;
+	public void addReply(ReplyVO rvo) {
+		bdao.addReply(rvo);
+	}
+
+	public HashMap<String, Object> boardViewWithoutCount(int num) {
+		HashMap<String, Object> paramMap = new HashMap<>();
+		
+		//게시물 조회 
+		BoardDto bdto = bdao.getBoard(num);
+		paramMap.put("bdto", bdto);
+		
+		//댓글 조회
+		ArrayList<ReplyVO> list = bdao.getReply(num);
+		paramMap.put("replyList", list);
+		
+		return paramMap;
 	}
 	
-	public ArrayList<ReplyVO> getReplysOne(int num) {
-		ArrayList<ReplyVO> list = bdao.getReply(num);
-		return list;
-	}
+	
+	
+
 }

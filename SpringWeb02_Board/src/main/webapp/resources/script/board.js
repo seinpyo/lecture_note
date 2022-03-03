@@ -96,6 +96,14 @@ function boardCheck(){
 }
 
 
-
+function reply_check(){
+	if(document.frm2.content.value=="") {
+		alert("덧글 내용을 입력해주세요");
+		document.frm2.content.focus();
+		return false;
+	} else {
+		return true;
+	}
+}
 
 

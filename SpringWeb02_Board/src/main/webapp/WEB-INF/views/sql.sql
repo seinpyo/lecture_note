@@ -48,4 +48,4 @@ select * from member2
 
 update board set readcount = readcount+1 where num=1
 select * from reply2
-insert into reply2 (num, boardnum, userid, content) values (reply_seq.nextVal, 165, 'yoon', '안녕하세요 ');
+insert into reply2 (num, boardnum, userid, content) values (reply_seq.nextVal, 166, 'yoon', 'test');

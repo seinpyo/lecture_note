@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ezen.board.dto.BoardDto;
+import com.ezen.board.dto.ReplyVO;
 import com.ezen.board.service.BoardService;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -82,27 +83,43 @@ public class BoardController {
 		
 		int num = Integer.parseInt(request.getParameter("num"));
 		
-//		BoardDto bdto = bs.boardView(num);
-//		model.addAttribute("board", bdto);
-//		
-//		ArrayList<ReplyVO> list = bs.getReplysOne(num);
-//		model.addAttribute("replyList", list);
-		
 		HashMap<String, Object> paramMap = new HashMap<>();
-	
-		//1)
-		paramMap.compute("bdto", null);
-		paramMap.compute("replyList", null);
-		paramMap.put("num", num);
-		bs.boardView(paramMap);
-		
-		
-		//2)
 		paramMap = bs.boardView(num);
 		
-		
+		model.addAttribute("board", (BoardDto) paramMap.get("bdto"));
+		model.addAttribute("replyList", (ArrayList<ReplyVO>) paramMap.get("replyList"));
+	
 		
 		return "board/boardView";
 	}
 	
+	@RequestMapping(value="/addReply", method = RequestMethod.POST)
+	public String add_reply(HttpServletRequest request, Model model) {
+		
+		String boardnum = request.getParameter("boardnum");
+		ReplyVO rvo = new ReplyVO();
+		
+		rvo.setUserid(request.getParameter("userid"));
+		rvo.setContent(request.getParameter("content"));
+		rvo.setBoardnum(Integer.parseInt(boardnum));
+		
+		bs.addReply(rvo);
+		
+		//덧글을 입력하고 다시 게시글 상세보기로 돌아갈 때 조회수가 카운팅 되지 않도록 함
+		return "redirect:/boardViewWithoutCount?num=" + boardnum;
+	}
+	
+	@RequestMapping("boardViewWithoutCount") 
+	public String boardViewWithoutCount(HttpServletRequest request, Model model) {
+		int num = Integer.parseInt(request.getParameter("num"));
+		
+		HashMap<String, Object> paramMap = new HashMap<>();
+		paramMap = bs.boardViewWithoutCount(num);
+		
+		model.addAttribute("board", (BoardDto) paramMap.get("bdto"));
+		model.addAttribute("replyList", (ArrayList<ReplyVO>) paramMap.get("replyList"));
+	
+		
+		return "board/boardView";
+	}
 }
