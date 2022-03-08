@@ -29,8 +29,8 @@ public class OrderService {
 	}
 
 	public List<OrderVO> listOrderByOseq(int oseq) {
-		List<OrderVO> list = odao.listOrderBtOseq(oseq);
-		return null;
+		List<OrderVO> list = odao.listOrderByOseq(oseq);
+		return list;
 	}
 
 	public int insertOrderOne(int pseq, int quantity, String userid) {
@@ -41,8 +41,11 @@ public class OrderService {
 	}
 
 	public List<Integer> selectSeqOrderIng(String userid) {
-		List<Integer> list = odao.selectSeqOrderIng(userid);
-		
-		return null;
+		return odao.selectSeqOrderIng(userid);
+	}
+
+	public List<Integer> oseqListAll(String userid) {
+		List<Integer> list = odao.oseqListAll(userid);
+		return list;
 	}
 }

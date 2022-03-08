@@ -50,7 +50,7 @@ public class OrderDao {
 		template.update(sql, cseq);
 	}
 
-	public List<OrderVO> listOrderBtOseq(int oseq) {
+	public List<OrderVO> listOrderByOseq(int oseq) {
 		String sql = "select * from order_view where oseq = ?";
 		List <OrderVO> list = template.query(sql, new RowMapper<OrderVO>() {
 			@Override
@@ -94,6 +94,22 @@ public class OrderDao {
 		}, userid);
 		return list;
 	}
+
+	public List<Integer> oseqListAll(String userid) {
+		String sql = "select distinct oseq from order_view " 
+				+"where id=? order by oseq desc";
+		List<Integer> list = template.query(sql, new RowMapper<Integer>() {
+
+			@Override
+			public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+				int oseq = rs.getInt("oseq");
+				return oseq;
+			}
+		}, userid);
+		return list;
+	}
+	
+	
 	
 	
 }
