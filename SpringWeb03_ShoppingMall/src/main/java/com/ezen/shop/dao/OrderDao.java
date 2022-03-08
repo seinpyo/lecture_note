@@ -53,7 +53,6 @@ public class OrderDao {
 	public List<OrderVO> listOrderBtOseq(int oseq) {
 		String sql = "select * from order_view where oseq = ?";
 		List <OrderVO> list = template.query(sql, new RowMapper<OrderVO>() {
-
 			@Override
 			public OrderVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 				OrderVO ovo = new OrderVO();
@@ -69,13 +68,31 @@ public class OrderDao {
 				ovo.setPname(rs.getString("pname"));
 				ovo.setPrice2(rs.getInt("price2"));
 				ovo.setResult(rs.getString("result"));
-				
-				return null;
+				return ovo;
 			}
-			
-		});
+		}, oseq);
 		
-		return null;
+		return list;
+	}
+
+	public void insertOrderDetail(int pseq, int quantity, int oseq) {
+		String sql = "insert into order_detail(odseq, oseq, pseq, qnantity) "
+				+ "values(order_detail_seq.nextVal, ?, ?, ?)";
+		template.update(sql, oseq, pseq, quantity);
+	}
+
+	public List<Integer> selectSeqOrderIng(String userid) {
+		String sql = "select distinct oseq from order_view " 
+				+"where id=? and result='1' order by oseq desc";
+		List<Integer> list = template.query(sql, new RowMapper<Integer>() {
+
+			@Override
+			public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+				int oseq = rs.getInt("oseq");
+				return oseq;
+			}
+		}, userid);
+		return list;
 	}
 	
 	

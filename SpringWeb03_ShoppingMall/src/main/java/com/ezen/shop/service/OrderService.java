@@ -32,4 +32,17 @@ public class OrderService {
 		List<OrderVO> list = odao.listOrderBtOseq(oseq);
 		return null;
 	}
+
+	public int insertOrderOne(int pseq, int quantity, String userid) {
+		odao.insertOrders(userid);
+		int oseq = odao.lookupMaxOseq();
+		odao.insertOrderDetail(pseq, quantity, oseq);
+		return 0;
+	}
+
+	public List<Integer> selectSeqOrderIng(String userid) {
+		List<Integer> list = odao.selectSeqOrderIng(userid);
+		
+		return null;
+	}
 }

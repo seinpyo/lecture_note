@@ -1,5 +1,6 @@
 package com.ezen.shop.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -62,5 +63,55 @@ public class OrderController {
 		return mav;
 	}
 	
+	@RequestMapping("/orderOne")
+	public String orderOne(HttpServletRequest request, 
+			@RequestParam("pseq") int pseq, @RequestParam("quantity") int quantity) {
+		HttpSession session = request.getSession();
+		MemberVO mvo = (MemberVO) session.getAttribute("loginUser");
+		int oseq = 0;
+		if(mvo == null) {
+			return "member/login";
+		} else {
+			List<CartVO> cartList = cs.listCart(mvo.getUserid()); 
+			oseq = os.insertOrderOne(pseq, quantity, mvo.getUserid());
+		}
+		
+		return "redirect:/orderList?oseq=" + oseq;
+	}
 	
+	@RequestsMapping("/myPage")
+	public ModelAndView myPage(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		MemberVO mvo = (MemberVO) session.getAttribute("loginUser");
+		if(mvo == null) {
+			mav.setViewName("member/login");
+		} else {
+			ArrayList<OrderVO> orderList = new ArrayList<>(); //mypage.jsp에 전달될 리스트
+			
+			//1.아이디로 진행중인 주문의 주문번호를 조회 
+			List<Integer> oseqList = os.selectSeqOrderIng(mvo.getUserid());
+			
+			//2. 조회한 주문번호를 상세 조회
+			for(int oseq : oseqList) {
+				List<OrderVO> orderListIng = oseqList.listOrderByOseq(oseq); 
+				
+				//3. 주문번호 목록에 "대표상품 외 x건" 으로 표시되도록 함
+				OrderVO ovo = orderListIng.get(0);
+				ovo.setPname(ovo.getPname() + "포함 "+ orderListIng.size() + "건");
+				int totalPrice = 0;
+				for(OrderVO ovo1 : orderListIng) totalPrice+=ovo1.getPrice2()*ovo1.getQuantity();
+				ovo.setPrice2(totalPrice);
+				
+				//4. mypage.jsp에 전달할 리스트에 현재 ovo 추가
+				orderList.add(ovo);
+			}
+			
+			mav.addObject("title", "진행 중인 주문 내역");
+			mav.addObject("orderList", orderList);
+			mav.setViewName("mypage/mypage");
+		}
+		return mav; 
+		
+	}
 }

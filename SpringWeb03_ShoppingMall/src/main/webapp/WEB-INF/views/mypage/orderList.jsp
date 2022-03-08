@@ -21,7 +21,8 @@
 		<th>주문 처리가 완료되었습니다</th></tr>
 </table>
 <div class="clear"></div>
-
+<div id="buttons" style="float:right">
+<input type="button" value="쇼핑 계속하기" class="cancel" onclick="location.href='/shop/'"/> </div>
 </article>
 
 <%@ include file="/resources/headerfooter/footer.jsp" %>
