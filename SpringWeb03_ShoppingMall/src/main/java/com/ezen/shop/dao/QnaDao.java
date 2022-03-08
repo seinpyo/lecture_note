@@ -43,4 +43,16 @@ public class QnaDao {
 		String sql = "insert into qna(qseq, subject, content, id) value(qna_seq.nextval, ?,?,?)";
 		int result = template.update(sql, qvo.getSubject(), qvo.getContent(), userid);
 	}
+	public QnaVO getQna(int qseq) {
+		/*
+		 * String sql = "select * from qna where qseq = ?"; List<QnaVO> list =
+		 * template.query(sql, new RowMapper<QnaVO>() { QnaVO qvo = new QnaVO();
+		 * qvo.setQseq(qseq); qvo.setSubject(rs.getString("subject"));
+		 * qvo.setContent(rs.getString("content")); qvo.setId(rs.getString("id"));
+		 * qvo.setIndate(rs.getTimpstamp("indate"));
+		 * qvo.setReplay(rs.getString("reply")); qvo.setRep(rs.getString("rep")); return
+		 * qvo; } }, qseq);
+		 */
+		return null;
+	}
 }

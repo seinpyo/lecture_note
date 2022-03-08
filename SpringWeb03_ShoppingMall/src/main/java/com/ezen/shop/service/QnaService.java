@@ -21,6 +21,6 @@ public class QnaService {
 	}
 
 	public QnaVO getQna(int qseq) {
-		return QnaVO;
+		return qdao.getQna(qseq);
 	}
 }

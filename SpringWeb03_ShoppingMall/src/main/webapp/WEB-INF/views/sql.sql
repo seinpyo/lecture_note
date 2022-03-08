@@ -167,6 +167,7 @@ select * from qna;
 ------------------------------------------------ 샘플 데이터 입력------------------------------------
 
 -- 관리자 입력
+select * from WORKER
 insert into worker values('admin', 'admin', '관리자', '010-7777-7777');
 insert into worker values('scott', 'tiger', '홍길동', '010-6400-6068');
 
