@@ -29,7 +29,7 @@
 	
 	<c:choose>
 		<c:when test="${productListSize<=0}">
-			<tr><td height="23" align="center" colspan="7" width=100%> 등록된 상품이 업습니다.</td></tr>
+			<tr><td height="23" align="center" colspan="7" width=100%> 등록된 상품이 없습니다.</td></tr>
 		</c:when>
 		<c:otherwise>
 			<c:forEach items="${productList}" var="productVO">
@@ -57,11 +57,6 @@
 
 <jsp:include page="/resources/page/paging.jsp">
 	<jsp:param name="command" value="productList"/>
-	<jsp:param name="page" value="${paging.page}"/>
-	<jsp:param name="beginPage" value="${paging.beginPage}"/>
-	<jsp:param name="endPage" value="${paging.endPage}"/>
-	<jsp:param name="prev" value="${paging.prev}"/>
-	<jsp:param name="next" value="${paging.next}"/>
 </jsp:include>
 
 <br><br>

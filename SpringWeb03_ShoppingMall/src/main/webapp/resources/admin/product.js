@@ -73,10 +73,7 @@ function go_mod(pseq){
 
 
 function go_mod_save(){
-	if (document.frm.kind.value == '') {
-		alert('상품분류를 선택하세요'); 	  
-		document.frm.kind.focus();
-	 } else if (document.frm.name.value == '') {
+	if (document.frm.name.value == '') {
 		alert('상품명을 입력하세요');	  
 		document.frm.name.focus();
 	 } else if (document.frm.price1.value == '') {

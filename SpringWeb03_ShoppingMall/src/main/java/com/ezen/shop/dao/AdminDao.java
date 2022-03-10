@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.ezen.shop.dto.Paging;
+import com.ezen.shop.dto.ProductVO;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Repository
@@ -36,7 +38,53 @@ private JdbcTemplate template;
 		else if(workPwd.equals(list.get(0))) result=1;
 		else result=0;
 		
-		
 		return result;
+	}
+
+	public List<ProductVO> productList(Paging paging, String key) {
+		String sql = "select * from ( select * from ("
+				+ " select rownum  as rn, p.* from "
+				+ " ((select * from product where name like '%'||?||'%' order by pseq desc) p) "
+				+ ") where rn>=? ) where rn<=? ";
+		
+		List<ProductVO> list = template.query(sql, new RowMapper<ProductVO>(){
+
+			@Override
+			public ProductVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+				ProductVO pvo = new ProductVO();
+				pvo.setPseq(rs.getInt("pseq"));
+				pvo.setPrice1(rs.getInt("price1"));
+				pvo.setPrice2(rs.getInt("price2"));
+				pvo.setPrice3(rs.getInt("price3"));
+				pvo.setIndate(rs.getTimestamp("indate"));
+				pvo.setName(rs.getString("name"));
+				pvo.setImage(rs.getString("image"));
+				pvo.setUseyn(rs.getString("useyn"));
+				pvo.setBestyn(rs.getString("bestyn"));
+				return pvo;
+			}
+		}, key, paging.getStartNum(), paging.getEndNum());
+		return list;
+	}
+
+	public int getAllCount(String tableName, String fieldName, String key) {
+		String sql = "select count(*) as cnt from " + tableName
+				+ " where " + fieldName + " like '%'||?||'%'";
+		List<Integer> list = template.query(sql, new RowMapper<Integer>() {
+
+			@Override
+			public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+				int count = rs.getInt("cnt");
+				return count;
+			}
+		}, key);
+		return list.get(0);
+	}
+
+	public void insertProduct(ProductVO pvo) {
+		String sql = "insert into product (pseq, kind, name, price1, price2, price3, content, image) "
+				+ "values(product_seq.nextVal, ?,?,?,?,?,?,?)";
+		template.update(sql, pvo.getKind(), pvo.getName(), pvo.getPrice1(), pvo.getPrice2(), pvo.getPrice3(), 
+				pvo.getContent(), pvo.getImage());
 	}
 }

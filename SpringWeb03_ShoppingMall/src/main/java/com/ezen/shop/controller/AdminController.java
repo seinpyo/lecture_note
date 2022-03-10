@@ -1,5 +1,9 @@
 package com.ezen.shop.controller;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -7,12 +11,17 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ezen.shop.dto.Paging;
+import com.ezen.shop.dto.ProductVO;
 import com.ezen.shop.service.AdminService;
 import com.ezen.shop.service.ProductService;
 import com.ezen.shop.service.QnaService;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @Controller
 public class AdminController {
@@ -59,8 +68,143 @@ public class AdminController {
 		return mav;
 	} 
 	
-	@RequestMapping("productList")
-	public String product_list(HttpServletRequest request) {
-		return "admin/product/productList";
+	@RequestMapping("/productList")
+	public ModelAndView product_list(HttpServletRequest request) {
+		
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("WorkId");
+		
+		if(id==null) mav.setViewName("redirect:/admin");
+		else {
+			if(request.getParameter("first") != null)  {
+				session.removeAttribute("page");
+				session.removeAttribute("key");
+			}
+			
+			int page = 1;
+			if(request.getParameter("page") != null) {
+				page = Integer.parseInt(request.getParameter("page"));
+				session.setAttribute("page", page);
+			} else if(session.getAttribute("page") != null) {
+				page = (Integer)session.getAttribute("page");
+			} else {
+				session.removeAttribute("page");
+			}
+			
+			String key = "";
+			if(request.getParameter("key") != null) {
+				key = request.getParameter("key");
+				session.setAttribute("key", key);
+			} else if (session.getAttribute("key") != null) {
+				key = (String)session.getAttribute("key");
+			} else {
+				session.removeAttribute("key");
+			}
+			
+			HashMap<String, Object> resultMap = as.productList(page, key);
+			
+			List<ProductVO> list = (List<ProductVO>) resultMap.get("productList");
+			Paging paging = (Paging) resultMap.get("paging");
+			
+			mav.addObject("paging", paging);
+			mav.addObject("productList", list);
+			mav.addObject("key", key);
+			mav.setViewName("admin/product/productList");
+		}
+		return mav;
+	}
+	
+	//상품 등록
+	
+	@RequestMapping("/productWriteForm")
+	public ModelAndView product_write_form(HttpServletRequest request) {
+		String kindList[] = {"Heels", "Boots","Sandals","Sneakers","Sliper","Sale"};
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("kindList", kindList);
+		mav.setViewName("admin/product/productWriteForm");
+		return mav;
+	}
+	
+	@RequestMapping(value="/productWrite", method=RequestMethod.POST)
+	public String product_wirte(HttpServletRequest request) {
+		
+		String savePath = context.getRealPath("resources/product_images");
+		//context는 @Autowired 됨
+		
+		ProductVO pvo = new ProductVO();
+		try {
+			MultipartRequest multi = 
+					new MultipartRequest(request, savePath, 5*1024*1024, "UTF-8", new DefaultFileRenamePolicy());
+			pvo.setName(multi.getParameter("name"));
+			pvo.setKind(multi.getParameter("kind"));
+			pvo.setPrice1(Integer.parseInt(multi.getParameter("price1")));
+			pvo.setPrice2(Integer.parseInt(multi.getParameter("price2")));
+			pvo.setPrice3(Integer.parseInt(multi.getParameter("price2"))
+					- Integer.parseInt(multi.getParameter("price2")));
+			pvo.setContent(multi.getParameter("content"));
+			pvo.setImage(multi.getFilesystemName("image"));
+			
+			as.insertProduct(pvo);
+			
+		} catch (IOException e) { e.printStackTrace();
+		}
+		return "redirect:/productList";
+	}
+	
+	@RequestMapping("/adminProductDetail")
+	public ModelAndView product_detail(HttpServletRequest request, @RequestParam("pseq") int pseq) {
+		ModelAndView mav = new ModelAndView();
+		ProductVO pvo = ps.getProduct(pseq);
+		String kindList[] = {"0", "Heels", "Boots","Sandals","Sneakers","Sliper","Sale"};
+		int index = Integer.parseInt(pvo.getKind());
+		
+		mav.addObject("productVO", pvo);
+		mav.addObject("kind", kindList[index]);
+		mav.setViewName("admin/product/productDetail");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/productUpdateForm")
+	public ModelAndView product_update_form(HttpServletRequest request, @RequestParam("pseq") int pseq) {
+		ModelAndView mav = new ModelAndView();
+		ProductVO pvo = ps.getProduct(pseq);
+		mav.addObject("productVO", pvo);
+		String kindList[] = {"Heels", "Boots","Sandals","Sneakers","Sliper","Sale"};
+		mav.addObject("kindList", kindList);
+		mav.setViewName("admin/product/productUpdate");
+		return mav;
+	}
+	
+	@RequestMapping(value="/productUpdate", method=RequestMethod.POST)
+	public String product_update(HttpServletRequest request) {
+		
+		ProductVO pvo = new ProductVO();
+		int pseq = 0;
+		
+		String savePath = context.getRealPath("resources/product_images");
+		try {
+			MultipartRequest multi = 
+					new MultipartRequest(request, savePath, 5*1024*1024, "UTF-8", new DefaultFileRenamePolicy());
+			pvo.setPseq(Integer.parseInt(multi.getParameter("pseq")));
+			pseq = Integer.parseInt(multi.getParameter("pseq"));
+			pvo.setName(multi.getParameter("name"));
+			pvo.setKind(multi.getParameter("kind"));
+			pvo.setPrice1(Integer.parseInt(multi.getParameter("price1")));
+			pvo.setPrice2(Integer.parseInt(multi.getParameter("price2")));
+			pvo.setPrice3(Integer.parseInt(multi.getParameter("price2"))
+					- Integer.parseInt(multi.getParameter("price2")));
+			pvo.setContent(multi.getParameter("content"));
+			pvo.setUseyn(multi.getParameter("useyn"));
+			pvo.setBestyn(multi.getParameter("bestyn"));
+			if(multi.getFilesystemName("image")==null) pvo.setImage(multi.getParameter("oldfilename"));
+			else pvo.setImage(multi.getFilesystemName("image"));
+		} catch (IOException e) { e.printStackTrace();
+		}
+		as.updateProduct(pvo);
+		
+		return "redirect:/adminProductDetail?pseq=" + pseq;
 	}
 }
