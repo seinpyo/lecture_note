@@ -127,6 +127,7 @@ select * from order_view;
 
 
 
+
 alter table address drop primary key cascade;
 drop table address purge;
 CREATE TABLE address (

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ezen.shop.dto.OrderVO;
 import com.ezen.shop.dto.Paging;
 import com.ezen.shop.dto.ProductVO;
 import com.ezen.shop.service.AdminService;
@@ -206,5 +207,50 @@ public class AdminController {
 		as.updateProduct(pvo);
 		
 		return "redirect:/adminProductDetail?pseq=" + pseq;
+	}
+	
+	@RequestMapping("/adminOrderList")
+	public ModelAndView adminOrderList(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("WorkId");
+		if(id==null) mav.setViewName("redirect:/admin");
+		else {
+			if(request.getParameter("first") != null)  {
+				session.removeAttribute("page");
+				session.removeAttribute("key");
+			}
+			
+			int page = 1;
+			if(request.getParameter("page") != null) {
+				page = Integer.parseInt(request.getParameter("page"));
+				session.setAttribute("page", page);
+			} else if(session.getAttribute("page") != null) {
+				page = (Integer)session.getAttribute("page");
+			} else {
+				session.removeAttribute("page");
+			}
+			
+			String key = "";
+			if(request.getParameter("key") != null) {
+				key = request.getParameter("key");
+				session.setAttribute("key", key);
+			} else if (session.getAttribute("key") != null) {
+				key = (String)session.getAttribute("key");
+			} else {
+				session.removeAttribute("key");
+			}
+			
+			HashMap<String, Object> resultMap = as.orderList(page, key);
+			
+			List<OrderVO> list = (List<OrderVO>) resultMap.get("orderList");
+			Paging paging = (Paging) resultMap.get("paging");
+			
+			mav.addObject("paging", paging);
+			mav.addObject("orderList", list);
+			mav.addObject("key", key);
+			mav.setViewName("admin/order/orderList");
+		}
+		return mav;
 	}
 }

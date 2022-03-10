@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.ezen.shop.dto.OrderVO;
 import com.ezen.shop.dto.Paging;
 import com.ezen.shop.dto.ProductVO;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
@@ -66,6 +67,36 @@ private JdbcTemplate template;
 		}, key, paging.getStartNum(), paging.getEndNum());
 		return list;
 	}
+	
+	public List<OrderVO> orderList(Paging paging, String key) {
+		String sql = "select * from ( select * from ("
+				+ " select rownum  as rn, o.* from "
+				+ " ((select * from order_view where mname like '%'||?||'%' order by odseq desc) o) "
+				+ ") where rn>=? ) where rn<=? ";
+		
+		List<OrderVO> list = template.query(sql, new RowMapper<OrderVO>(){
+
+			@Override
+			public OrderVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+				OrderVO ovo = new OrderVO();
+				ovo.setAddress(rs.getString("adress"));
+				ovo.setId(rs.getString("id"));
+				ovo.setIndate(rs.getTimestamp("indate"));
+				ovo.setMname(rs.getString("mname"));
+				ovo.setOdseq(rs.getInt("odseq"));
+				ovo.setOseq(rs.getInt("oseq"));
+				ovo.setPhone(rs.getString("phone"));
+				ovo.setPname(rs.getString("pname"));
+				ovo.setPrice2(rs.getInt("price2"));
+				ovo.setQuantity(rs.getInt("quantity"));
+				ovo.setResult(rs.getString("result"));
+				ovo.setZipnum(rs.getString("zipnum"));
+				ovo.setPseq(rs.getInt("pseq"));
+				return ovo;
+			}
+		}, key, paging.getStartNum(), paging.getEndNum());
+		return list;
+	}
 
 	public int getAllCount(String tableName, String fieldName, String key) {
 		String sql = "select count(*) as cnt from " + tableName
@@ -87,4 +118,13 @@ private JdbcTemplate template;
 		template.update(sql, pvo.getKind(), pvo.getName(), pvo.getPrice1(), pvo.getPrice2(), pvo.getPrice3(), 
 				pvo.getContent(), pvo.getImage());
 	}
+
+	public void updateProduct(ProductVO pvo) {
+		String sql = "update product set kind=?, name=?, price1=?, price2=?, price3=?, content=?, image=?"
+				+ ", useyn=?, bestyn=? where pseq = ?";
+		template.update(sql, pvo.getKind(), pvo.getName(), pvo.getPrice1(), pvo.getPrice2(), pvo.getPrice3(),
+				pvo.getContent(), pvo.getImage(), pvo.getUseyn(), pvo.getBestyn(), pvo.getPseq());
+	}
+
+
 }
