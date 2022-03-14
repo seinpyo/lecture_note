@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.ezen.spg11.dao.IUserDao">
+	
+	<select id="list" resultType="com.ezen.spg11.dto.UserDto">
+			<!-- id = "메서드이름" resultType="리턴 될 타입 경로"-->
+		select * from myuser
+	</select> 
+	
+
+</mapper>	
+	
+	
