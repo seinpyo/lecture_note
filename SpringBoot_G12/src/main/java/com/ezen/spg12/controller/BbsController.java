@@ -60,4 +60,34 @@ public class BbsController {
 		return "view";
 	}
 	
+	@RequestMapping("/updateForm")
+	public String updateFomr(@RequestParam("id") int id, Model model) {
+		model.addAttribute("dto", bdao.view(id));
+		return "updateForm";
+	}
+	
+	@RequestMapping("/update")
+	public String update(@ModelAttribute("dto") @Valid BbsDto bbsdto,
+			BindingResult result, Model model) {
+		
+		if(result.hasErrors()) {
+			if(result.getFieldError("writer") != null) 
+				model.addAttribute("msg", result.getFieldError("writer").getDefaultMessage());
+			else if(result.getFieldError("title") != null) 
+				model.addAttribute("msg", result.getFieldError("title").getDefaultMessage());
+			else if(result.getFieldError("content") != null) 
+				model.addAttribute("msg", result.getFieldError("content").getDefaultMessage());
+			return "updateForm";
+		} else {
+			bdao.update(bbsdto);
+			return "redirect:/";
+		}
+	}
+	
+	@RequestMapping("/delete")
+	public String delete(@RequestParam("id") int id, Model model) {
+		bdao.delete(id);
+		return "redirect:/";
+	}
+	
 }
