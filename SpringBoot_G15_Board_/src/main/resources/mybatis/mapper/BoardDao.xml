@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "com.ezen.spg15.dao.IBoardDao">
+	<select id="getAllCount" resultType="_int"> 
+		<!-- 기본 int 형을 리턴 받고 싶을 때는 그냥 'int'가 아닌 '_int'로 작성 -->
+		select count(*) from board
+	</select>
+	
+	<select id="selectBoardAll" resultType="com.ezen.spg15.dto.BoardVO">                                                                  
+	 	select * from ( select * from (select rownum as rn, b.* from (
+	 	(select * from board order by num desc) b) where rn>=#{startNum} ) where rn<=#{endNum}
+	</select>
+</mapper>
