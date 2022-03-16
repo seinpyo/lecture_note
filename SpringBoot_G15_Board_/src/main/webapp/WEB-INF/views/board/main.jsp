@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>메인</title>
-<link rel="stylesheet" type="text/css" href="resources/css/board.css"/>
+<link rel="stylesheet" type="text/css" href="css/board.css">
 </head>
 <body>
 <div id="wrap" align="center">

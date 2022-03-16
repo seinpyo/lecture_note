@@ -1,16 +1,27 @@
 package com.ezen.spg15.controller;
 
+import java.util.HashMap;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ezen.spg15.dto.BoardVO;
 import com.ezen.spg15.dto.Paging;
 import com.ezen.spg15.service.BoardService;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @Controller
 public class BoardController {
@@ -56,4 +67,103 @@ public class BoardController {
 
 		return mav;
 	} 
+	
+//글쓰기
+	
+	@RequestMapping("/boardWriteForm")
+	public String write_form(HttpServletRequest request) {
+		String url = "board/boardWriteForm";
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("loginUser") == null) url = "member/loginform";
+		
+		return url;
+	}
+	
+	//파일 업로드 창으로 이동
+	@RequestMapping("/selectimg")
+	public String selectimg() {
+		return "board/selectimg";
+	}
+	
+	//파일을 업로드
+	@RequestMapping(value="/fileupload", method=RequestMethod.POST)
+	public String fileupload(Model model, HttpServletRequest request) {
+		//static 폴더와 webapp 폴더 안에 각각 upload 폴더 생성
+		//upload 하면 webapp/upload 에 들어가고 꺼내 쓸 때는 static/upload에서 꺼낸다
+		//반드시 두 폴더 다 생성할 것
+		
+		String path = context.getRealPath("/upload");
+		
+		try {
+			MultipartRequest multi = new MultipartRequest(
+					request, path, 5*1024*1024, "UTF-8", new DefaultFileRenamePolicy());
+			model.addAttribute("image", multi.getFilesystemName("image"));
+		} catch (Exception e) { e.printStackTrace();
+		}
+		return "board/completeupload";
+	}
+	
+	//Validation 후 DB에 데이터 insert 
+	@RequestMapping("/boardWrite")
+	public String board_write(@ModelAttribute("dto") @Valid BoardVO boardvo,
+			BindingResult result, Model model, HttpServletRequest request) {
+		
+		String url = "board/boardWriteForm";
+		
+		if(result.getFieldError("pass") != null) 
+			model.addAttribute("message", result.getFieldError("pass").getDefaultMessage());
+		else if(result.getFieldError("title") != null) 
+			model.addAttribute("message", result.getFieldError("title").getDefaultMessage());
+		else if(result.getFieldError("content") != null) 
+			model.addAttribute("message", result.getFieldError("content").getDefaultMessage());
+		else { 
+			url = "redirect:/main";
+			bs.insertBoard(boardvo);
+		}
+	
+		return url;
+	}
+	
+	
+//게시글 열람	
+	@RequestMapping("/boardView")
+	 public ModelAndView board_view(@RequestParam("num") int num, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		
+		//덧글과 게시글 내용을 한번에 가져오기 위해 Hashmap 사용
+		HashMap<String, Object> resultMap = bs.boardView(num);
+		mav.addObject("board", resultMap.get("board"));
+		mav.addObject("replyList", resultMap.get("replyList"));
+		
+		mav.setViewName("board/boardView");
+		return mav;
+	}
+	
+	
+//댓글 작성
+	@RequestMapping("/addReply")
+	public String addReply(@RequestParam("boardnum") int boardnum, 
+			@RequestParam("userid") String userid, @RequestParam("content") String content,
+			HttpServletRequest request) {
+		
+		bs.addReply(boardnum, userid, content);
+	
+		return "redirect:/boardViewWithoutCount?num="+boardnum;
+	}
+
+	@RequestMapping("/boardViewWithoutCount")
+	 public ModelAndView board_view_without_count(
+			 @RequestParam("num") int num, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		
+		//덧글과 게시글 내용을 한번에 가져오기 위해 Hashmap 사용
+		HashMap<String, Object> resultMap = bs.boardViewWithoutCount(num);
+		mav.addObject("board", resultMap.get("board"));
+		mav.addObject("replyList", resultMap.get("replyList"));
+		
+		mav.setViewName("board/boardView");
+		return mav;
+	}
+	
 }

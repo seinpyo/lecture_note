@@ -9,8 +9,32 @@
 		select count(*) from board
 	</select>
 	
-	<select id="selectBoardAll" resultType="com.ezen.spg15.dto.BoardVO">                                                                  
-	 	select * from ( select * from (select rownum as rn, b.* from (
-	 	(select * from board order by num desc) b) where rn>=#{startNum} ) where rn<=#{endNum}
+	<select id="selectBoardAll" resultType="com.ezen.spg15.dto.BoardVO"
+		parameterType="com.ezen.spg15.dto.Paging">                                                                  
+	 	select * from (select * from (select rownum as rn, b.* from (
+	 	(select * from board order by num desc) b)) where rn &gt;=#{startNum}) where rn &lt;=#{endNum}
 	</select>
+	
+	<insert id="insertBoard" parameterType="com.ezen.spg15.dto.BoardVO">
+		insert into board(num, userid, pass, email, title, content, imgfilename)
+		values(board_seq.nextval, #{userid}, #{pass}, #{email}, #{title} ,#{content}, #{imgfilename})
+	</insert>
+	
+	<update id="plusReadCount">
+		update board set readcount = readcount+1 where num = #{param1}
+	</update>
+	
+	<select id="getBoard" resultType="com.ezen.spg15.dto.BoardVO">
+		select * from board where num = #{param1}
+	</select>
+	
+	<select id="selectReply" resultType="com.ezen.spg15.dto.ReplyVO">
+		select * from reply2 where boardnum=#{param1} order by num desc
+	</select>
+	
+	<insert id="addReply">
+		insert into reply2 (num, boardnum, userid, content) 
+		values(reply_seq.nextval, #{param1}, #{param2}, #{param3})
+	</insert>
+	
 </mapper>

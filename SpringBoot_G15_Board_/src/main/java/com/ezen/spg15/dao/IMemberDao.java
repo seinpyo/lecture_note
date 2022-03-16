@@ -9,4 +9,8 @@ public interface IMemberDao {
 
 	public MemberVO getMember(String userid);
 
+	public void insertMember(MemberVO membervo);
+
+	public void updateMember(MemberVO membervo);
+
 }
