@@ -33,3 +33,7 @@ function reply_check(){
 		return true;
 	}
 }
+
+function open_win(url, name){
+	window.open(url, name, "toolbar=no, menubar=no, resizable=no, width=450, height=200");
+}

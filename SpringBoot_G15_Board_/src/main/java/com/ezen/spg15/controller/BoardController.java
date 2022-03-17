@@ -166,4 +166,81 @@ public class BoardController {
 		return mav;
 	}
 	
+//댓글 삭제
+	@RequestMapping("/deleteReply")
+	public String reply_delete(@RequestParam("num") int num, 
+			@RequestParam("boardnum") int boardnum,
+			HttpServletRequest reqeust) {
+		bs.deleteReply(num);
+		return "redirect:/boardViewWithoutCount?num="+boardnum;
+	}
+	
+	
+//게시물 수정
+	@RequestMapping("/boardEditForm")
+	public String board_edit_form(Model model, HttpServletRequest request) {
+		String num = request.getParameter("num");
+		model.addAttribute("num", num);
+		return "board/boardCheckPassForm";
+	}
+	
+	@RequestMapping("/boardEdit")
+	public String board_edit(Model model, @RequestParam("num") int num, 
+			@RequestParam("pass") String pass, HttpServletRequest request) {
+		BoardVO bvo = bs.getBoard(num);
+		model.addAttribute("num", num);
+		if(pass.equals(bvo.getPass())) {
+			return "board/boardCheckPass";
+		} else {
+			model.addAttribute("message", "비밀번호가 틀렸습니다.");
+			return "board/boardCheckPassForm";
+		}
+	}
+	
+	@RequestMapping("/boardUpdateForm")
+	public String board_update_form(@RequestParam("num") int num, Model model, 
+			HttpServletRequest request) {
+		BoardVO bvo = bs.getBoard(num);
+		model.addAttribute("num", num);
+		model.addAttribute("dto", bvo);
+		return "board/boardEditForm";
+	}
+	
+	@RequestMapping(value="/boardUpdate", method=RequestMethod.POST)
+	public String boardUpdate(@ModelAttribute("dto") @Valid BoardVO boardvo,
+			BindingResult result, @RequestParam("oldfilename") String oldfilename,
+			HttpServletRequest request, Model model			) {
+		
+		String url = "board/boardEditForm";
+		
+		if(result.getFieldError("pass") != null) {
+			model.addAttribute("message", "비밀번호를 입력해주세요");
+		} else if(result.getFieldError("title") != null) {
+			model.addAttribute("message", "제목을 입력해주세요");
+		} else if(result.getFieldError("content") != null) {
+			model.addAttribute("message", "내용을 입력해주세요");
+		} else {
+			if(boardvo.getImgfilename().equals("") || boardvo.getImgfilename() == null) 
+				boardvo.setImgfilename(oldfilename);
+			bs.updateBoard(boardvo);
+			url = "redirect:/boardViewWithoutCount?num=" + boardvo.getNum();
+		}
+		return url;
+	}
+
+//삭제
+	@RequestMapping("/boardDeleteForm")
+	public String board_delete_form(@RequestParam("num") int num, Model model,
+			HttpServletRequest request) {
+		model.addAttribute("num", num);
+		return "board/boardCheckPassForm";
+	}
+	
+	@RequestMapping("/boardDelete")
+	public String board_delete(Model model, HttpServletRequest request) {
+		int num = Integer.parseInt(request.getParameter("num"));
+		
+		bs.removeBoard(num);
+		return "redirect:/main";
+	}
 }

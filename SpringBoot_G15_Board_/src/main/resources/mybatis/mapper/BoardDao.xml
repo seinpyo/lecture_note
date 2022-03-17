@@ -37,4 +37,25 @@
 		values(reply_seq.nextval, #{param1}, #{param2}, #{param3})
 	</insert>
 	
+	<delete id="deleteReply">
+		delete from reply2 where num = #{param1}
+	</delete>
+	
+	<update id="updateBoard" parameterType="com.ezen.spg15.dto.BoardVO">
+		update board set pass=#{pass}, email=#{email}, title=#{title}, content=#{content},
+		imgfilename=#{imgfilename} where num=#{num}
+	</update>
+	
+	<delete id="deleteReplyBoard">
+		delete from reply2 where boardnum=#{param1}
+	</delete>
+	
+	<delete id="deleteBoard">
+		delete from board where num=#{param1}
+	</delete>
+	
+	<select id="getCount" resultType="_int">
+		select count(*) from reply2 where boardnum = #{param1} 
+	</select>
+	
 </mapper>

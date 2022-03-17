@@ -18,5 +18,10 @@ public interface IBoardDao {
 	BoardVO getBoard(int num);
 	List<ReplyVO> selectReply(int num);
 	void addReply(int boardnum, String userid, String content);
+	void deleteReply(int num);
+	void updateBoard(BoardVO boardvo);
+	void deleteReplyBoard(int num);
+	void deleteBoard(int num);
+	int getCount(int num);
 
 }

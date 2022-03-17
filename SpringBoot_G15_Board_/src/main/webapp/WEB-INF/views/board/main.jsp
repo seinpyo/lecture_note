@@ -41,6 +41,7 @@
 				<td>
 					<a href="boardView?num=${board.num}"> 
 					${board.title}
+					[${board.replycnt}]
 					</a>
 				</td>
 				<td align="center">${board.userid}</td>

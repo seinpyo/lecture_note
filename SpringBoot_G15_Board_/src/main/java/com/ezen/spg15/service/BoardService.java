@@ -3,6 +3,7 @@ package com.ezen.spg15.service;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,12 @@ public class BoardService {
 	}
 
 	public List<BoardVO> selectBoardAll(Paging paging) {
-		return bdao.selectBoardAll(paging);
+		List<BoardVO> list =   bdao.selectBoardAll(paging);
+		for(BoardVO bvo : list ) {
+			int count = bdao.getCount(bvo.getNum());
+			bvo.setReplycnt(count);
+		}
+		return list;
 	}
 
 	public void insertBoard(BoardVO boardvo) {
@@ -58,6 +64,25 @@ public class BoardService {
 		bdao.selectReply(num));
 		  
 		return paramMap; 
+	}
+
+	public void deleteReply(int num) {
+		bdao.deleteReply(num);
+	}
+
+	public BoardVO getBoard(int num) {
+		return bdao.getBoard(num);
+	}
+
+	public void updateBoard( BoardVO boardvo) {
+		bdao.updateBoard(boardvo);
+	}
+
+	public void removeBoard(int num) {
+		//덧글 삭제
+		bdao.deleteReplyBoard(num);
+		//게시글 삭제
+		bdao.deleteBoard(num);
 	}
  
 }
