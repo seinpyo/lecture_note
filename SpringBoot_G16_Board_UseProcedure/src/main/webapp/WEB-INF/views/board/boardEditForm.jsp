@@ -19,8 +19,8 @@
 		<tr>
 			<th>작성자</th>
 			<td>
-				${ loginUser.userid }
-				<input type="hidden" name="userid" value="${ loginUser.userid }">
+				${ loginUser.USERID }
+				<input type="hidden" name="userid" value="${ loginUser.USERID }">
 			</td>
 		</tr>
 		<tr>
@@ -33,8 +33,8 @@
 		<tr>
 			<th>이메일</th>
 			<td>
-				${loginUser.email}
-				<input type="hidden" name="email" value="${ loginUser.email }">
+				${loginUser.EMAIL}
+				<input type="hidden" name="email" value="${ loginUser.EMAIL }">
 			</td>
 		</tr>
 		<tr>
@@ -46,7 +46,7 @@
 		<tr>
 			<th>내용</th>
 			<td>
-				<textarea cols="70" rows="15" name="content" value="${dto.content}"></textarea> *필수
+				<textarea cols="70" rows="15" name="content">${dto.content}</textarea> *필수
 			</td>
 		</tr>
 		<tr>

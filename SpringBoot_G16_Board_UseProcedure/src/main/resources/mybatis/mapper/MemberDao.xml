@@ -15,5 +15,13 @@
 			#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap}
 		) }
 	</select>
+	
+	<insert id="insertMember" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{CALL insertMember(#{userid}, #{pwd}, #{name}, #{email}, #{phone})}
+	</insert>
+	
+	<update id="updateMember" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{CALL updateMember(#{USERID}, #{PWD}, #{NAME}, #{EMAIL}, #{PHONE})}
+	</update>
 
 </mapper>

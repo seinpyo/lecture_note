@@ -14,6 +14,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.spg16.dto.MemberVO;
 import com.ezen.spg16.service.MemberService;
@@ -87,4 +89,133 @@ public class MemberController {
 			return "member/loginForm";
 		}
 	}
+	
+	@RequestMapping("/logout")
+	public String logout(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+	@RequestMapping("memberJoinForm")
+	public String join_form() {
+		return "member/memberJoinForm";
+	}
+	
+	
+	@RequestMapping("/idcheck")
+	public ModelAndView idcheck(@RequestParam("userid") String userid) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		HashMap<String, Object> paramMap = new HashMap<>();
+		paramMap.put("userid", userid);
+		paramMap.put("ref_cursor", null);
+		ms.getMember(paramMap);
+		ArrayList<HashMap<String, Object>> list 
+			= (ArrayList<HashMap<String, Object>>) paramMap.get("ref_cursor");
+		
+		
+		if(list.size() == 0) mav.addObject("result", -1);
+		else mav.addObject("result", 1);
+		
+		mav.addObject("userid", userid);
+		mav.setViewName("member/idcheck");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/memberJoin", method=RequestMethod.POST) 
+	public ModelAndView memberJoin(@ModelAttribute("dto") @Valid MemberVO membervo, 
+			BindingResult result,
+			Model model, @RequestParam("re_id") String re_id,
+			@RequestParam("pw_check") String pw_check) {
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("member/memberJoinForm");
+		if(re_id != null || re_id.equals("") || !re_id.equals(membervo.getUserid())) 
+			 mav.addObject("re_id", re_id);
+		
+		if(result.getFieldError("userid") != null) 
+			mav.addObject("message", result.getFieldError("userid").getDefaultMessage());
+		 else if(result.getFieldError("pwd") != null) 
+			 mav.addObject("message", "비밀번호를 입력하세요");
+		 else if(result.getFieldError("name") != null) 
+			 mav.addObject("message", "이름을 입력하세요");
+		 else if(result.getFieldError("email") != null) 
+			 mav.addObject("message", "이메일을 입력하세요");
+		 else if(result.getFieldError("phone") != null) 
+			 mav.addObject("message", "전화번호를 입력하세요");
+		 else if(!pw_check.equals(membervo.getPwd())) 
+			 mav.addObject("message", "비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+		 else if (!membervo.getUserid().equals(re_id)) 
+			 mav.addObject("message", "아이디 중복체크를 해주세요");
+		 else {
+			HashMap<String, Object> paramMap = new HashMap<String, Object>();
+			paramMap.put("userid", membervo.getUserid());
+			paramMap.put("pwd", membervo.getPwd());
+			paramMap.put("name", membervo.getName());
+			paramMap.put("email", membervo.getEmail());
+			paramMap.put("phone", membervo.getPhone());
+			ms.insertMember(paramMap);
+			
+			mav.addObject("message", "회원 가입이 완료되었습니다");
+			mav.setViewName("member/loginForm");
+		}
+		
+		return mav;
+	}
+	
+	@RequestMapping("/memberEditForm")
+	public ModelAndView mem_edit_form(Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		ModelAndView mav = new ModelAndView();
+		HashMap<String, Object> loginUser 
+			= (HashMap<String, Object>) session.getAttribute("loginUser");
+		MemberVO dto = new MemberVO();
+		dto.setUserid((String)loginUser.get("USERID"));
+		dto.setPwd((String)loginUser.get("PWD"));
+		dto.setEmail((String)loginUser.get("EMAIL"));
+		dto.setPhone((String)loginUser.get("PHONE"));
+		dto.setName((String)loginUser.get("NAME"));
+		
+		mav.addObject("dto", dto);
+		mav.setViewName("member/memberEditForm");
+		return mav;
+	}
+	
+	@RequestMapping("memberEdit")
+	public String memberEdit(@ModelAttribute("dto") @Valid MemberVO membervo, 
+			BindingResult result, @RequestParam("pw_check") String pw_check, Model model,
+			HttpServletRequest request) {
+		
+		String url = "member/memberEditForm";
+		
+		if(result.getFieldError("pwd") != null) 
+			 model.addAttribute("message", "비밀번호를 입력하세요");
+		 else if(result.getFieldError("name") != null) 
+			 model.addAttribute("message", "이름을 입력하세요");
+		 else if(result.getFieldError("email") != null) 
+			 model.addAttribute("message", "이메일 입력하세요");
+		 else if(result.getFieldError("phone") != null) 
+			 model.addAttribute("message", "전화번호를 입력하세요");
+		 else if(!pw_check.equals(membervo.getPwd())) 
+			 model.addAttribute("message", "비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+		 else {
+			HashMap<String, Object> mvo = new HashMap<>();
+			mvo.put("USERID", membervo.getUserid());
+			mvo.put("PWD", membervo.getPwd());
+			mvo.put("NAME", membervo.getName());
+			mvo.put("PHONE", membervo.getPhone());
+			mvo.put("EMAIL", membervo.getEmail());
+			ms.updateMember(mvo);
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", mvo);
+			url = "redirect:/main";
+		}
+		return url;
+	}
+	
 }

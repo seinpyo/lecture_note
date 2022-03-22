@@ -17,13 +17,13 @@ public class MemberService {
 	public void getMember(HashMap<String, Object> paramMap) {
 		mdao.getMember(paramMap);
 	}
-//
-//	public void insertMember(MemberVO membervo) {
-//		mdao.insertMember(membervo);
-//	}
-//
-//	public void updateMember(MemberVO membervo) {
-//		mdao.updateMember(membervo);
-//	}
+
+	public void insertMember(HashMap<String, Object> paramMap) {
+		mdao.insertMember(paramMap);
+	}
+
+	public void updateMember(HashMap<String, Object> mvo) {
+		mdao.updateMember(mvo);
+	}
 
 }

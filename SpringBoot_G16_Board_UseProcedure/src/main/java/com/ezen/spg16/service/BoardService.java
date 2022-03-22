@@ -19,6 +19,27 @@ public class BoardService {
 	public void getAllCount(HashMap<String, Object> paramMap) {
 		bdao.getAllCount(paramMap);
 	}
+
+	public void boardView(HashMap<String, Object> paramMap) {
+		bdao.plusReadCount(paramMap);
+		bdao.boardView(paramMap);
+	}
+
+	public void insertReply(HashMap<String, Object> paramMap) {
+		bdao.insertReply(paramMap);
+	}
+
+	public void boardViewWithOutCount(HashMap<String, Object> paramMap) {
+		bdao.boardView(paramMap);
+	}
+
+	public void deleteReply(HashMap<String, Object> paramMap) {
+		bdao.deleteReply(paramMap);
+	}
+
+	public void getBoard(HashMap<String, Object> paramMap) {
+		bdao.getBoard(paramMap);
+	}
 	
 	
 }
