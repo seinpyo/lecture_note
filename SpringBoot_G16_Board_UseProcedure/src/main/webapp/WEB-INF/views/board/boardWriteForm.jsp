@@ -19,8 +19,8 @@
 		<tr>
 			<th>작성자</th>
 			<td>
-				${ loginUser.userid }
-				<input type="hidden" name="userid" value="${ loginUser.userid }">
+				${ loginUser.USERID }
+				<input type="hidden" name="userid" value="${ loginUser.USERID }">
 			</td>
 		</tr>
 		<tr>
@@ -33,8 +33,8 @@
 		<tr>
 			<th>이메일</th>
 			<td>
-				${loginUser.email}
-				<input type="hidden" name="email" value="${ loginUser.email }">
+				${loginUser.EMAIL}
+				<input type="hidden" name="email" value="${ loginUser.EMAIL }">
 			</td>
 		</tr>
 		<tr>

@@ -148,7 +148,8 @@ public class BoardController {
 		bs.deleteReply(paramMap);
 		return "redirect:/boardViewWithoutCount?num="+boardnum;
 	}
-	
+
+//게시물 수정
 	@RequestMapping("/boardEditForm")
 	public String board_edit_form(Model model, HttpServletRequest request) {
 		String num = request.getParameter("num");
@@ -244,11 +245,76 @@ public class BoardController {
 			if(boardvo.getImgfilename().equals("") || boardvo.getImgfilename() == null) 
 				boardvo.setImgfilename(oldfilename);
 			
+			HashMap<String, Object> paramMap = new HashMap<>();
+			paramMap.put("num", boardvo.getNum());
+			paramMap.put("userid", boardvo.getUserid());
+			paramMap.put("pass", boardvo.getPass());
+			paramMap.put("title", boardvo.getTitle());
+			paramMap.put("email", boardvo.getEmail());
+			paramMap.put("content", boardvo.getContent());
+			paramMap.put("imgfilename", boardvo.getImgfilename());
 			
-			//bs.updateBoard(boardvo);
+			bs.updateBoard(paramMap);
 			url = "redirect:/boardViewWithoutCount?num=" + boardvo.getNum();
 		}
 		return url;
 	}
+
+//게시물 삭제 
 	
+	@RequestMapping("/boardDeleteForm")
+	public String board_delete_form(@RequestParam("num") int num, Model model,
+			HttpServletRequest request) {
+		model.addAttribute("num", num);
+		return "board/boardCheckPassForm";
+	}
+	
+	@RequestMapping("/boardDelete")
+	public String board_delete(Model model, HttpServletRequest request) {
+		int num = Integer.parseInt(request.getParameter("num"));
+		HashMap<String, Object> paramMap = new HashMap<>();		
+		paramMap.put("num", num);
+		bs.removeBoard(paramMap);
+		return "redirect:/main";
+	}
+	
+//게시물 작성
+	
+	@RequestMapping("/boardWriteForm")
+	public String write_form(HttpServletRequest request) {
+		String url = "board/boardWriteForm";
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("loginUser") == null) url = "member/loginform";
+		
+		return url;
+	}
+	
+	@RequestMapping("/boardWrite")
+	public String board_write(@ModelAttribute("dto") @Valid BoardVO boardvo,
+			BindingResult result, Model model, HttpServletRequest request) {
+		
+		String url = "board/boardWriteForm";
+		
+		if(result.getFieldError("pass") != null) 
+			model.addAttribute("message", result.getFieldError("pass").getDefaultMessage());
+		else if(result.getFieldError("title") != null) 
+			model.addAttribute("message", result.getFieldError("title").getDefaultMessage());
+		else if(result.getFieldError("content") != null) 
+			model.addAttribute("message", result.getFieldError("content").getDefaultMessage());
+		else { 
+			HashMap<String, Object> paramMap = new HashMap<>();
+			paramMap.put("userid", boardvo.getUserid());
+			paramMap.put("pass", boardvo.getPass());
+			paramMap.put("title", boardvo.getTitle());
+			paramMap.put("email", boardvo.getEmail());
+			paramMap.put("content", boardvo.getContent());
+			paramMap.put("imgfilename", boardvo.getImgfilename());
+			
+			bs.insertBoard(paramMap);
+			url = "redirect:/main";
+		}
+	
+		return url;
+	}
 }
