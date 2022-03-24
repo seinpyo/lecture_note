@@ -135,13 +135,116 @@ public class MemberController {
 	}
 	
 	
-	
-	
 	@RequestMapping(value = "/join", method=RequestMethod.POST)
-	public String join( Model model ) {
+	public String join( @ModelAttribute("dto") @Valid MemberVO membervo, 
+			BindingResult result, 
+			@RequestParam(value="reid", required=false) String reid, 
+			@RequestParam(value="pwdCheck", required=false) String pwdCheck, 
+			//required=false => null값 허용
+			HttpServletRequest request,
+			Model model) {
 		
-		model.addAttribute("message", "회원가입이 완료되었어요. 로그인하세요.");
-		return "member/login";
+		model.addAttribute("reid", "reid");
+		String url = "member/joinForm";
+		
+		if(result.getFieldError("userid") != null) {
+			model.addAttribute("message", result.getFieldError("userid").getDefaultMessage());
+		} else if(result.getFieldError("pwd") != null) {
+			model.addAttribute("message", result.getFieldError("pwd").getDefaultMessage());
+		} else if(result.getFieldError("name") != null) {
+			model.addAttribute("message", result.getFieldError("name").getDefaultMessage());
+		} else if(result.getFieldError("email") != null) {
+			model.addAttribute("message", result.getFieldError("email").getDefaultMessage());
+		} else if(result.getFieldError("phone") != null) {
+			model.addAttribute("message", result.getFieldError("phone").getDefaultMessage());
+		} else if(reid==null || (reid != null && !reid.equals(membervo.getUserid()))) {
+			model.addAttribute("message", "아이디 중복체크를 하지 않으셨습니다.");
+		} else if(pwdCheck==null || (pwdCheck != null && !pwdCheck.equals(membervo.getPwd()))) {
+			model.addAttribute("message", "비밀번호 확인이 일치하지 않습니다.");
+		} else {
+		
+			HashMap<String, Object> paramMap = new HashMap<>();
+			paramMap.put("userid", membervo.getUserid());
+			paramMap.put("pwd", membervo.getPwd());
+			paramMap.put("name", membervo.getName());
+			paramMap.put("email", membervo.getEmail());
+			paramMap.put("phone", membervo.getPhone());
+			paramMap.put("zip_num", membervo.getZip_num());
+			paramMap.put("address", membervo.getAddress());
+			paramMap.put("address2", membervo.getAddress2());
+			
+			ms.insertMember(paramMap);
+			
+			model.addAttribute("message", "회원가입이 완료되었습니다. 로그인하세요.");
+			url = "member/login";
+		}
+		return url;
+	}
+	
+	@RequestMapping("/memberEditForm")
+	public String member_Edit_Form(Model model, HttpServletRequest request) {
+		
+		MemberVO dto = new MemberVO();
+		HttpSession session = request.getSession();
+		
+		HashMap<String, Object> loginUser = 
+				(HashMap<String, Object>) session.getAttribute("loginUser");
+		dto.setUserid((String) loginUser.get("USERID"));
+		dto.setName((String) loginUser.get("NAME"));
+		dto.setEmail((String) loginUser.get("EMAIL"));
+		dto.setPhone((String) loginUser.get("PHONE"));
+		dto.setZip_num((String) loginUser.get("ZIP_NUM"));
+		dto.setAddress((String) loginUser.get("ADDRESS"));
+		dto.setAddress2((String) loginUser.get("ADDRESS2"));
+		
+		model.addAttribute("dto", dto);
+		return "member/memberUpdateForm";
+	}
+	
+
+	@RequestMapping(value = "/memberUpdate", method=RequestMethod.POST)
+	public String join( @ModelAttribute("dto") @Valid MemberVO membervo, 
+			BindingResult result, 
+			@RequestParam(value="pwdCheck", required=false) String pwdCheck, 
+			//required=false => null값 허용
+			HttpServletRequest request,
+			Model model) {
+		
+		if(result.getFieldError("userid") != null) {
+			model.addAttribute("message", result.getFieldError("userid").getDefaultMessage());
+			return "member/memberUpdateForm";
+		} else if(result.getFieldError("pwd") != null) {
+			model.addAttribute("message", result.getFieldError("pwd").getDefaultMessage());
+			return "member/memberUpdateForm";
+		} else if(result.getFieldError("name") != null) {
+			model.addAttribute("message", result.getFieldError("name").getDefaultMessage());
+			return "member/memberUpdateForm";
+		} else if(result.getFieldError("email") != null) {
+			model.addAttribute("message", result.getFieldError("email").getDefaultMessage());
+			return "member/memberUpdateForm";
+		} else if(result.getFieldError("phone") != null) {
+			model.addAttribute("message", result.getFieldError("phone").getDefaultMessage());
+			return "member/memberUpdateForm";
+		} else if(pwdCheck==null || (pwdCheck != null && !pwdCheck.equals(membervo.getPwd()))) {
+			model.addAttribute("message", "비밀번호 확인이 일치하지 않습니다.");
+			return "member/memberUpdateForm";
+		} 
+			HashMap<String, Object> paramMap = new HashMap<>();
+			paramMap.put("USERID", membervo.getUserid());
+			paramMap.put("PWD", membervo.getPwd());
+			paramMap.put("NAME", membervo.getName());
+			paramMap.put("EMAIL", membervo.getEmail());
+			paramMap.put("PHONE", membervo.getPhone());
+			paramMap.put("ZIP_NUM", membervo.getZip_num());
+			paramMap.put("ADDRESS", membervo.getAddress());
+			paramMap.put("ADDRESS2", membervo.getAddress2());
+			
+			ms.updateMember(paramMap);
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", paramMap);
+			
+			return "redirect:/";
 	}
 	
 	

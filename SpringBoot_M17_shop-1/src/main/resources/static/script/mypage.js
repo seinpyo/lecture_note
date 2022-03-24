@@ -9,8 +9,6 @@ function go_cart(){
 }
 
 
-
-
 function go_cart_delete(){
 	
 	var count = 0;  	

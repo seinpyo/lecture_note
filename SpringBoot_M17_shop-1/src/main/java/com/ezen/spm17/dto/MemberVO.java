@@ -27,7 +27,6 @@ public class MemberVO {
 	private String phone;
     private String zip_num;
     private String address;
-    private String useyn;
-    private Timestamp indate;
+    private String address2;
     
 }

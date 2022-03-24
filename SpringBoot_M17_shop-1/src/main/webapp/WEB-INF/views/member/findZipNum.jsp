@@ -17,7 +17,7 @@ table#zipcode a:hover{color: #F90;font-weight: bold;}
 <script type="text/javascript">
 	function result(zip_num, sido, gugun, dong) {
 	   opener.document.formm.zip_num.value=zip_num;
-	   opener.document.formm.addr1.value = sido+ "  " + gugun + " " + dong;
+	   opener.document.formm.address.value = sido+ "  " + gugun + " " + dong;
 	   self.close();
 	};
 </script>
