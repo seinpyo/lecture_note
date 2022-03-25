@@ -50,9 +50,6 @@ function go_order(){
 
 
 
-
-
-
 function withdrawalConfirm(){
 	var answer = confirm("회원탈퇴를하면 장바구니 및 이용내역이 모두 없어집니다. 탈퇴하시겠습니까?");
 	if( answer ){

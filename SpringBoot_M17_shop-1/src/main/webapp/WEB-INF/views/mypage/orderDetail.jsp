@@ -1,16 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/resources/headerfooter/header.jsp" %>
-<%@ include file="/resources/sub03/sub_image.html" %> 
-<%@ include file="/resources/sub03/sub_menu.jsp" %>
-
+<%@ include file="../include/headerfooter/header.jsp" %>
+<%@ include file="../include/sub03/sub_image.html" %> 
+<%@ include file="../include/sub03/sub_menu.jsp" %>
 <article>
 <h2>My Page(주문상세 정보)</h2>
 <form name="formm" method="post">
 <table id="cartList">
 	<tr><th>주문일자</th><th>주문번호</th><th>주문자</th><th>주문 총액</th></tr>
-	<tr><td><fmt:formatDate value="${orderDetail.indate}" type="date"/></td>
-		<td>${orderDetail.oseq}</td>
-		<td>${orderDetail.mname }</td>
+	<tr><td><fmt:formatDate value="${orderDetail.INDATE}" type="date"/></td>
+		<td>${orderDetail.OSEQ}</td>
+		<td>${orderDetail.MNAME }</td>
 		<td><fmt:formatNumber value="${totalPrice}" type="currency"/></td>
 	</tr>
 </table>	
@@ -18,13 +17,13 @@
 <table id="cartList">
 	<tr><th>상품명</th><th>상품별주문번호</th><th>수량</th><th>가격</th><th>주문일</th><th>진행상태</th></tr>
 	<c:forEach items="${orderList}" var="orderVO">
-		<tr><td>${orderVO.pname}</td>
-			<td>${orderVO.odseq}</td>
-			<td>${orderVO.quantity}</td>
-			<td><fmt:formatNumber value="${orderVO.price2*orderVO.quantity}" type="currency"/></td> 
+		<tr><td>${orderVO.PNAME}</td>
+			<td>${orderVO.ODSEQ}</td>
+			<td>${orderVO.QUANTITY}</td>
+			<td><fmt:formatNumber value="${orderVO.PRICE2*orderVO.QUANTITY}" type="currency"/></td> 
 			<td>
 				<c:choose>
-					<c:when test='${orderVO.request=="1"}'>진행중</c:when>
+					<c:when test='${orderVO.RESULT=="1"}'>진행중</c:when>
 					<c:otherwise><span style="color:red">처리 완료</span></c:otherwise>
 				</c:choose>
 			</td></tr>
@@ -37,4 +36,4 @@
 </form>
 </article>
 
-<%@ include file="/resources/headerfooter/footer.jsp" %>
+<%@ include file="../include/headerfooter/footer.jsp" %>

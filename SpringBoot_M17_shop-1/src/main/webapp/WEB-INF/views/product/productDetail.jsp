@@ -7,7 +7,7 @@
 	<div id="itemdetail" >
 		<form  method="post" name="formm">
 			<fieldset><legend> Item detail Info</legend><span style="float: left;">
-				<img src="resources/product_images/${productVO.IMAGE}"
+				<img src="product_images/${productVO.IMAGE}"
            			style="border-radius:20px 20px 20px 20px;"/></span>
        			<h2> ${productVO.NAME} </h2> 
 				<label> 가 격 :  </label><p> ${productVO.PRICE2} 원</p> 

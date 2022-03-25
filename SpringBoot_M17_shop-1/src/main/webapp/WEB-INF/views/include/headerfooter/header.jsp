@@ -29,6 +29,7 @@
 		       			<li><a href="logout">LOGOUT</a></li>
 					</c:otherwise>
 				</c:choose>
+				<li ><a href="admin">admin</a></li>
 				<li><a href="cartList">CART</a></li>
 				<li><a href="myPage">MY PAGE</a></li>
 		    	<li ><a href="qnaList" >Q&amp;A(1:1)</a></li>
