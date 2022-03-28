@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -141,6 +142,7 @@ public class AdminController {
 	@RequestMapping("/productWriteForm")
 	public String product_write_form(HttpServletRequest request, Model model) {
 		String kindList[] =  {"Heels", "Boots","Sandals","Sneakers","Sliper","Sale"};
+		model.addAttribute("kindList", kindList);
 		return "admin/product/productWriteForm";
 		
 	}
@@ -150,7 +152,7 @@ public class AdminController {
 	@ResponseBody
 	public Map<String, Object> fileup(Model model, HttpServletRequest request) {
 		
-		String savePath = context.getRealPath("/product_images");
+		String savePath = context.getRealPath("/WEB-INF/product_images");
 		HashMap<String,Object> resultMap = new HashMap<>();
 		
 		try {
@@ -166,5 +168,22 @@ public class AdminController {
 		return resultMap;
 	}
 	
+	@RequestMapping(value="/productWrite", method=RequestMethod.POST)
+	@ResponseBody
+	public String productWrite(Model model, HttpServletRequest request) {
 	
+		HashMap<String, Object> paramMap = new HashMap<>();
+		paramMap.put("name", request.getParameter("name"));
+		paramMap.put("kind",  request.getParameter("kind"));
+		paramMap.put("price1", Integer.parseInt(request.getParameter("price1")));
+		paramMap.put("price2", Integer.parseInt(request.getParameter("price2")));
+		paramMap.put("price3", Integer.parseInt(request.getParameter("price1"))-Integer.parseInt(request.getParameter("price2")));
+		paramMap.put("content", request.getParameter("content"));
+		paramMap.put("image", request.getParameter("image"));
+
+		as.insertProduct(paramMap);
+		
+		return "redirect:/productList";
+	
+	}
 }
