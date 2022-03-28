@@ -26,9 +26,6 @@ function go_save(){
 	} else if (theForm.content.value == '') {
 		alert('상품상세를 입력하세요.'); 		
 		theForm.content.focus();
-	} else if (theForm.image.value == '') {
-		alert('상품이미지들 입력하세요.'); 	
-		theForm.image.focus();	
 	} else{
 		theForm.action = "productWrite";
 		theForm.submit();

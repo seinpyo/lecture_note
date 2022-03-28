@@ -27,9 +27,6 @@
 			<tr><th>상품이미지</th><td width="343" colspan="5"><input type="file" name="image"></td></tr>  --> 
 			
 			<tr><th>상품이미지</th><td width="343" colspan="5">
-				<form name="formm" id="fileupForm" method="post" enctype="multpart/form-data">
-					<input type="file" name="fileimage"> <input type="button" id="myButton" value="추가">
-				</form>
 				<div id="filename"></div>
 			</td></tr>
 			 
@@ -37,6 +34,9 @@
 		</table>
 		<input class="btn" type="button" value="등록" onClick="go_save()">           
 		<input class="btn" type="button" value="목록" onClick="go_mov()">
+	</form>
+	<form name="formm" id="fileupForm" method="post" enctype="multpart/form-data">
+		<input type="file" name="fileimage"> <input type="button" id="myButton" value="추가">
 	</form>
 </article>
 <%@ include file="../../include/admin/footer.jsp" %>  
