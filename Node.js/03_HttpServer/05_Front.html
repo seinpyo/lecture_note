@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node.js Web Server</title>
+    <style type="text/css">
+        a{color:blue; text-decoration: none;}
+    </style>
+    <script src="https://unpkg.com/axois/dist/axios.min.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="/"> HOME </a>
+        <a href="/about"> ABOUT </a>
+    </nav>
+    <div style="margin-top: 30px;">
+        <form id="form">
+            <input type="text" id="username">
+            <button type="submit"> 등록 </button>
+        </form>
+    </div>
+    <div id="list"></div>
+
+    <script type="text/javascript">
+        document.getElementById('form').addEventListener('submit', (e)=>{ 
+            //e에는 이벤트의 주체(form)가 전달됨
+            e.preventDefault();
+            const name = e.target.username.value
+            console.log(name)
+        })
+        
+    </script>
+</body>
+</html>

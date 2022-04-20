@@ -25,8 +25,33 @@ console.log('--------------')
 
 console.log('path.parse() : ', path.parse(string))
 //파일 경로를 root, dir, base, ext, name으로 분리
-console.log()
-console.log()
+
+///////////////////////
+
+console.log('path.format() : ', path.format({
+    dir: 'C:\Users\SEIN\git\lecture_note\Node.js',
+    name: 'javascript_ex1',
+    ext: '.js'
+}))
+//제공된 파일의 경로와 이름, 확장자를 조합함
+
+console.log('path.nomalize() : ', path.normalize('C:\/Users\SEIN\//\git\lecture_note\Node.js')) 
+//파일 경로 오류를 수정
+
+console.log('path.isAbsolue(C:\\) : ', path.isAbsolute('C:\\'))
+console.log('path.isAbsolue(./home) : ', path.isAbsolute('./home'))
+//파일의 경로가 절대경로인지 상대경로인지 boolean으로 리턴
+
+console.log('path.join() : ', path.join(__dirname, '..', '/sein', '.', '/node_js'))
+//입력된 파라미터들을 조합하여 이동 (해당 경로가 존재하지 않더라도 조합된 경로 이름이 결과로 나옴)
+// '/'를 상대경로로 취급
+
+console.log('path.resolve() : ', path.resolve(__dirname, '..', '/sein', '.', '/node_js'))
+//resolve와 join은 비슷하지만 '/'표시를 절대 경로로 취급
+// '/sein'에 의해 C:\sein 이 되었다가 '/node_js'를 만나서
+// C:\node_js로 설정됨
+
+
 
 
 //node 04_Path.js
