@@ -7,7 +7,7 @@ const parseCookies = (cookie='') =>
     cookie 
         .split(';')
         .map(v=>v.split('='))
-        .reduce((acc, [k,v]) => {
+        .reduce(( acc, [k, v]) =>{
             acc[k.trim()] = decodeURIComponent(v)
             return acc
         }, {})
@@ -21,6 +21,8 @@ http.createServer(async(req, res) => {
         const {query} = url.parse(req.url)
         const {name} = qs.parse(query)
         
+        console.log('name : ' + name)
+
         //세션, 쿠키 수명 계산
         const expires = new Date()
         expires.setMinutes(expires.getMinutes() + 1)
@@ -43,7 +45,7 @@ http.createServer(async(req, res) => {
             'Set-Cookie' : `session=${uniqueInt}; Expires=${expires.toGMTString()}; HttpOnly; Path=/`
         })  
         //쿠키에는 고유 키 값(uniqueInt)을 value로써 session key에 저장 (실제 값은 없음)
-
+        res.end()
     } else if(cookies.session && session[cookies.session].expires > new Date() ) { 
         //쿠키에 session이라는 key가 존재 && session의 유효시간이 지나지 않있을 때
 
