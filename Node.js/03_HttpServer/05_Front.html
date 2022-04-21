@@ -8,7 +8,7 @@
     <style type="text/css">
         a{color:blue; text-decoration: none;}
     </style>
-    <script src="https://unpkg.com/axois/dist/axios.min.js"></script>
+
 </head>
 <body>
     <nav>
@@ -21,15 +21,94 @@
             <button type="submit"> 등록 </button>
         </form>
     </div>
-    <div id="list"></div>
+    <div id="list">
 
+
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript">
-        document.getElementById('form').addEventListener('submit', (e)=>{ 
+        getUsers()
+
+        document.getElementById('form').addEventListener('submit', async(e)=>{ 
             //e에는 이벤트의 주체(form)가 전달됨
             e.preventDefault();
             const name = e.target.username.value
             console.log(name)
+
+            if(!name) {
+                return alert('이름을 입력하세요')
+            }
+            try{
+                console.log('try')
+                await axios.post('/user', {name})
+                console.log('await')
+                getUsers()
+            } catch(err) {
+                console.log('에러')
+            }
+            e.target.username.value = ''
+            console.log('function end')
+            //input id="username" 을 빈칸으로 초기화
+            //target = form id="form"
         })
+
+        async function getUsers(){
+            try{
+                const res = await axios.get('/users')
+                const users = res.data 
+                //요청에 대한 리턴값을 객체 형식으로 변환
+                const list = document.getElementById('list')
+                list.innerHTML = ''
+
+                //users 변수에 있는 키 값들을 전달 인수로 하여 키 값 개수만큼 반복 실행
+                Object.keys(users).map(function(key){
+                    //users에서 key값 추출 -> key값 마다 익명함수 실행
+                    const userDiv = document.createElement('div')
+                    const span = document.createElement('span')
+                    span.textContent = users[key] //span안에 users의 key값 삽입
+
+                    //수정버튼 생성
+                    const edit = document.createElement('button')
+                    edit.textContent = '수정'
+                    edit.addEventListener('click', async () => {
+                        const name = prompt('바꿀 이름을 입력하세요')
+                        if(!name){
+                            return alert('이름을 입력해주세요')
+                        }
+                        try {
+                            await axios.put('/user/' + key, {name})
+                            //url = /user/바뀐이름
+                            getUsers()
+                        } catch(err) {
+                            console.error(err)
+                        }
+                    })
+
+                    //삭제 버튼 생성
+                    const remove = document.createElement('button')
+                    remove.textContent = '삭제'
+                    remove.addEventListener('click', async () => {
+                        try {
+                            let result = confirm('삭제할까요?')
+                            if(result){
+                                await axios.delete('/user/' + key)
+                                //url = /user/바뀐이름
+                                getUsers()
+                            }
+                        } catch(err) {
+                            console.error(err)
+                        }
+                    })
+
+                    userDiv.appendChild(span) //div안에 span 삽입
+                    userDiv.appendChild(edit) //div안에 수정버튼 삽입
+                    userDiv.appendChild(remove) //div안에 삭제버튼 삽입
+                    list.appendChild(userDiv) //div를 list에 삽입
+                })
+            } catch(err) {
+                console.error(error)
+            }
+        }
         
     </script>
 </body>
