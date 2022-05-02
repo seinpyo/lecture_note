@@ -1,6 +1,6 @@
-<<<<<<< HEAD
+
 # lecture_note
-=======
+
 # Ezen Academy 자바(JAVA> 웹 개발자(백엔드)
 
 과정 중 배운 코드를 정리한 Repository입니다👩‍💻
@@ -21,4 +21,4 @@
 
 ![Eclipse](https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=EclipseIDE&logoColor=white)
 ![VScode](https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=VisualStudioCode&logoColor=white)
->>>>>>> af1e3f03e50dd882e7a6d0784ceda35092abb56d
+
