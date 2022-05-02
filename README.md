@@ -1,6 +1,4 @@
 
-# lecture_note
-
 # Ezen Academy 자바(JAVA> 웹 개발자(백엔드)
 
 과정 중 배운 코드를 정리한 Repository입니다👩‍💻
