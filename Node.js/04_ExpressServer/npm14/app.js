@@ -43,9 +43,20 @@ sequelize.sync({force:false})
     console.error(err)
 })
 
-app.get('/', (req, res)=>{
-    res.send('<h1>hello world</h1>')
-})
+const postRouter = require('./routers/post')
+const pageRouter = require('./routers/page')
+const authRouter = require('./routers/auth')
+const userRouter = require('./routers/user')
+
+app.use('/', pageRouter)
+app.use('/post', postRouter)
+app.use('/auth', authRouter)
+app.use('/user', userRouter)
+
+
+// app.get('/', (req, res)=>{
+//     res.send('<h1>hello world</h1>')
+// })
 
 app.use((req, res, next)=> {
     const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`)
