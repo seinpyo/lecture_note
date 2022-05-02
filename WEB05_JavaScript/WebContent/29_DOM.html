@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=, initial-scale=1.0">
+<title>Document</title>
+<script type="text/JavaScript">
+    // var header = document.getElementById("header_1");
+    // header.innerHTML = '펭귄';
+    // 문서 객체를 변수에 저장하고 변수.innerHTML 사용이 가능. (그 외 메서드도 사용 가능)
+    
+    function changeHeader() {
+        document.getElementById("header_1").innerHTML='펭귄';
+    }
+    
+</script>
+</head>
+<body>
+    <h1 id="header_1">HEADER-1</h1><img src="images/Penguins.jpg" width="300"/>
+    <div>
+        <h1 id="header_2" class="" name="">
+        HEADER-2
+        </h1>
+    </div>
+    <input type="button" value="제목 변경" onclick="changeHeader()"/>
+</body>
+</html>

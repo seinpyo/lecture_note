@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Layout09</title>
+<style type="text/css">
+	#wrap {width:100%; background:#F5F7F8;}
+	#header {position:relative; width:800px; padding: 30px 0 5px; margin:0 auto; }
+	#header logo {position:relative;}
+	#header .logo img {position:relative; left:36%;}
+	
+	input {border:none;}
+	select{border:none;}
+	#container {width:100%}
+	#content {position:relative; width:460px; height:1000px; margin: 0 auto; font-size:14px; overflow:hidden;}
+	.join_row {position:relative; width:460px; hight:100px; margin:0 auto; margin-top:30px;}
+	.join_row:last-child{margin-top:30px;}
+	.join_title {font-size:14px; font-weight:700; margin-bottom:20px}
+	.id_box{position:relative; width:460px; height:50px; background:white; border:1px solid #dadada; padding: 10px 271px 18px 14px;}
+	.phone_box{position:relative; width:460px; height:50px; background:white; border:1px solid #dadada; padding: 10px 150px 18px 14px;
+	float:left;} 
+	#url {position:absolute; top: 16px; right: 13px; font-size:15px; line-height:18px; color:#949494;}
+	.text_box{}
+	#lock_pic {position:absolute; right:2%;}
+	.bir_wrap{}
+	#bir_yy{position:relative; width:147px; height:50px; background:white; border:1px solid #dadada; padding: 10px 20px 18px 14px;
+	box-sizing: border-box; vertical-align: top; margin-right:10px}
+	#bir_mm{position:relative; width:147px; height:50px; background:white; border:1px solid #dadada; padding: 10px 88px 18px 14px;
+	box-sizing: border-box; vertical-align: top; margin-right:10px}
+	#bir_dd{position:relative; width:147px; height:50px; background:white; border:1px solid #dadada; padding: 10px 31px 18px 14px;
+	box-sizing: border-box; vertical-align: top; }
+	.select_all {position:relative; width:460px; height:50px; background:white; border:1px solid #dadada; padding: 10px 364px 18px 14px;
+	box-sizing: border-box; vertical-align: top; margin-bottom: 100px;}
+	#phone{padding: 10px 332px 18px 14px; margin-bottom :10px;}
+	#selection {color:#949494;}
+	
+	#phone_wrap {position:relative; width:460px; height:200px; margin-top:200px; background:white;}
+	#phone_number {position:relative; width:100%; height:50px; background:white; border:1px solid #dadada; padding: 10px 237px 18px 14px;
+	box-sizing: border-box; vertical-align: top; margin-bottom: 30px;}
+	.phone_box {position:relative; width:147px; height:50px; background:white; border:1px solid #dadada; padding: 10px 334px 18px 14px;
+	box-sizing: border-box; vertical-align: top; margin-right:10px; margin-top:25px;}
+	input[type=button] {width:100px; height:50px; background:#16C71C; text-align:center; color:white; margin-top:25px; margin-bottom:20px;}
+	#confirm_box {position:relative; width:100%; height:50px; background:white; border:1px solid #dadada; padding: 10px 271px 18px 14px;
+	box-sizing: border-box; vertical-align: top; margin-bottom: 30px;}
+	
+	#join_now{position:relative; width:100%; height: 50px; background:#ADADAD; font-size:150%; font-weight:bold;
+	line-height:50px; color:white; margin:0 auto; text-align:center; margin-top: 50px}
+	#join_now:hover{background:#16C71C;  color:white; transition-duration:0.5s;}
+	
+	.footer{background:#F5F7F8; height:60px}
+	#first_line{width:420px; hiehgt:25px; font-size:72%; margin:0 auto; text-align:center; line-height:25px;}
+	#second_line{width:420px; hiehgt:25px; font-size:68%; margin:0 auto; text-align:center; line-height:25px;}
+	#second_line>img{margin-right:5px}
+	
+</style>
+</head>
+<body>
+<!-- 페이지 전체 -->
+<div id="wrap">
+	<!-- 헤더 -->
+	<div id="header">
+		<h1>
+			<a href="http://www.naver.com" >
+				<div class="logo"><img src="images/naver_logo.png" width="230px"></div>
+			</a>
+		</h1>
+	</div>
+	
+	<!-- 콘테이너 -->
+	<div id="container">
+		<div id="content">
+			<!-- 아이디 -->
+			<div class="join_row">
+				<h3 class="join_title"> <label>아이디</label></h3>
+				<span class="id_box"> 
+					<input type="text" id="id" class="text_box">
+					<span id="url"> @naver.com </span>
+				</span>
+	
+			</div>
+			
+			
+			<!-- 비밀번호 -->
+			<div class="join_row">
+				<h3 class="join_title"><label>비밀번호</label></h3>
+				<span class="id_box">
+					<input type="password" id="password" class="text_box">
+					<span id="lock_pic"><img src="images/key1.png"> </span>
+				</span>
+			
+			</div>
+			
+			<div class="join_row">
+				<h3 class="join_title"><label>비밀번호 재확인</label></h3>
+				<span class="id_box">
+					<input type="password" id="password_check" class="text_box">
+					<span id="lock_pic"><img src="images/key2.png"> </span>
+				</span>
+			
+			</div>
+			
+			<!-- 이름 -->
+			<div class="join_row">
+				<h3 class="join_title"><label>이름</label></h3>
+				<span class="id_box">
+					<input type="text" id="name" class="text_box">
+				</span>
+			
+			</div>
+			
+			<!-- 생년월일 -->
+			<div class="join_row">
+				<h3 class="join_title"><label>생년월일</label></h3>
+				<span id="bir_yy">
+					<input type="text" id="yy" placeholder="년(4자)" size="10" maxlength="4">
+				</span>
+				<span id="bir_mm">
+					<select id="mm" > 
+						<option value> 월 </option>
+						<option value="01"> 1 </option>
+						<option value="02"> 2 </option>
+						<option value="03"> 3 </option>
+						<option value="04"> 4 </option>
+						<option value="05"> 5 </option>
+						<option value="06"> 6 </option>
+						<option value="07"> 7 </option>
+						<option value="08"> 8 </option>
+						<option value="09"> 9 </option>
+						<option value="10"> 10 </option>
+						<option value="11"> 11 </option>
+						<option value="12"> 12 </option>
+					</select>
+				</span>
+				<span id="bir_dd">
+					<input type="text" id="dd" placeholder="일" size="10" maxlength="2">
+				</span>
+			</div>
+			
+			<!-- 성별 -->
+			<div class="join_row">
+				<h3 class="join_title"><label>성별</label></h3>
+				<span class="select_all">
+					<select id="gender_option"> 
+						<option value> 성별 </option>
+						<option value="male"> 남성 </option>
+						<option value="female"> 여성 </option>
+						<option value="none"> 선택 안함 </option>
+					</select>
+				</span>
+			</div>
+			<br/>		
+			<!-- 본인 확인 이메일(선택) -->
+			<div class="join_row">
+				<h3 class="join_title"><label>본인 확인 이메일</label> <label id=selection>(선택)</label></h3>
+				<span class="id_box">
+					<input type="text" id="name" class="text_box" placeholder="선택입력">
+				</span>
+			</div>
+			
+			<br/>
+			
+			<!-- 휴대전화 -->
+			<div class="phone_wrap">
+				<h3 class="join_title"><label>휴대전화</label></h3>
+				<span class="select_all" id="phone">
+					<select> 
+						<option value> 전화번호 </option>
+						<option value="korea"> 대한민국 +82 </option>
+						<option value="denmark"> 덴마크 +45 </option>
+						<option value="usa"> 미국/캐나다 +1 </option>
+						<option value="uk"> 영국 +44 </option>
+					</select>
+				</span>
+
+		
+				<span class="phone_box">
+					<input type="text" class="text_box" placeholder="전화번호 입력">
+				</span>
+				<input type="button" value="인증번호 받기">
+			
+			</div>
+		
+			<!-- 인증번호입력 -->
+				<span id="confirm_box">
+					<input type="text" class="text_box" placeholder="인증번호 입력하세요">
+				</span>
+		
+	
+	
+			<div id="join_now"> 가입하기
+			
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- footer -->
+<footer>
+	<div class="footer">
+		<div id="first_line"> 이용약관 | <strong>개인정보처리방침</strong> | 책임의 한계와 법적 고지 | 회원 정보 고객센터</div>
+		<div id="second_line"><img src="images/naver_logo.png" height=13px"> Copyright <b>Naver corp.</b> All rights Reserved.</div>
+	</div>
+</footer>
+</body>
+</html>

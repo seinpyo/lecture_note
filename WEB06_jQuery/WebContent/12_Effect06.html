@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12_Effect06.html</title>
+<style type="text/css">
+    div{
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    img{
+        width: 500px;
+        height: 350px;
+    }
+</style>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+
+let number = 0;
+$(function() {
+    setInterval(function(){
+        // $('div').fadeOut(1000); //모든 div fadeout
+        // $('div').eq(number).fadeIn(1000);
+        // number++;
+        // if(number==6) number=0;
+
+        for(var i=0; i<=5; i++){
+            if(number==i) $('div').eq(i).fadeIn(1000);
+            else $('div').eq(i).fadeOut(1000);
+        }
+        number++;
+
+    },1000)
+})
+
+</script>
+</head>
+
+<body>
+    <div><img src="images/Chrysanthemum.jpg"></div>
+    <div><img src="images/Hydrangeas.jpg"></div>
+    <div><img src="images/Desert.jpg"></div>
+    <div><img src="images/Lighthouse.jpg"></div>
+    <div><img src="images/Penguins.jpg"></div>
+    <div><img src="images/Tulips.jpg"></div>
+    <div><img src="images/Desert.jpg"></div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Layout08</title>
+<style type="text/css">
+	#first {width:100%; height:150px; background:#FFFB8B;}
+	#top {width:400px; height: 75px; background: #CBCF46; margin:0 auto; font-size: 250%;
+	font-weight: bold; text-align: center; line-height: 75px;}
+	#bottom {width:400px; height:75px; background: #A5A838; margin:0 auto; font-size:100%;}
+	
+	#container{width:100%; height:600px; background:#F5DF9B;}
+	#second{width:1200px; height:600px; background:skyblue; margin:0 auto;}
+	#second_pic{width:600px; height:600px; overflow:hidden; float:left;}
+	#second_view{width: 600px; height:600px; overflow:hidden; float:left;}
+	#segment_content{width:412px; height:188px; background:#CACACA; float:left; margin-bottom: 18px;}
+	#segmnet_content:last-child{margin-bottom:0px;}
+	.segment_title{width: 380px; height:50px; border-top:3px solid black; text-align:right; font-size:150%;
+	line-height:50px; margin:0 auto;}
+	.segment_text{width: 380px; height:132px; border-bottom:3px solid black; text-align:right;  margin:0 auto;}
+	
+	.pic_container{width:188px; height:188px; background:white;float:left;}
+	.segment_pic{width:188px; height:188px; border-radius:50%; overflow:hidden; margin: 0; }
+</style>
+</head>
+<body>
+<!-- 타이틀 -->
+	<div id="first">
+		<div id="top">Content02 Title</div>
+		<div id="bottom">국회의원은 국회에서 직무상 행한 발언과 표결에 관하여 국회외에서 책임을 지지
+			아니한다. 누구든지 병역의무의 이행으로 인하여 불이익한 처우를 받지 아니한다.</div>
+	</div>
+	
+<!-- 콘텐츠 -->
+	<div id="container">
+		<div id="second">
+			<div id="second_pic"><img src="images/Lighthouse.jpg" height="600px"></div>
+			<div id="second_view">
+				<div id="segment_content">
+					<div class="segment_title">Segment Title</div> 
+					<div class="segment_text">국회의원은 국회에서 직무상 행한 발언과 표결에 관하여 국회외에서 책임을 지지
+			아니한다. 누구든지 병역의무의 이행으로 인하여 불이익한 처우를 받지 아니한다.</div>
+				</div>
+				<div class="pic_container">
+					<div class="segment_pic"><img src="images/Koala.jpg" height="188px"></div>
+				 </div>
+				 
+				 <div id="segment_content">
+					<div class="segment_title">Segment Title</div> 
+					<div class="segment_text">국회의원은 국회에서 직무상 행한 발언과 표결에 관하여 국회외에서 책임을 지지
+			아니한다. 누구든지 병역의무의 이행으로 인하여 불이익한 처우를 받지 아니한다.</div>
+				</div>
+				<div class="pic_container">
+					<div class="segment_pic"><img src="images/Penguins.jpg" height="188px"></div>
+				 </div>
+				 
+				 <div id="segment_content">
+					<div class="segment_title">Segment Title</div> 
+					<div class="segment_text">국회의원은 국회에서 직무상 행한 발언과 표결에 관하여 국회외에서 책임을 지지
+			아니한다. 누구든지 병역의무의 이행으로 인하여 불이익한 처우를 받지 아니한다.</div>
+				</div>
+				<div class="pic_container">
+					<div class="segment_pic"><img src="images/Jellyfish.jpg" height="188px"></div>
+				 </div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

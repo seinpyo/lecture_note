@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>10_BOM03</title>
+<script type="text/javaScript">
+    var output = '';
+    for(var key in location) {
+        output += '※' + key + ' : ' +  location[key] + '\n';
+    }
+    console.log( output );
+
+   // location.href="https://www.naver.com";
+
+</script>
+</head>
+<body>
+    <input type="button" value="이동" onclick="location.href='https://naver.com'">
+</body>
+</html>

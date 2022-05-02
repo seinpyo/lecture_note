@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>14_AnimationEx2</title>
+<style type="text/css">
+.box{position:relative; height: 60px; width: 400px; padding-left: 50px; font-size: 150%;
+line-height: 60px; background: orange; animation-iteration-count: infinite;  
+animation-name: moving; animation-direction: alternate; animation-duration: 2s;
+perspective: 300px; transform-origin: right;}
+
+@keyframes moving{
+    from{transform: rotatey(0deg);}
+    to{transform: rotatey(180deg);}
+}
+</style>
+</head>
+<body>
+    <div class="box">
+        <h3>CSS3 Animation</h3>
+    </div>
+</body>
+</html>

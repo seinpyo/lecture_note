@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>05_DOM_Operation-9</title>
+
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+$(function(){
+    $('h1').first().remove();
+    //h1태그 자체를 없앰
+}) 
+
+$(function(){
+    $('div').empty();
+    //div 태그 내에 모든 자식 구성 요소를 제거
+    //자식 구성요소가 제거되어 div는 존재하지만 표시할 내용이 없어서 
+    //없는것처럼 보이는 상태
+}) 
+
+</script>
+</head>
+<body>
+<div>
+    <!-- 문서 객체의 내부 제거 -->
+    <h1>Header-0</h1>
+    <h1>Header-1</h1>
+</div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02_JavaScriptBasic02</title>
+    <style type="text/css"></style>
+    <script type="text/javaScript">
+
+        //배열
+
+        var array=[273, 'String', true, function(){}, {a:100, b:200}, [150,170]]
+        console.log("array[0] : " + array[0]);
+        console.log("array[1] : " + array[1]);
+        console.log("array[2] : " + array[2]);
+        console.log("array[3] : " + array[3]);
+        console.log("array[4] : " + array[4]);
+        console.log("array[5] : " + array[5]);
+        console.log("array[5][0] : " + array[5][0]);
+        console.log("array[5][1] : " + array[5][1]);
+        console.log("array : " + array);
+
+        //undifined 
+
+        console.log("typeof(variable) : " + typeof(variable));
+        var variable2;
+        console.log("variable2 : " + variable2);
+        console.log("typeof(variable2) :" + typeof(variable2));
+
+        variable3=100;
+        console.log("variable3 : " + variable3);
+        console.log("typeof(variable3) : " + typeof(variable3));
+
+        //숫자와 문자열(아라비아기호)의 산술연산
+
+        console.log("52+273 = " + (52+273));
+        console.log("'52'+273 = " + ('52'+273));
+        console.log("52+'273' = " + (52+'273'));
+        console.log("'52'+'273' = " + ('52'+'273'));
+        console.log("'12'+ 52 + 273   = " + ('12'+ 52 + 273));
+        console.log("52 + 273 + '12' = " + (52 + 273 + '12'));
+        console.log("52 + 273 +  '12' + 345 = " + (52 + 273 +  '12' + 345));
+        console.log("52 + 273 +  12 + '345' = " + (52 + 273 +  12 + '345'));
+
+
+
+        console.log("'52'*2 = " + ('52'*2));
+        console.log("'52'-2 = " + ('52'-2));
+        console.log("'52'/2 = " + ('52'/2));
+        console.log("'52'%2 = " + ('52'%2));
+        console.log("'홍길동'-2 = " + ('홍길동'-2));
+
+        console.log("'52'*'2' = " + ('52'*'2'));
+        console.log("'52'-'2' = " + ('52'-'2'));
+        console.log("'52'/'2' = " + ('52'/'2'));
+        console.log("'52'%'2' = " + ('52'%'2'));
+
+        //var input = prompt('숫자를 입력하세요.', '숫자');
+        // var num = Number(input);
+        // console.log("typeOf(input) : " + typeof(input));
+        // console.log("typeOf(num) : " + typeof(num));
+        //숫자가 아닌 값 입력시 NaN
+
+        var str = String(12.123);
+        console.log("typeof(str) : " + typeof(str));
+
+        //boolean 값 캐스팅
+        console.log('Boolean(0) -> ' + Boolean(0));
+        console.log('Boolean(45) -> ' + Boolean(45));
+        console.log("Boolean('') -> " + Boolean(''));
+        console.log("Boolean('0') -> " + Boolean('0'));
+        console.log("Boolean('false') -> " + Boolean('false'));
+        console.log("Boolean(NaN) -> " + Boolean(NaN));
+
+        //일치 연산자
+
+        console.log("'' == false -> " + (''==false));  
+        console.log("'' == 0 -> " + (''==0));  
+        console.log("0 == false -> " + (0==false));  
+        console.log("273 == '273' -> " + (273=='273'));  
+
+        // === : 양변의 자료형과 값이 모두 일치
+        // !== : 양변의 자료형과 값이 다름
+
+        console.log("'' === false -> " + (''===false));  
+        console.log("'' === 0 -> " + (''===0));  
+        console.log("0 === false -> " + (0===false));  
+        console.log("273 === '273' -> " + (273==='273')); 
+        var str = "홍길동"
+        console.log("str === '홍길동' -> " + (str==="홍길동"));
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

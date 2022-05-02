@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/board.css">
+    <style>
+        #boardnum{text-align: center}
+        #readCount{text-align: center}
+        #writer{text-align: center}
+    </style>
+</head>
+<body>
+    {{loginUser.userid}}({{loginUser.name}})님 안녕하세요 &nbsp;
+    <input type="button" value="회원정보수정" onclick="location.href='/members/updateForm/{{loginUser.userid}}'">
+    <input type="button" value="로그아웃" onclick="location.href='/members/logout'">
+    <input type="button" value="글쓰기" onclick="location.href='/members/boards/writeForm'"><br><br>
+
+    <table id="board-list" style="text-align: left">
+        <thead>
+            <tr>
+                <th width="100">번호</th>
+                <th width="400">제목</th>
+                <th width="100">작성자</th>
+                <th width="100">조회수</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/main.js"></script>
+</body>
+</html>

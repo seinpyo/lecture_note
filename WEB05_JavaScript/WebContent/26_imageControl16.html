@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>22_imageControl12</title>
+<style type = "text/css">
+    #view {
+        position: relative;
+        width: 600px;
+        height: 400px;
+        margin: 0 auto;
+        border: 1px dashed black;
+        overflow: hidden;
+    }
+    #imgs {
+        position: absolute;
+        width: 4800px;
+        height: 400px;
+        left: 0;
+        top: 0;
+        border: 1px dashed red;
+        transition: 0.3s;
+    }
+    img{
+        width: 600px;
+        height: 400px;
+        }
+    #remote {
+        position: relative;
+        width: 250px;
+        height: 50px;
+        margin: 0 auto;
+        text-align: center;
+        top: 350px;
+        border: 1px solid white;
+    }
+    #remote ul{
+        list-style: none; margin: 0; padding: 0; display: inline-block;
+    }
+    #remote ul li {
+        float:left;
+        width: 14px; 
+        height: 14px;
+        background: white;
+        margin: 18px 4px;
+        font-weight: bold;
+        line-height: 14px;
+        cursor: pointer;
+    }
+    #remote ul li:last-child {
+        border-radius: 50%;
+        font-weight: 700;
+        font-size: 80%;
+    }
+</style>
+<script type="text/JavaScript">
+    var target;
+    var count=0;
+    var playing = false;
+    var timer
+    function move(number) {
+        switch (number) {
+            case -1: 
+                if(count==0 || playing==true) return;
+                count--;
+                target = 600*count*-1;
+                document.getElementById("imgs").style.left=target+'px';
+                break;
+            case 0:  case 1: case 2: case 3: case 4: case 5: case 6: case 7: 
+                if(playing==true) return;
+                count = number; 
+                target = 600*number*-1; 
+                document.getElementById("imgs").style.left=target+'px';
+                break;
+            case 8: 
+                if(count==7 || playing==true) return;
+                count++;
+                target = 600*count*-1;
+                document.getElementById("imgs").style.left=target+'px';
+                break;
+            case 9:
+                if (playing==true) {
+                    playing = false;
+                    document.getElementById("btn").innerHTML= '▶';
+                    window.clearInterval(timer);
+                } else {
+                    playing = true;
+                    document.getElementById("btn").innerHTML= '■';
+                    timer = window.setInterval(function() {  
+                        var dist = -600*count
+                        document.getElementById("imgs").style.left = dist+"px";
+                        count++;
+                        if(count == 8) count = 0;
+                    }, 1000);
+            }
+        }
+    }
+</script>
+</head>
+<body onload="move(9)">
+    <div id="view">
+        <div id="imgs">
+            <img src="images/Jellyfish.jpg"><img src="images/Tulips.jpg"><img 
+            src="images/Penguins.jpg"><img src="images/Lighthouse.jpg"><img 
+            src="images/Hydrangeas.jpg"><img src="images/Desert.jpg"><img src="images/Koala.jpg"><img 
+            src="images/Chrysanthemum.jpg">
+        </div>
+        <div id="remote">
+            <ul>
+                <li onclick="move(-1)">〈</li>
+                <li onclick="move(0)">1</li>
+                <li onclick="move(1)">2</li>
+                <li onclick="move(2)">3</li>
+                <li onclick="move(3)">4</li>
+                <li onclick="move(4)">5</li>
+                <li onclick="move(5)">6</li>
+                <li onclick="move(6)">7</li>
+                <li onclick="move(7)">8</li>
+                <li onclick="move(8)">〉</li>
+                <li onclick="move(9)" id="btn">■</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

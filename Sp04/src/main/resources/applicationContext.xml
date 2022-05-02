@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+       
+	<bean class = "com.battery.NormalBattery" id="nBattery"></bean>
+	<bean class = "com.battery.ChargeBattery" id="cBattery"></bean>
+	
+	<bean id="car" class="com.toys.ElectronicCar"></bean>
+	<bean id="radio" class="com.toys.ElectronicRadio">
+		<constructor-arg ref="cBattery"></constructor-arg>
+		<!-- 의존 주입 - 객체 조립 -->
+	</bean>
+</beans>

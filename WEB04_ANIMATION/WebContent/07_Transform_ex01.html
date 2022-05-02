@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Transform_ex01</title>
+<style type="text/css">
+#wrap{position:relative; width: 800px; height: 400px; border: 1px solid black;}
+#circle{position: relative; width:200px; height: 200px; top: 100px; text-align: center;
+background: orangered; border-radius: 50%; line-height: 200px; transition-duration: 2s; color: white; font-weight: bold; font-size: 50px;}
+
+#wrap:hover #circle{transform:translateX(400px) rotate(180deg) scale(1.5); }
+</style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="circle">타이어</div>
+    </div>
+
+    <!-- wrap에 마우스를 올리면 circle이 오른쪽으로 이동+회전+크기증가 -->
+</body>
+</html>

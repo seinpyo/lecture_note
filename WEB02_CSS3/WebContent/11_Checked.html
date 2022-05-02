@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>11_Checked</title>
+<style type="text/css">
+	#text{width:450px; height:300px; background:silver; overflow:hidden;
+	transition-duration:1s}
+	input[type=checkbox]:checked~#text {height:0px}
+	
+	.button {width:300px; height:20px; background:yellow; border:1px solid black;}
+	#button1:active~#text{height:0px;}
+	
+	
+</style>
+</head>
+<body>
+<input type="checkbox"/> 체크하면 아래 텍스트가 사라집니다 &nbsp;&nbsp;&nbsp; <br/>
+<div id="button1" class="button">클릭하면 아래 텍스트가 사라집니다.</div>
+<div id="text">
+	<h1>별헤는 밤</h1>
+	<p>무엇인지 가을로 별 묻힌 사람들의 않은 어머님, 프랑시스 봅니다. 어머니, 무엇인지 내 있습니다. 
+	이네들은 새워 사람들의 겨울이 강아지, 새겨지는 거외다. 소녀들의 소학교 이런 있습니다. 
+	이름과, 별들을 마리아 그리워 나는 별이 계집애들의 시인의 하나에 봅니다. 소학교 애기 둘 봅니다. 
+	밤이 어머님, 별 이네들은 하나 별 보고, 나는 듯합니다. 
+	별 멀듯이, 하나에 애기 딴은 불러 청춘이 이네들은 봅니다. 같이 위에 별빛이 별 무덤 슬퍼하는 아름다운 한 있습니다.</p>
+</div>
+</body>
+</html>

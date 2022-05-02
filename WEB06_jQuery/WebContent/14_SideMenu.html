@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>14_SideMenu</title>
+<style type="text/css">
+    body{
+        background: royalblue;
+    }
+    a{
+        text-decoration: none;
+        display: block;
+        font-size: 40px;
+        margin: 5px 0;
+        color: white;
+        transition: 0.5s;
+    }
+    .gnb{
+        position: absolute;
+        top: 100px;
+        left: 50px;
+    }
+</style>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('a').mouseenter(function(){
+            let num = $(this).index()
+            $('a').css('opacity','0.3');
+            $('a').eq(num).css('opacity','1');
+        })
+
+        $('a').mouseleave(function(){
+            $('a').css("opacity","1");
+        })
+    })
+
+</script>
+</head>
+<body>
+    <div class="gnb">
+        <a href='#none'>New Arrivals</a>
+        <a href='#none'>Summer Collection</a>
+        <a href='#none'>Winter Collection</a>
+        <a href='#none'>Special Offers</a>
+        <a href='#none'>Trends</a>
+    </div>
+</body>
+</html>

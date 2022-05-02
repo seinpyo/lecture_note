@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>05_DOM_Operation-6</title>
+<style type="text/css">
+    .item_1 {background: red; color: white;}
+    .item_2 {background: pink; color: white;}
+    .item_3 {background: orange; color: white;}
+
+</style>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+
+//1) html()
+$(function(){
+    let html = $('h1').html();
+    let header1 = document.createElement('h1');
+    let textNode = document.createTextNode(html);
+    header1.appendChild(textNode);
+    document.body.appendChild(header1);
+})  //선택자의 index 0을 대상으로 한다
+
+//2) text() 
+$(function(){
+        let text = $('h1').text();
+        let header1 = document.createElement('h1');
+        let textNode = document.createTextNode(text);
+        header1.appendChild(textNode);
+        document.body.appendChild(header1);
+    })  
+
+
+</script>
+</head>
+<body>
+
+    <!-- 문서 객체의 스타일 추가 -->
+    <h1 class="item_1">Header-0</h1>
+    <h1 class="item_2">Header-1</h1>
+    <h1 class="item_3">Header-2</h1>
+
+</body>
+</html>

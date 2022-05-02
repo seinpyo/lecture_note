@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>13_TabMenu</title>
+<style type="text/css">
+    #tabs{
+        position: relative;
+        margin: 100 auto;
+        width: 1080px;
+        height: 40px;
+        text-align: center;
+        margin-bottom: 0px;
+    }
+    ul{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: inline-block;
+    }
+    ul li{
+        width: 180px;
+        height: 40px;
+        float: left;
+        border-radius: 5px 5px 0 0;
+        line-height: 40px;
+        text-align: center;
+        font-size: 120%;
+        cursor: default;
+    }
+    #content{
+        position: relative;
+        margin: 0;
+        width: 1080px;
+        height: 440px;
+    }
+    .contents{
+        position: absolute;
+        width: 1080px;
+        height: 440px;
+        left: 0px;
+        top: 0px;
+        line-height: 440px;
+        text-align: center;
+        font-size: 120%;
+    }
+    #content1{background: #ebaa55;}
+    #content2{background: #55ebd1; display: none;}
+    #content3{background: #4fbde3; display: none;}
+    #content4{background: #6ebe6d; display: none;}
+    #content5{background: #95a096; display: none;}
+    #content6{background: #ed8d2a; display: none;}
+</style>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+    $(function(){
+        for(let i=0; i<6; i++){
+            let color = $('.contents:eq('+i+')').css('background-color');
+        $('li:eq('+ i +')').css('background', color);
+        }
+    })
+
+    $(function(){
+        $('li').click(function(){
+            let num = $(this).index()
+            for(let i=0; i<6; i++){
+                if(num == i) $('.contents:eq('+ i +')').show();
+                else $('.contents:eq('+ i +')').hide();
+            }
+        })
+    })
+</script>
+</head>
+<body>
+    <div id="tabs">
+        <ul>
+            <li>Menu A</li>
+            <li>Menu B</li>
+            <li>Menu C</li>
+            <li>Menu D</li>
+            <li>Menu E</li>
+            <li>Menu F</li>
+        </ul>
+    </div>
+    <div id="content">
+        <div class="contents" id="content1">ConTent A</div>
+        <div class="contents" id="content2">ConTent B</div>
+        <div class="contents" id="content3">ConTent C</div>
+        <div class="contents" id="content4">ConTent D</div>
+        <div class="contents" id="content5">ConTent E</div>
+        <div class="contents" id="content6">ConTent F</div>
+    </div>
+</body>
+</html>

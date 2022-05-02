@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>04_ID_Selector</title>
+<style type="text/css">
+	#header {width:800px; margin:0 auto; height:150px; color:white; background:red;}
+	/* color : 글자색 */
+	#wrap {width:800px; margin:0 auto; height:150px; color:white; border:5px solid black; overflow:hidden;}
+	/* border-width:5px; border-style:solid; border-color:black; = border:5px solid black; */
+
+	#aside {width:200px; height:300px; background:blue; float:left;}
+	#contents {width:600px; height:300px; background:green; float:left;}
+	#footer{width:800px; height:100px; background:silver; margin:0 auto}
+</style>
+</head>
+<body>
+	<div id="header"> 
+		<h1>Header-1</h1>
+		<h3>Header-3</h3>
+	</div>
+	<div id="wrap">
+		<div id="aside"> <h3> Aside(subMenu) </h3> </div>
+		<div id="contents"> <h3> Contents </h3> </div>
+		<!-- 시멘틱이 아니고 id이름만 지정한것 -->
+	</div>
+	<div id=footer>
+		<span>footer</span>
+	</div>
+</body>
+</html>

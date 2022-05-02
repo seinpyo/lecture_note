@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<script type="text/JavaScript">
+    var output = '';
+    for(var key in navigator){
+        output += key + " : " + navigator[key] + "\n";
+    }
+    output += navigator.userAgent;
+    console.log(output);
+
+    // if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/ipod/i)) || 
+    // (navigator.userAgent.match(/iPad/i)) || (navigator.userAgent.match(/Windows CE/i)) || 
+    // (navigator.userAgent.match(/Symbian/i)) || (navigator.userAgent.match(/BlackBerry/i)) || 
+    // (navigator.userAgent.match(/Android/i))) { 
+    //     location.href = 'mobile.html';
+    // }else {
+    //     location.href='desktop.html';
+    // }
+
+    Window.onload=function () {
+        alert('Hello JavaScript onload Event');
+    };
+    function abc() {
+        alert('Hello JavaScript onload Event');
+    }
+</script>
+</head>
+<body body onLoad = "abc();">
+    
+</body>
+</html>

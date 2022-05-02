@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>07_Descendant01</title>
+<style type="text/css">
+	#section h1{color:blue;}
+/* 	빈칸(공백)으로 선택자가 이어지면 아래 포함되어있는 child선택자를 모두 지목 */
+	#header h1 {color:red;}
+	#header h1, #header h3 {background:yellow;}
+	/*','로 구분하면 두개의 후손 선택자를 동시에 선택 가능
+	 #header h1, he => hearder내부의 h1과 h3가 아니라 header내부의 h1과 내외부 모든 h3라는 뜻이므로
+	 부모가 필요할 경우 반드시 기재*/
+</style>
+</head>
+<body>
+	<div id="header">
+		<h1 class="title">회사이름/로고</h1>
+		<div id="nav">
+			<h1>Navigation</h1>
+			<h2>header2</h2>
+			<h3>CSS3</h3>
+		</div>
+	</div>
+	<div id="section">
+		<h1 class="title">Aside</h1>
+		<p> 감사원은 원장을 포함한 5인 이상 11인 이하의 감사위원으로 구성한다. 
+		모든 국민의 재산권은 보장된다. 그 내용과 한계는 법률로 정한다. 헌법개정안이 제2항의 찬성을 얻은 때에는 
+		헌법개정은 확정되며, 대통령은 즉시 이를 공포하여야 한다. 
+		누구든지 병역의무의 이행으로 인하여 불이익한 처우를 받지 아니한다. </p>
+		<h1 class="title">Aside</h1>
+	</div>
+</body>
+</html>

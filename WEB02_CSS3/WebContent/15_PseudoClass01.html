@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>15_PseudoClass</title>
+<style type="text/css">
+	ul{list-style:none; padding:0px; margin:0px; border:1px solid red; height:60px;}
+	ul li{border: 1px dashed blue; float:left; padding:15px; width:100px; text-align:center;}
+/* 	ul li:nth-child(1){background:red;}
+	ul li:nth-child(2){background:orange;}
+	ul li:nth-child(3){background:yellow;}
+	ul li:nth-child(4){background:green;}
+	ul li:nth-child(5){background:blue;}
+	ul li:nth-child(6){background:purple;} */
+	
+	ul li:nth-child(2n){background:orange;};
+	ul li:nth-child(2n+1){background:yellow;}
+	ul li:first-child{border-radius:20px 0 0 20px;}
+	ul li:last-child{border-radius:0 20px 20px 0}
+	
+</style>
+</head>
+<body>
+<ul>
+	<li>회사 소개</li>
+	<li>사업</li>
+	<li>조직도</li>
+	<li>게시판</li>
+	<li>고객 지원</li>
+	<li>사이트 맵</li>
+</ul>
+</body>
+</html>

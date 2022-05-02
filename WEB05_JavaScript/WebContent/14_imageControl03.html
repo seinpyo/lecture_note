@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>14_imageControl03</title>
+<script type="text/JavaScript">
+    var cunt = 1;
+    function changeImg() {
+        var fileName;
+        if (cunt != 10) {
+            ++cunt;
+        } else {
+            cunt = 1;
+        }
+
+        fileName = "images/" + cunt + ".jpg";
+        document.getElementById("target").src = fileName;
+
+    }
+</script>
+</head>
+<body>
+    <img src="images/1.jpg" id="target" onclick="changeImg();" >
+</body>
+</html>

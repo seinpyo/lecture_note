@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>09_HoverEx</title>
+<style type="text/css">
+	#base{width:250px; height:1000px; background:#595959;}
+	#top{width:100%; height:30px; border:1px solid white;}
+	.menuall{width:100%; height:40px; border:1px solid yellow; 
+	background:#232323; color:white; line-height:0px; text-align:center;}
+	.submenuall{width:100%; height:0px; border:1px solid red; 
+	background:#989898; transition-duration:1s}
+	
+	.menuall:hover{color:orange}
+	.menuall:hover+.submenuall{height:100px}
+</style>
+</head>
+<body>
+<div id="base">
+	<div id="top"></div>
+	<div id="menu1" class="menuall"><h2>NEWS</h2></div>
+	<div id="submenu1" class="submenuall"></div>
+	<div id="menu2" class="menuall"><h2>PORTPOLIO</h2></div>
+	<div id="submenu2" class="submenuall"></div>
+	<div id="menu3" class="menuall"><h2>BOARD</h2></div>
+	<div id="submenu3" class="submenuall"></div>
+	<div id="menu4" class="menuall"><h2>ALBUM</h2></div>
+	<div id="submenu4" class="submenuall"></div>
+	<div id="menu5" class="menuall"><h2>CONTACT</h2></div>
+	<div id="submenu5" class="submenuall"></div>
+</div>
+</body>
+</html>

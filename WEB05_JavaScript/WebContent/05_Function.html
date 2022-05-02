@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>05_Function</title>
+<script type="text/javaScript">
+
+var func1 = function() {
+    var output = Number(prompt('숫자를 입력하세요', '숫자'));
+    alert(output);
+}
+
+func1();
+
+func1 = function() {
+    alert("안녕하세요 반갑습니다.");
+}
+
+func1();
+
+function move() {
+    var output = Number(prompt('숫자를 입력하세요', '숫자'));
+    alert(output);
+}
+
+move();
+
+</script>
+</head>
+<body>
+    <input type="button" value="func1 실행" onclick="func1();">
+    <input type="button" value="move 실행" onclick="move();">
+</body>
+</html>

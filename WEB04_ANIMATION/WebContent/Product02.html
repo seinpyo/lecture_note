@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style type="text/css">
+#view{position:relative; width: 600px; height:600px; margin:0 auto; border: 1px dashed red;
+overflow: hidden;}
+#bigimg{position:relative; left:0; top:0px; background: silver; width: 600px; height: 400px;
+font-size:110%; font-weight: bold; color:white; line-height:400px; text-align: center;}
+box1{position:relative; list-style-type: none; margin:0; padding: 0;}
+.item{position:relative; width:200px;height:110px; float:left; overflow:hidden;
+border-radius:100px;margin:10px auto;}
+
+
+</style>
+</head>
+<body>
+    <div class="view">
+        <div id="bigimg"><h3>이미지 위에 마우스를 올리면 큰 이미지를 볼 수 있습니다.</h3></div>
+            <ul id="box1">
+                <li class="item"> <img src ="images/prod1.jpg" width="198px"></li>
+                <li class="item"> <img src ="images/prod2.jpg" width="198px"></li>
+                <li class="item"> <img src ="images/prod3.jpg" width="198px"></li>
+            </ul>
+
+            <ul id="box2">
+                <li class="item_big"><img src ="images/prod1.jpg" width="600px"></li>
+                <li class="item_big"><img src ="images/prod2.jpg" width="600px"></li>
+                <li class="item_big"><img src ="images/prod3.jpg" width="600px"></li>
+            </ul>
+        
+    <div>
+</body>
+</html>

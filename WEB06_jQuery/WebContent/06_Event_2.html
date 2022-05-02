@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>06_Event_2.html</title>
+<style type="text/css">
+    .reverse {
+        background: black;
+        color: white;
+    }
+    .outer {
+        width: 200px;
+        height: 100px;
+        background: orange;
+        padding: 50px;
+        margin: 10px;
+    }
+    .inner {
+        width: 200px;
+        height: 100%;
+        background: pink;
+    }
+</style>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $('h1').click(function(){
+            $(this).html(function(index, html){
+                return html + '>'
+                //클릭된 태그에 '>' 추가
+            })
+        })
+        setInterval(function(){
+            $('h1').last().trigger('click');
+        }, 3000);
+        //3초마다 마지막 h1을 클릭한 것 처럼 내용에 '>' 추가
+    })
+
+</script>
+</head>
+<body>
+    <!--이벤트 강제 발생-->
+    <h1>Start: </h1>
+    <h1>Start: </h1>
+    <h1>TRIGGER</h1>
+</body>
+</html>

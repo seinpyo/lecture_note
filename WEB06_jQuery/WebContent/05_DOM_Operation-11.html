@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>05_DOM_Operation-10.html</title>
+<script src="script/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $('img').css('width','200');
+        setInterval(function(){
+            $('img').first().appendTo('body');
+            //첫번째 그림을 body맨뒤로 보내기
+        },1000)
+    })
+</script>
+</head>
+<body>
+    <img src = "images/Chrysanthemum.jpg" /> <img src="images/Desert.jpg" /><img src="
+    images/Hydrangeas.jpg" /><img src="images/Tulips.jpg"/><img src="images/Penguins.jpg"/><img
+    src ="images/Lighthouse.jpg">
+</body>
+</html>

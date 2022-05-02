@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>09_BOM02</title>
+<script type="text/javaScript">
+    var output = '';
+    for(var key in screen) {
+        output += '※' + key + ' : ' +  screen[key] + '\n';
+    }
+    console.log( output ); 
+
+    var child = window.open('', '', 'width=300, height=200');
+    //팝업창의 위치를 최 상단에 맞춰 이동
+    var width = screen.width;
+    var height = screen.height;
+
+    child.resizeTo(width, height);
+
+    setInterval( function(){
+        child.resizeBy(-20, -20);
+        child.moveBy(20, 20);
+    }, 1000); 
+
+</script>
+</head>
+<body>
+    
+</body>
+</html>
