@@ -11,7 +11,7 @@
     <div class="container">
         <div class="profile-wrap">
             <div calss="profile">
-                {%if user%}
+                {%if user%} <!--로그인한 유저가 null이 아니라면-->
                     <div class="user-name">{{'안녕하세요'+user.nick +'님'}}</div>
                     <div class="half">
                         <div>팔로워</div>
@@ -31,7 +31,7 @@
                             <input id="email" type="text" name="email">
                         </div>
                         <div class="input-group">
-                            <label id="password">비밀번호</label>
+                            <label for="password">비밀번호</label>
                             <input id="password" type="password" name="password">
                         </div>
                         <a id="join" href="/join" class="btn">회원가입</a>
@@ -44,5 +44,8 @@
         {%block content%}
         {%endblock%}
     </div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+{%block script%}
+{%endblock%}
 </body>
 </html>

@@ -9,13 +9,14 @@ const passport = require('passport')
 const app = express()
 app.set('port', process.env.PORT || 3000)
 
+dotenv.config() //dotenv 설정은 가장 위에 쓸것
 const passportConfig = require('./passport')
 passportConfig() //패스포트 설정
 
 app.set('view engine', 'html')
 nunjucks.configure('views', {express:app, watch:true})
-app.use(express.static(path.join(__dirname, 'public')))
-app.use('/img', express.static(path.join(__dirname, 'uploads')))
+app.use(express.static(path.join(__dirname, '/public')))
+app.use('/img', express.static(path.join(__dirname, '/uploads')))
 //이미지용 스태틱 폴더
 
 app.use(express.json())
@@ -24,7 +25,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET))
 app.use(session({
     resave: false,
     saveUninitialized: false, 
-    secret: provess.env.COOKIE_SECRET, 
+    secret: process.env.COOKIE_SECRET, 
     cookie:{
         httpOnly:true,
         secure:false
@@ -34,7 +35,7 @@ app.use(session({
 app.use(passport.initialize()) //express cookie 보다 아래
 app.use(passport.session()) // 세션 쿠키 사용을 위한 설정
 
-const{sequelize} = require("./models")
+const {sequelize} = require("./models")
 sequelize.sync({force:false})
 .then(()=>{
     console.log('DB 연결 완료')

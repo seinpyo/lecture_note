@@ -1,0 +1,67 @@
+{%extends 'layout.html'%}
+{%block content%}
+
+<div class="timeline">
+    {%if user%}
+        <div>
+            <form id="post-form" action="/post" method="post" enctype="multipart/form-data">
+                <div class="input-group">
+                    <textarea id="twit" name="content" maxlength="140"></textarea>
+                </div>
+                <div class="img-priveiw">
+                    <img id="img-priview" src="" style="display:none; width:250px;" alt="미리보기">
+                    <input id="img-url" type="hidden" name="url">
+                </div>
+                <div>
+                    <label id="img-label" for="img">사진업로드</label>
+                    <input id="img" type="file" accept="image/*">
+                    <button id="post-btn" type="submit" class="btn">포스팅</button>
+                </div>
+            </form>
+        </div>
+    {%else%}
+    {%endif%}
+    <div class="twits">
+        <form id="hashtage-form" action="/hashtag">
+            <input type="text" name="hashtag" placeholder="태그 검색">
+            <button class="btn">검색</button>
+        </form>
+        <br/>
+        {% for post in posts %}
+        <div class="twit">
+            <input type="hidden" value="{{post.id}}" class="twit-id">
+            <input type="hidden" value="{{post.UserId}}" class="twit-user-id">
+            <div class="twit-author" style="font-weight: bold; font-family: Verdana;">
+                {{post.id}} &nbsp;-&nbsp; {{post.User.nick}}
+            </div>
+            <div class="twit-content" style="font-weight: bold; font-family: Verdana;">
+                <pre>{{post.content}}</pre>
+            </div>
+            {% if post.img %}
+                <div class="twit-img">
+                    <img src="{{post.img}}">
+                </div>
+            {% endif %}
+            
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{%endblock%}
+{%block script%}
+<script type="text/javascript">
+    document.getElementById('img').addEventListener('change',(e)=>{
+        const formData = new FormData()
+        formData.append('img', e.target.files[0]);
+        axios.post('/post/img', formData)
+        .then((res)=>{
+            document.getElementById('img-url').value = res.data.url
+            document.getElementById('img-priview').src = res.data.url
+            document.getElementById('img-priview').style.display = 'inline'
+        })
+        .catch((err)=>{ console.error(err) })
+    })
+</script>
+{%endblock%}
