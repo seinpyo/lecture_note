@@ -7,16 +7,17 @@ router.get('/', async (req, res, next)=>{
     try{
         const posts = await Post.findAll({
             include : { 
-                model:User, attribute:['id', 'nicl'],
+                model:User, attribute:['id', 'nick'],
             },
             order:[['createdAt', 'DESC']],
         })
         res.render('main', {
             title:'Nodegram',   //타이틀
             user:req.user,      //로그인한 유저의 객체
-            followerCount:0,    //팔로워 수 
-            followingCount:0,   //팔로잉 수
-            followerIdList:[],  //팔로워 아이디 리스트 : 배열
+            followerCount: req.user ? req.user.Followers.length : 0,    //팔로워 수 
+            followingCount: req.user ? req.user.Followings.length : 0,   //팔로잉 수
+            followerIdList: req.user ? req.user.Followings.map(f=>f.id) : [], 
+            //팔로워 아이디 리스트 : 배열
             posts      //전체 포스팅 객체
         })
     } catch(err) {
@@ -33,9 +34,10 @@ router.get('/profile', (req, res)=>{
     res.render('profile', {
         title: '내정보 - Nodegram',
         user: req.user,
-        followerCount: 0,
-        followingCount: 0,
-        follwerIdList: []
+        followerCount: req.user ? req.user.Followers.length : 0,    //팔로워 수 
+        followingCount: req.user ? req.user.Followings.length : 0,   //팔로잉 수
+        follwerIdList: req.user ? req.user.Followings.map(f=>f.id) : [],  
+        follwingIdList: req.user ? req.user.Followers.map(f=>f.id) : []
     })
 })
 
@@ -54,9 +56,9 @@ router.get('/hashtag', async (req, res, next) => {
             title: `${query} | NodeGram`,
             posts, 
             user:req.user,
-            followerCount: 0,
-            followingCount: 0,
-            follwerIdList: []
+            followerCount: req.user ? req.user.Followers.length : 0,    //팔로워 수 
+            followingCount: req.user ? req.user.Followings.length : 0,   //팔로잉 수
+            follwerIdList: req.user ? req.user.Followings.map(f=>f.id) : [],  
         })
     } catch(error) {
         console.error(error)

@@ -6,7 +6,7 @@ module.exports = class User extends Sequelize.Model{
             email: {type: Sequelize.STRING(50), allowNull: true, unique: true},
             //unique값은 중복값을 허용하지 않지만 null 값은 허용한다
             nick: {type: Sequelize.STRING(30), allowNull: false},
-            password: {type: Sequelize.STRING(200), allowNull: false},
+            password: {type: Sequelize.STRING(200), allowNull: true},
             provider: {type: Sequelize.STRING(20), allowNull: false, defaultValue:'local'},
             //↑ 다른 사이트 계정으로 로그인 할 수 있도록 만드는 컬럼
             snsid: {type: Sequelize.STRING(30), allowNull: true}

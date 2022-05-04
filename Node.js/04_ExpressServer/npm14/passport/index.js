@@ -1,6 +1,7 @@
 const passport = require('passport')
 const local = require('./localStrategy')
 const User = require('../models/user')
+const kakao = require('./kakaoStrategy')
 
 module.exports = () => {
     passport.serializeUser((user, done)=>{ //정상 로그인되었을 때 실행
@@ -11,11 +12,23 @@ module.exports = () => {
     })
 
     passport.deserializeUser((id,done)=>{
-        User.findOne({ where: {id} })
+        User.findOne({ 
+            where: {id},
+            include: [{
+                model: User,
+                attribute: ['id', 'nick'],
+                as: 'Followers'
+            }, {
+                model:User,
+                attribute: ['id', 'nick'],
+                as: 'Followings'
+            }]
+        })
         .then(user => done(null, user)) 
         //세션에 저장된 아이디와 쿠키로 user를 복구, req.user로 사용
         //로그인 되어있는동안 req.isAuthenticated()함수의 결과는 true
         .catch(err=>done(err))
     })
     local()
+    kakao()
 }

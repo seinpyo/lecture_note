@@ -2,10 +2,10 @@ const express = require('express')
 const User = require('../models/user')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
-
+const { isLoggedIn, isNotLoggedIn } = require('./middleware')
 const router = express.Router()
 
-router.post('/join', async (req, res,next)=>{
+router.post('/join', isNotLoggedIn, async (req, res,next)=>{
     // const email = req.body.email;
     // const nick = req.body.nick;
     // const password = req.body.password;
@@ -36,7 +36,7 @@ router.post('/join', async (req, res,next)=>{
     }
 }) // 일반(local) 회원가입
 
-router.post('/login',  (req, res, next)=>{
+router.post('/login', isNotLoggedIn, (req, res, next)=>{
     //possport모듈로 로그인 구현
     passport.authenticate('local', (authError, user, info)=>{
         //로그인을 위해 현재 미들웨어가 실행되고 local 까지만 인식되고 
@@ -68,10 +68,18 @@ router.post('/login',  (req, res, next)=>{
     })(req, res, next) //미들웨어 내의 미들웨어 뒤에는 (req,res,next)를 붙인다
 }) 
 
-router.get('/logout', (req,res)=>{
+router.get('/logout', isLoggedIn, (req,res)=>{
     req.logout();
     req.session.destroy();
     res.redirect('/');
+})
+
+router.get('/kakao', passport.authenticate('kakao'))
+
+router.get('/kakao/callback', passport.authenticate('kakao',{
+    failureRedirect: '/',
+}), (req, res)=>{
+    res.redirect('/')
 })
 
 module.exports = router
