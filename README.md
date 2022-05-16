@@ -5,7 +5,7 @@
 매일 수업이 끝날 때마다 commit 하고 있었으나 git 오류로 파일을 전부 다시 올리게 되었습니다 ...
 
 자세한 강의 내용 정리는 
-[![tistory](https://img.shields.io/badge/Tistory-orange?style=flat-square&logo=?])](https://omp14.tistory.com/) 에서 확인 하실 수 있습니다
+[![tistory](https://img.shields.io/badge/Tistory-orange?style=flat-square&logo=?])](https://omp14.tistory.com/category/%ED%95%99%EC%9B%90) 에서 확인 하실 수 있습니다
 
 <br>
 
