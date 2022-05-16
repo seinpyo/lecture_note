@@ -2,6 +2,7 @@
 # Ezen Academy 자바(JAVA> 웹 개발자(백엔드)
 
 과정 중 배운 코드를 정리한 Repository입니다👩‍💻
+매일 수업이 끝날 때마다 commit 하고 있었으나 git 오류로 파일을 전부 다시 올리게 되었습니다 ...
 
 자세한 강의 내용 정리는 
 [![tistory](https://img.shields.io/badge/Tistory-orange?style=flat-square&logo=?])](https://omp14.tistory.com/) 에서 확인 하실 수 있습니다
